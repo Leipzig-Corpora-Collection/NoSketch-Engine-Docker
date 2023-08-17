@@ -1,5 +1,7 @@
 # NoSketch Engine Docker
 
+Fork of https://github.com/elte-dh/NoSketch-Engine-Docker
+
 This is a [dockerised](https://www.docker.com/) version of [NoSketch Engine](https://nlp.fi.muni.cz/trac/noske),
  the open source version of [Sketch Engine](https://www.sketchengine.eu/) corpus manager and text analysis software
  developed by [Lexical Computing Limited](https://www.lexicalcomputing.com/).
@@ -11,8 +13,8 @@ See [Dockerfile](Dockerfile) for details.
 
 ## TL;DR
 
-1. `git clone https://github.com/ELTE-DH/NoSketch-Engine-Docker.git`
-2. `make pull` – to download the docker image
+1. `git clone https://git.saw-leipzig.de/wortschatz/nosketch-engine-docker.git`
+2. `make build` – to build the docker image
 3. `make compile` – to compile sample corpora
 4. `make execute` – to execute a Sketch Engine command (`compilecorp`, `corpquery`, etc.) in the docker container
     (runs a test CLI query on `susanne` corpus by default)
@@ -25,35 +27,23 @@ See [Dockerfile](Dockerfile) for details.
    and compile the corpus with one command)
 - CLI commands can be used directly (outside the docker image)
 - Works on any domain without changing configuration (without HTTPS and Shibboleth)
-- Two example corpora included: [`susanne`](corpora/susanne)
-   ([original NoSkE sample corpus](https://corpora.fi.muni.cz/noske/current/src/susanne-example-source.tar.bz2))
-   and [`emagyardemo`](corpora/emagyardemo)
-- (optional) Shibboleth SP (with eduid.hu)
+- ~~(optional) Shibboleth SP (with eduid.hu)~~ (removed, see [origin](https://github.com/elte-dh/NoSketch-Engine-Docker))
 - (optional) basic auth (updateable easily)
-- (optional) HTTPS with Let's Encrypt (automatic renewal with [traefik proxy](https://traefik.io/traefik/))
+- ~~(optional) HTTPS with Let's Encrypt (automatic renewal with [traefik proxy](https://traefik.io/traefik/))~~ (removed)
 
-[Further info](corpora/emagyardemo/vertical/README.md) on how to analyse a plain text corpus by
- [e-magyar](https://github.com/nytud/emtsv) and convert it to the right format suitable to fit in the system.
-
-Corpus configuration recipes to aid compilation of large corpora can be found [here](examples/README.md).
+Corpus configuration recipes to aid compilation of large corpora can be found [here](https://github.com/ELTE-DH/NoSketch-Engine-Docker/tree/main/examples).
 
 ## Usage
 
 ### 1. Get the Docker image
 
-- Either pull the prebuilt image from [Dockerhub](https://hub.docker.com/r/eltedh/nosketch-engine): `make pull`
-   (or `docker pull eltedh/nosketch-engine:latest`)
-- Or build your own image yourself (the process can take 5 minutes or so): `make build IMAGE_NAME=myimage`– be sure
+- Build your own image yourself (the process can take 5 minutes or so): `make build IMAGE_NAME=myimage`– be sure
    to name your image using the `IMAGE_NAME` parameter
 
 ### 2. Compile your corpus
 
-1. Put vert file(s) in: `corpora/CORPUS_NAME/vertical` directory\
-   (see examples in [`corpora/susanne/vertical`](corpora/susanne/vertical)
-   and [`corpora/emagyardemo/vertical`](corpora/emagyardemo/vertical) directories)
-2. Put config in: `corpora/registry/CORPUS_NAME` file\
-   (see examples in [`corpora/registry/susanne`](corpora/registry/susanne)
-   and [`corpora/registry/emagyardemo`](corpora/registry/emagyardemo))
+1. Put vert file(s) in: `corpora/vert/CORPUS_NAME` directory
+2. Put config in: `corpora/registry/CORPUS_NAME` file
 3. Compile all corpora listed in [`corpora/registry`](corpora/registry) directory using the docker image: `make compile`
     - To compile _one_ corpus at a time (overwriting existing files), use the following command:
       `make execute CMD="compilecorp --no-ske --recompile-corpus CORPUS_REGISTRY_FILE"`
@@ -87,8 +77,6 @@ Customise the environment variables in `secrets/env.sh` (see [`secrets/env.sh.te
 
 - `make stop`: stops the container
 - `make clean`: stops the container, _removes indices for all corpora_ and deletes docker image – __use with caution!__
-- `make create-cert`: create self-signed certificate for Shibboleth (must restart a container to apply)
-- `make remove-cert`: delete self-signed certificate files (must restart a container to apply)
 - `make htpasswd`: generate strong password for htaccess authentication (must restart a container to apply; see details
    in [Basic auth](#basic-auth) section)
 
@@ -108,9 +96,6 @@ By default,
    (mandatory for [`docker-compose.yml`](docker-compose.yml)),
 - the e-mail address required by Let's Encrypt (`LETS_ENCRYPT_EMAIL`) is not set (mandatory for Let's Encrypt and
    [`docker-compose.yml`](docker-compose.yml)),
-- the self-signed public and private keys (`PUBLIC_KEY`, `PRIVATE_KEY`) are loaded from
-   ([secrets/sp.for.eduid.service.hu-{cert,key}.crt](secrets)) or empty if these files do not exist
-   (mandatory for [`docker-compose.yml`](docker-compose.yml)),
 - the _htaccess_ and _htpasswd_ files (`HTACCESS`, `HTPASSWD`) are loaded from ([secrets/{htaccess,htpasswd}](secrets)
    see [secrets/{htaccess.template,htpasswd.template}](secrets) for example) or empty if these files do not exist
    (mandatory for [`docker-compose.yml`](docker-compose.yml)).
@@ -135,16 +120,12 @@ See the table below on which `make` command accepts which parameter:
 | `make connect`     |       .      |         ✔        |       .       |    .   |         .         |      .     |      .     |          .          |
 | `make stop`        |       .      |         ✔        |       .       |    .   |         .         |      .     |      .     |          .          |
 | `make clean`       |       ✔      |         ✔        |       ✔       |    .   |         .         |      .     |      .     |          .          |
-| `make create-cert` |       .      |         .        |       .       |    .   |         .         |      .     |      .     |          .          |
-| `make remove-cert` |       .      |         .        |       .       |    .   |         .         |      .     |      .     |          .          |
 | `make htpasswd`    |       ✔      |         .        |       .       |    .   |         .         |      ✔     |      ✔     |          .          |
 
 - The Other Variables are
     - `CITATION_LINK`
     - `SERVER_NAME` and `SERVER_ALIAS`
-    - `PUBLIC_KEY` and `PRIVATE_KEY`
     - `HTACCESS` and `HTPASSWD`
-- `LETS_ENCRYPT_EMAIL` variable is only used in `docker-compose.yml`
 
 In the rare case of _multiple different docker images_, be sure to name them differently (by using `IMAGE_NAME`).\
 In the more common case of _multiple different docker containers_ running simultaneously,
@@ -175,42 +156,6 @@ Two types of authentication is supported: _basic auth_ and _Shibboleth_
 2. [Run or restart the container to apply](#3a-run-the-container) or
     [(re)build your custom image](#1-get-the-docker-image)
 
-### Shibboleth
-
-To be able to use the container as a Shibboleth SP (with eduid.hu)
-
-1. Set the following environment variables:
-    - `SERVER_NAME`  e.g. `export SERVER_NAME="https://sketchengine.company.com/"`
-    - `SERVER_ALIAS`e.g. `export SERVER_ALIAS="sketchengine.company.com"`
-2. Obtain a self-signed certificate:
-    - `make create-cert` to create a new certificate
-    - Or put your files to `secrets/sp.for.eduid.service.hu-cert.crt` and `secrets/sp.for.eduid.service.hu-key.crt` with
-       appropriate permissions (`chmod 644 secrets/sp.for.eduid.service.hu-cert.crt
-       secrets/sp.for.eduid.service.hu-key.crt`)
-3. [Setup HTTPS](#https-with-lets-encrypt)
-4. [Run or restart the container to apply](#3a-run-the-container) or uncomment the relevant lines at the end of
-    [`Dockerfile`](Dockerfile) before [(re)building your custom image](#1-get-the-docker-image)
-5. Register your SP with your IdP
-
-## HTTPS with Let's Encrypt
-
-1. Set (`export`) the environment variables (or set them in `secrets/env.sh` based on
-    [`secrets/env.sh.template`](secrets/env.sh.template) and `source secrets/env.sh`):
-    - `CITATION_LINK` e.g. `export CITATION_LINK="https://github.com/elte-dh/NoSketch-Engine-Docker"`
-    - `LETS_ENCRYPT_EMAIL` e.g. `export LETS_ENCRYPT_EMAIL="contact@company.com"`
-    - `SERVER_NAME`  e.g. `export SERVER_NAME="https://sketchengine.company.com/"`
-    - `SERVER_ALIAS` e.g. `export SERVER_ALIAS="sketchengine.company.com"`
-    - (optional) `IMAGE_NAME`, `PORT` and `CONTAINER_NAME`
-    - `PRIVATE_KEY` e.g. `export PRIVATE_KEY="$(cat secrets/sp.for.eduid.service.hu-key.crt 2> /dev/null)"`
-        or set as empty if basic auth is used `export PRIVATE_KEY=""`
-    - `PUBLIC_KEY` e.g. `export PUBLIC_KEY="$(cat secrets/sp.for.eduid.service.hu-cert.crt 2> /dev/null)"`
-        or set as empty if basic auth is used `export PUBLIC_KEY=""`
-    - `HTACCESS` e.g. `export HTACCESS="$(cat secrets/htaccess 2> /dev/null)"` or set as empty if Shibboleth is used
-       `export HTACCESS=""`
-    - `HTPASSWD` e.g. `export HTPASSWD="$(cat secrets/htpasswd 2> /dev/null)"` or set as empty if Shibboleth is used
-       `export HTPASSWD=""`
-3. Run `docker-compose up -d`
-
 ## Citation link
 
 You can set a link to your publications which you require users to cite.
@@ -222,6 +167,7 @@ The link is displayed in the lower-right corner of the main dashboard if [any ty
 
 ## Similar projects
 
+- https://github.com/elte-dh/NoSketch-Engine-Docker (original)
 - https://hub.docker.com/r/acdhch/noske
 
 ## License

@@ -1,48 +1,29 @@
 version: "3.3"
 
 services:
-
-  traefik:
-    restart: always
-    image: "traefik:v2.9.1"
-    container_name: "traefik"
-    command:
-      #- "--log.level=DEBUG"
-      # - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      # - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.myresolver.acme.email=${LETS_ENCRYPT_EMAIL:? Please set LETS_ENCRYPT_EMAIL environment variable!}"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-    ports:
-      - "${PORT:-10070}:80"
-      - "443:443"
-      # - "8080:8080"
-    volumes:
-      - "./letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
   sketch_engine:
     restart: always
-    image: "${IMAGE_NAME:-eltedh/nosketch-engine:latest}"
+    image: "${IMAGE_NAME:-lcc/nosketch-engine:latest}"
     container_name: "${CONTAINER_NAME:-noske}"
     environment:
-      SERVER_NAME: "${SERVER_NAME:? Please set SERVER_NAME environment variable!}"
-      SERVER_ALIAS: "${SERVER_ALIAS:? Please set SERVER_ALIAS environment variable!}"
-      CITATION_LINK: "${CITATION_LINK:-https://github.com/elte-dh/NoSketch-Engine-Docker}"
-      PRIVATE_KEY: "${PRIVATE_KEY? Please use export PRIVATE_KEY=$(cat secrets/sp.for.eduid.service.hu-key.crt) or set it as empty!}"
-      PUBLIC_KEY: "${PUBLIC_KEY? Please use export PUBLIC_KEY=$(cat secrets/sp.for.eduid.service.hu-cert.crt) or set it as empty!}"
+      SERVER_NAME: "${SERVER_NAME:-https://cql.wortschatz-leipzig.de/}"
+      SERVER_ALIAS: "${SERVER_ALIAS:-cql.wortschatz-leipzig.de}"
+      CITATION_LINK: "${CITATION_LINK:-https://wortschatz-leipzig.de/}"
       HTACCESS: "${HTACCESS? Please use export HTACCESS=$(cat secrets/htaccess) or set it as empty!}"
       HTPASSWD: "${HTPASSWD? Please use export HTPASSWD=$(cat secrets/htpasswd) or set it as empty!}"
     volumes:
       - type: bind
-        source: "${CORPORA_DIR:? Please set CORPORA_DIR environment variable!}"
-        target: /corpora
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.sketchengine.rule=Host(`${SERVER_ALIAS:? Please set SERVER_ALIAS environment variable!}`)"
-      - "traefik.http.routers.sketchengine.entrypoints=web,websecure"
-      - "traefik.http.routers.sketchengine.tls.certresolver=myresolver"
+        source: "${REGISTRY_DIR:-/disk/NoSketchEngine/registry}"
+        target: /corpora/registry
+        read_only: true
+      - type: bind
+        source: "${VERT_DIR:-/disk/NoSketchEngine/vert}"
+        target: /corpora/vert
+        read_only: true
+      - type: bind
+        source: "${COMPILED_DIR:-/ssd1/NoSketchEngine/data}"
+        target: /corpora/data
+        read_only: true
+      - type: bind
+        source: "${CACHE_DIR:-/ssd1/NoSketchEngine/cache}"
+        target: /var/lib/bonito/cache

@@ -7,7 +7,6 @@ FROM debian:bullseye-slim
 RUN apt-get update && \
     apt-get install -y \
         apache2 \
-        libapache2-mod-shib \
         build-essential \
         libltdl-dev \
         libpcre++-dev \
@@ -24,7 +23,7 @@ RUN apt-get update && \
 
 
 # Enable apache CGI and mod_rewrite
-RUN a2enmod cgi rewrite shib
+RUN a2enmod cgi rewrite
 
 
 # Install noske components
@@ -64,6 +63,7 @@ RUN sed  -i 's/npm install/npm install --unsafe-perm=true/' crystal*/Makefile &&
     sed -e 's|URL_BONITO: "http://.*|URL_BONITO: window.location.origin + "/bonito/run.cgi/",|' \
         -e 's|HIDE_DASHBOARD_BANNER: true|HIDE_DASHBOARD_BANNER: false|' \
         -i /var/www/crystal/config.js
+        # -e 's|NO_SKE: true|NO_SKE: false|' \
 
 
 # Remove unnecessary files and create symlink for utility command
@@ -75,14 +75,12 @@ RUN rm -rf /var/www/bonito/.htaccess /tmp/noske_files/* && \
 COPY conf/*.sh /usr/local/bin/
 COPY conf/run.cgi /var/www/bonito/run.cgi
 COPY conf/000-default.conf /etc/apache2/sites-enabled/000-default.conf
-COPY conf/shibboleth2.xml /etc/shibboleth/shibboleth2.xml
-COPY conf/*.crt /etc/shibboleth/
+
 
 ### These files should be updated through environment variables (HTACCESS,HTPASSWD,PUBLIC_KEY,PRIVATE_KEY)
 # but uncommenting the lines below enable creation of a custom image with secrets included
 # COPY secrets/htaccess /var/www/.htaccess
 # COPY secrets/htpasswd /var/lib/bonito/htpasswd
-# COPY secrets/*.crt /etc/shibboleth/
 
 ### HACK4: Link site-packages to dist-packages to help Python find these packages
 #          (e.g. creating subcorpus and keywords on it -> calls mkstats with popen which calls manatee internally)

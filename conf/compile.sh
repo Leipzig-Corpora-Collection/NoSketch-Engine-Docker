@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -n "$(ls /corpora/*/indexed 2> /dev/null)" ]]; then
+if [[ -n "$(ls /corpora/data/* 2> /dev/null)" ]]; then
     echo 'WARNING: This will delete all indices and recompile all coropra!' >&2
     if [[ -n "$FORCE_RECOMPILE" ]]; then
         echo 'INFO: Continuing in force recompile mode' >&2
