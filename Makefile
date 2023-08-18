@@ -71,6 +71,16 @@ execute:
      $(IMAGE_NAME):latest "$(CMD)"
 .PHONY: execute
 
+execute-no-tty:
+	docker run --rm \
+	 --mount type=bind,src=$(REGISTRY_DIR),dst=/corpora/registry,readonly \
+	 --mount type=bind,src=$(VERT_DIR),dst=/corpora/vert,readonly \
+	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data \
+	 -e FORCE_RECOMPILE="$(FORCE_RECOMPILE)" \
+     -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
+     $(IMAGE_NAME):latest "$(CMD)"
+.PHONY: execute-no-tty
+
 
 # Compile all corpora
 compile:
