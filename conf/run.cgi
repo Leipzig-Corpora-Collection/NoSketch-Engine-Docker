@@ -53,7 +53,7 @@ class BonitoCGI (WSEval, UserCGI):
     if 'MANATEE_REGISTRY' not in os.environ:
         # TODO: SET THIS APROPRIATELY!
         os.environ['MANATEE_REGISTRY'] = '/corpora/registry'
-    corplist = [corp_name for corp_name in os.listdir(os.environ['MANATEE_REGISTRY'])]
+    corplist = [corp_name for corp_name in os.listdir(os.environ['MANATEE_REGISTRY']) if not corp_name.endswith(".disabled")]
     # set default corpus
     if len(corplist) > 0:
         corpname = corplist[0]
@@ -90,17 +90,17 @@ if __name__ == '__main__':
     if 'MANATEE_REGISTRY' not in os.environ:
         # TODO: SET THIS APROPRIATELY!
         os.environ['MANATEE_REGISTRY'] = '/corpora/registry'
-    if ";prof=" in os.environ['QUERY_STRING'] or "&prof=" in os.environ['QUERY_STRING']:
-        import cProfile, pstats, tempfile
-        proffile = tempfile.NamedTemporaryFile()
-        cProfile.run('''BonitoCGI().run_unprotected (selectorname="corpname",
-                        outf=open(os.devnull, "w"))''', proffile.name)
-        profstats = pstats.Stats(proffile.name)
-        print("<pre>")
-        profstats.sort_stats('time','calls').print_stats(50)
-        profstats.sort_stats('cumulative').print_stats(50)
-        print("</pre>")
-    else:
-        BonitoCGI(user=username).run_unprotected (selectorname='corpname')
+    # if ";prof=" in os.environ['QUERY_STRING'] or "&prof=" in os.environ['QUERY_STRING']:
+    #     import cProfile, pstats, tempfile
+    #     proffile = tempfile.NamedTemporaryFile()
+    #     cProfile.run('''BonitoCGI().run_unprotected (selectorname="corpname",
+    #                     outf=open(os.devnull, "w"))''', proffile.name)
+    #     profstats = pstats.Stats(proffile.name)
+    #     print("<pre>")
+    #     profstats.sort_stats('time','calls').print_stats(50)
+    #     profstats.sort_stats('cumulative').print_stats(50)
+    #     print("</pre>")
+    # else:
+    BonitoCGI(user=username).run_unprotected (selectorname='corpname')
 
 # vim: ts=4 sw=4 sta et sts=4 si tw=80:

@@ -62,6 +62,7 @@ RUN sed  -i 's/npm install/npm install --unsafe-perm=true/' crystal*/Makefile &&
     make install VERSION=2.142 && \
     sed -e 's|URL_BONITO: "http://.*|URL_BONITO: window.location.origin + "/bonito/run.cgi/",|' \
         -e 's|HIDE_DASHBOARD_BANNER: true|HIDE_DASHBOARD_BANNER: false|' \
+        -e 's|DISABLE_EMBEDDED_YOUTUBE: false|DISABLE_EMBEDDED_YOUTUBE: true|' \
         -i /var/www/crystal/config.js
         # -e 's|NO_SKE: true|NO_SKE: false|' \
 
