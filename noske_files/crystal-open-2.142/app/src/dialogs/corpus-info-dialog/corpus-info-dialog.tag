@@ -38,7 +38,8 @@
                     onclick={closeDialog}>
                 {_("manageCorpus")}
             </a>
-            <a href="#ca-subcorpora"
+            <a if={window.permissions["ca-subcorpora"]}
+                    href="#ca-subcorpora"
                     class="btn">
                 {_("ca.subcorporaDesc")}
             </a>
