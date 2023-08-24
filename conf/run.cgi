@@ -87,6 +87,17 @@ if __name__ == '__main__':
         username = sys.argv[2]
     else:
         username = None
+
+        if os.environ.get("HTTP_AUTHORIZATION", "").lower().startswith("basic "):
+            import base64
+            import subprocess
+
+            digest = os.environ["HTTP_AUTHORIZATION"].split(" ", 1)[-1]
+            _username, _password = base64.b64decode(digest).decode("utf-8").split(":", 1)
+            proc = subprocess.run(["htpasswd", "-vb", "/var/lib/bonito/htpasswd", _username, _password], stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+            if proc.returncode == 0:
+                os.environ["REMOTE_USER"] = _username
+
     if 'MANATEE_REGISTRY' not in os.environ:
         # TODO: SET THIS APROPRIATELY!
         os.environ['MANATEE_REGISTRY'] = '/corpora/registry'

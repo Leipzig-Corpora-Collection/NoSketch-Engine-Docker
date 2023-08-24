@@ -78,6 +78,7 @@ RUN rm -rf /var/www/bonito/.htaccess /tmp/noske_files/* && \
 COPY conf/*.sh /usr/local/bin/
 COPY conf/run.cgi /var/www/bonito/run.cgi
 COPY conf/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+RUN mkdir /var/www/auth
 
 
 ### These files should be updated through environment variables (HTACCESS,HTPASSWD,PUBLIC_KEY,PRIVATE_KEY)

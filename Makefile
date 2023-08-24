@@ -36,6 +36,7 @@ run:
 	 --mount type=bind,src=$(VERT_DIR),dst=/corpora/vert,readonly \
 	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data,readonly \
 	 --mount type=bind,src=$(CACHE_DIR),dst=/var/lib/bonito/cache \
+	 --mount type=bind,src=$$(pwd)/secrets/htpasswd,dst=/var/lib/bonito/htpasswd \
      -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
      $(IMAGE_NAME):latest
 	@echo 'URL: http://$(HOSTNAME):$(PORT)/'
