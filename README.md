@@ -26,6 +26,39 @@ See [Dockerfile](Dockerfile) for details.
 
 Corpus configuration recipes to aid compilation of large corpora can be found [here](https://github.com/ELTE-DH/NoSketch-Engine-Docker/tree/main/examples).
 
+## Changes
+
+### crystal-open-2.142
+
+Overrides in `noske_files/crystal-open-2.142`:
+
+- added Matomo/Piwik monitoring by hooking into the UI routing lib
+  - `app/index.html`
+  - `app/src/core/Router.js`
+  - `app/src/core/Connection.js`
+- updated logos
+  - `app/favicon.ico`
+  - `app/images/`
+  - `app/src/core/side-nav/`
+- some bugfixes (ske -> noske, missing stuff)
+  - `app/src/core/permissions.js` (fix permissions)
+  - `app/config.js` (add missing links)
+  - `app/src/corpus/` (remove 'basic' and 'shared' corpus tabs, not used)
+  - `app/src/dialogs/` (disable any Ske feedback dialogs)
+  - `app/src/core/side-nav/side-nav.tag` (remove word sketches, can't provide those anyway)
+- disabled youtube integration (and tracking!)
+  - `app/config.js`
+  - `app/texts/`
+
+### Basic Auth
+
+- `conf/000-default.conf` (enable basic auth, forward header)
+- `conf/run.cgi` (parse header, restrict corplist)
+- `noske_files/bonito-open-5.63.9/conccgi.py` (add user to corpus)
+- `noske_files/crystal-open-2.142/app/locale/`
+- `noske_files/crystal-open-2.142/app/src/core/header`
+- `noske_files/crystal-open-2.142/app/src/corpus/` (using `username` instead of `userid`)
+
 ## Usage
 
 ### 1. Get the Docker image
