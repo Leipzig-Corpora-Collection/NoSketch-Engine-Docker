@@ -70,13 +70,21 @@ Corpus configuration recipes to aid compilation of large corpora can be found [h
 By default,
 - the name of the docker image (`IMAGE_NAME`) is `lcc/nosketch-engine`,
 - the name of the docker container (`CONTAINTER_NAME`) is `noske`,
-- the directory where the corpora are stored (`CORPORA_DIR`) is `/disk/NoSketchEngine`,
+- the directory where the corpora metadata and raw input files (vertical) are stored (`CORPORA_DIR`) is `/disk/NoSketchEngine`,
+  - the directory with the corpus metadata files (`REGISTRY_DIR`) is `$(CORPORA_DIR)/registry`,
+  - the directory with the corpus vertical input files (`VERT_DIR`) is `$(CORPORA_DIR)/vert`,
+- the directory where the corpora (compiled, index files; and bonito caches) are stored (`FAST_CORPORA_DIR`) is `/ssd1/NoSketchEngine`,
+  - the directory with the compiled corpora files (`COMPILED_DIR`) is `$(FAST_CORPORA_DIR)/data`,
+  - the directory with the Bonito corpus cache files (`CACHE_DIR`) is `$(FAST_CORPORA_DIR)/cache`,
+  - the directory with the Bonito subcorpus definition files (`SUBCORP_DIR`) is `$(FAST_CORPORA_DIR)/subcorp`,
+  - the directory with the Bonito user data files (`USERDATA_DIR`) is `$(FAST_CORPORA_DIR)/options`,
+  - the file with the apache2 basic auth user credentials (`SECRETS_FILE`) is `$(pwd)/secrets/htpasswd`,
 - the port number which the docker container uses (`PORT`) is `10070`,
 - the variable to force recompiling already indexed corpora (`FORCE_RECOMPILE`) is not set (_empty_ or _not set_ means _false_ any other non-zero length value means _true_),
 - the citation link (`CITATION_LINK`) is `https://wortschatz-leipzig.de/`,
 - the server name (`SERVER_NAME`) is `https://cql.wortschatz-leipzig.de/`,
 - the server alias (`SERVER_ALIAS`) is `cql.wortschatz-leipzig.de`,
-- the _htpasswd_ file (`HTPASSWD`) is loaded from ([secrets/htpasswd](secrets) see [secrets/htpasswd.template](secrets) for example) or empty if these files do not exist..
+- the _htpasswd_ file is loaded from ([secrets/htpasswd](secrets) see [secrets/htpasswd.template](secrets) for example) or empty if these files do not exist.
 
 If there is a need to change these, set them as environment variables (e.g. `export IMAGE_NAME=myimage`) or supplement `make` commands with the appropriate values (e.g. `make run PORT=8080`).
 
@@ -85,22 +93,28 @@ In the latter case the system will be available at `http://SERVER_NAME:12345/`.
 
 See the table below on which `make` command accepts which parameter:
 
-| command            | `IMAGE_NAME` | `CONTAINER_NAME` | `CORPORA_DIR` | `PORT` | `FORCE_RECOMPILE` | `USERNAME` | `PASSWORD` | The Other Variables |
-|--------------------|:------------:|:----------------:|:-------------:|:------:|:-----------------:|:----------:|:----------:|:-------------------:|
-| `make pull`        |       ✔      |         .        |       .       |    .   |         .         |      .     |      .     |          .          |
-| `make build`       |       ✔      |         .        |       .       |    .   |         .         |      .     |      .     |          .          |
-| `make compile`     |       ✔      |         .        |       .       |    .   |         ✔         |      .     |      .     |          .          |
-| `make execute`     |       ✔      |         .        |       ✔       |    .   |         ✔         |      .     |      .     |          ✔          |
-| `make run`         |       ✔      |         ✔        |       ✔       |    ✔   |         .         |      .     |      .     |          ✔          |
-| `make connect`     |       .      |         ✔        |       .       |    .   |         .         |      .     |      .     |          .          |
-| `make stop`        |       .      |         ✔        |       .       |    .   |         .         |      .     |      .     |          .          |
-| `make clean`       |       ✔      |         ✔        |       ✔       |    .   |         .         |      .     |      .     |          .          |
-| `make htpasswd`    |       ✔      |         .        |       .       |    .   |         .         |      ✔     |      ✔     |          .          |
+| command               | `IMAGE_NAME` | `CONTAINER_NAME` | `REGISTRY_DIR` | `VERT_DIR` | `COMPILED_DIR` | `SECRETS_FILE` | Cache and User Data | `PORT` | `FORCE_RECOMPILE` | User Credential Variables | The Other Variables |
+|-----------------------|:------------:|:----------------:|:--------------:|:----------:|:--------------:|:--------------:|:-------------------:|:------:|:-----------------:|:-------------------------:|:-------------------:|
+| `make build`          |       ✔      |         .        |       .        |     .      |        .       |        .       |          .          |    .   |         .         |            .              |          .          |
+| `make compile`        |       ✔      |         .        |      (✔)       |     .      |        ✔       |       (✔)      |          .          |    .   |         ✔         |            .              |          .          |
+| `make check`          |       ✔      |         .        |      (✔)       |     .      |       (✔)      |       (✔)      |          .          |    .   |         .         |            .              |          .          |
+| `make execute`        |       ✔      |         .        |       ✔        |     ✔      |        ✔       |        ✔       |          .          |    .   |         ✔         |            .              |          ✔          |
+| `make execute-no-tty` |       ✔      |         .        |       ✔        |     ✔      |        ✔       |        ✔       |          .          |    .   |         ✔         |            .              |          ✔          |
+| `make run`            |       ✔      |         ✔        |       ✔        |     ✔      |        ✔       |        ✔       |          ✔          |    ✔   |         .         |            .              |          ✔          |
+| `make connect`        |       .      |         ✔        |       .        |     .      |        .       |        .       |          .          |    .   |         .         |            .              |          .          |
+| `make stop`           |       .      |         ✔        |       .        |     .      |        .       |        .       |          .          |    .   |         .         |            .              |          .          |
+| `make htpasswd`       |       ✔      |         .        |      (✔)       |    (✔)     |       (✔)      |       (✔)      |          .          |    .   |         .         |            ✔              |          .          |
+| `make clean`          |       ✔      |         ✔        |       .        |     .      |        ✔       |        ✔       |          ✔          |    .   |         .         |            .              |          .          |
 
+- Cache and User Data Variables are
+  - `CACHE_DIR` (Bonito corpora)
+  - `SUBCORP_DIR` (Bonito subcorpora definition)
+  - `USERDATA_DIR` (Bonito user data (options))
+- User Credential Variables are
+  - `USERNAME` and `PASSWORD` (user credentials)
 - The Other Variables are
-    - `CITATION_LINK`
-    - `SERVER_NAME` and `SERVER_ALIAS`
-    - `HTPASSWD`
+  - `CITATION_LINK` (when logged in, link in dashboard to citations)
+  - `SERVER_NAME` and `SERVER_ALIAS` (apache2 configurations)
 
 In the rare case of _multiple different docker images_, be sure to name them differently (by using `IMAGE_NAME`).\
 In the more common case of _multiple different docker containers_ running simultaneously, be sure to name them differently (by using `CONTAINER_NAME`) and also be sure to use different port for each of them (by using `PORT`). To handle multiple different sets of corpora be sure to set the directory containing the corpora (`CORPORA_DIR`) accordingly for each container.

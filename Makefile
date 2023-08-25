@@ -110,6 +110,12 @@ compile:
 .PHONY: compile
 
 
+# Check all corpora (skip "NAME.disabled")
+check:
+	@make -s execute IMAGE_NAME=$(IMAGE_NAME) CMD=check.sh
+.PHONY: check
+
+
 # Create a strong password with htpasswd command inside the docker container
 htpasswd:
 	@make -s execute IMAGE_NAME=$(IMAGE_NAME) CMD="htpasswd -bB /var/lib/bonito/htpasswd \"$(USERNAME)\" \"$(PASSWORD)\""
@@ -121,5 +127,8 @@ clean:
 	docker volume rm $(CONTAINER_NAME)-registration
 	docker volume rm $(CONTAINER_NAME)-jobs
 	docker image rm -f $(IMAGE_NAME)
-	sudo rm -vrf $(COMPILED_DIR)/*/
+	sudo rm -vrf $(CACHE_DIR)/*/
+	sudo rm -vrf $(USERDATA_DIR)/*
+	sudo rm -vrf $(SUBCORP_DIR)/*
+	sudo rm -vrf $(COMPILED_DIR)/*
 .PHONY: clean
