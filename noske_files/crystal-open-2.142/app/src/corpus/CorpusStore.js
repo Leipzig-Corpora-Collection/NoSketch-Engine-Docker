@@ -61,6 +61,16 @@ class CorpusStoreClass extends StoreMixin {
         return -1
     }
 
+    sortBySizeSentences(a, b) {
+        if (a.sizes && a.sizes.sentcount) {
+            if (b.sizes && b.sizes.sentcount) {
+                return a.sizes.sentcount > b.sizes.sentcount ? 1 : -1
+            }
+            return 1
+        }
+        return -1
+    }
+
     sortByLang(a, b) {
         return a.language_name.localeCompare(b.language_name)
     }
@@ -68,6 +78,7 @@ class CorpusStoreClass extends StoreMixin {
     sort(data, sort){
         let sortFun = {
             size: this.sortBySize,
+            sizeS: this.sortBySizeSentences,
             name: this.sortByName,
             lang: this.sortByLang
         }[sort.orderBy]

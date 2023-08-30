@@ -151,6 +151,18 @@
                                     on-sort={onSort}>
                                 </table-label>
                             </th>
+                            <th>
+                                <table-label
+                                    align-right=1
+                                    label={_("sentences")}
+                                    desc-allowed={true}
+                                    asc-allowed={true}
+                                    order-by="sizeS"
+                                    actual-sort={sort.sort}
+                                    actual-order-by={sort.orderBy}
+                                    on-sort={onSort}>
+                                </table-label>
+                            </th>
                             <th style="width: 1px;"></th>
                         </tr>
                     </thead>
@@ -182,6 +194,9 @@
                             </td>
                             <td onclick={onSelectCorpus} class="right-align">
                                 {corpus.sizes ? window.Formatter.num(corpus.sizes.wordcount) : (corpus.size && window.Formatter.num(corpus.size) || '')}
+                            </td>
+                            <td onclick={onSelectCorpus} class="right-align">
+                                {corpus.sizes && window.Formatter.num(corpus.sizes.sentcount) || ''}
                             </td>
                             <td class="menuCell" if={!config.READ_ONLY}>
                                 <a href="javascript:void(0);"
