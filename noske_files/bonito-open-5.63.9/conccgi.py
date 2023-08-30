@@ -346,8 +346,11 @@ class ConcCGI (UserCGI):
                     'corpname': c,
                     'language_id': mc.get_conf('LANGUAGE'),
                     'language_name': mc.get_conf('LANGUAGE'),
-                    'sizes': dict([x.split() for x in mc.get_sizes().split('\n')\
-                            if len(x.split()) == 2]),
+                    'sizes': dict([
+                        map(lambda f, d: f(d), [str, int], x.split())
+                        for x in mc.get_sizes().split('\n')
+                        if len(x.split()) == 2
+                    ]),
                     'compilation_status': mc.get_sizes() and 'COMPILED' or 'READY',
                     'new_version': mc.get_conf('NEWVERSION'),
                     'name': mc.get_conf('NAME'),
