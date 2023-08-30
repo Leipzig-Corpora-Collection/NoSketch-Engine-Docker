@@ -46,6 +46,8 @@ Overrides in `noske_files/crystal-open-2.142`:
   - `app/src/corpus/` (remove 'basic' and 'shared' corpus tabs, not used)
   - `app/src/dialogs/` (disable any Ske feedback dialogs, remove user Lexonomy settings, fix manage-corpus redirect)
   - `app/src/core/side-nav/side-nav.tag` (remove word sketches, can't provide those anyway)
+- some UI additions
+  - `app/src/corpus/` (add sentence count to corpora list)
 - disabled youtube integration (and tracking!)
   - `app/config.js`
   - `app/texts/`
@@ -60,7 +62,7 @@ Overrides in `noske_files/bonito-open-5.63.9`:
 
 ### Basic Auth
 
-- `conf/000-default.conf` (enable basic auth, forward header)
+- `conf/000-default.conf` (enable basic auth, forward header; block file listing)
 - `conf/run.cgi` (parse header, restrict corplist)
 - `noske_files/bonito-open-5.63.9/conccgi.py` (add user to corpus)
 - `noske_files/crystal-open-2.142/app/locale/`
