@@ -78,6 +78,7 @@ RUN rm -rf /var/www/bonito/.htaccess /tmp/noske_files/* && \
 # Copy config files (These files contain placeholders replaced in entrypoint.sh according to environment variables)
 COPY conf/*.sh /usr/local/bin/
 COPY conf/run.cgi /var/www/bonito/run.cgi
+COPY conf/robots.txt /var/www/robots.txt
 COPY conf/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 
