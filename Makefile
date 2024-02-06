@@ -17,7 +17,7 @@ CITATION_LINK?=https://wortschatz-leipzig.de/
 CMD?=corpquery susanne "[word=\"Mardi\"][word=\"Gras\"]"
 
 
-all: build compile run
+all: build run
 .PHONY: all
 
 
