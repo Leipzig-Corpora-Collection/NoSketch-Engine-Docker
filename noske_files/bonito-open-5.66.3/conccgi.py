@@ -358,6 +358,7 @@ class ConcCGI (UserCGI):
                     'new_version': mc.get_conf('NEWVERSION'),
                     'name': mc.get_conf('NAME'),
                     'info': mc.get_conf('INFO'),
+                    'handle': mc.get_conf('HANDLE') or None,
                     'wsdef': mc.get_conf('WSDEF'),
                     'termdef': mc.get_conf('TERMDEF'),
                     'diachronic': bool(mc.get_conf('DIACHRONIC')),

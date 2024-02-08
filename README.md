@@ -65,6 +65,9 @@ Overrides in `noske_files/bonito-open-5.63.9`:
   - `usercgi.py`
 - remove insecure `clear_cache` method (os access is mitigated with corpname validation but is not really used anyway)
   - `conccgi.py`
+- added [FCS](https://git.saw-leipzig.de/text-plus/FCS/fcs-nosketchengine-endpoint) related attributes to API
+  - `conccgi.py` (for `/corp_info`, `handle` PID (from `HANDLE`) and `fcsrefs` (from `FCSREFS`))
+  - `corplib.py` (`/corpora` with `handle` PID)
 
 ### Basic Auth
 
