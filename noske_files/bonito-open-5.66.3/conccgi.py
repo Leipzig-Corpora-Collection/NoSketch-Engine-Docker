@@ -365,6 +365,7 @@ class ConcCGI (UserCGI):
                     'aligned': mc.get_conf('ALIGNED').split(',') if mc.get_conf('ALIGNED') else [],
                     'docstructure': mc.get_conf('DOCSTRUCTURE')
                 })
+                o.update({'wsinfo': corplib.get_ws_info(mc)})
                 if '/' in c:
                     owner_name = c.split('/', 1)[0]
                     o.update({

@@ -68,6 +68,9 @@ Overrides in `noske_files/bonito-open-5.63.9`:
 - added [FCS](https://git.saw-leipzig.de/text-plus/FCS/fcs-nosketchengine-endpoint) related attributes to API
   - `conccgi.py` (for `/corp_info`, `handle` PID (from `HANDLE`) and `fcsrefs` (from `FCSREFS`))
   - `corplib.py` (`/corpora` with `handle` PID)
+- for [Wortschatz Leipzig]() added some more metadata (e.g., to compute frequency classes etc.)
+  - `corplib.py`: `get_ws_info(corpus)` will extract `WSMFW` and `WSMFWF` settings aka _most frequent word_ and its frequency
+  - `conccgi.py` --> `wsinfo: { mfw: str|null, mfwf: int|null }` will expose the _most frequent word_ information
 
 ### Basic Auth
 
