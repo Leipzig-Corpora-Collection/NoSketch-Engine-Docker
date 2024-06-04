@@ -78,6 +78,10 @@ Overrides in `noske_files/bonito-open-5.63.9`:
 - `noske_files/crystal-open-2.142/app/src/core/header`
 - `noske_files/crystal-open-2.142/app/src/corpus/` (using `username` instead of `userid`)
 
+### NSE Configuration
+
+- `conf/000-default.conf`: increasing _keyword_ (`extract_keywords()`) limit using `SetEnv HTTP_X_KEYWORD_MAX_SIZE 10000`
+
 ## Known Issues
 
 - basic auth re-login:\
