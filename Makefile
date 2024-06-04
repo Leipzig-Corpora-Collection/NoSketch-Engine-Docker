@@ -47,8 +47,8 @@ run:
 	 --mount type=bind,src=$(SECRETS_FILE),dst=/var/lib/bonito/htpasswd \
 	 --mount type=volume,src=$(CONTAINER_NAME)-registration,dst=/var/lib/bonito/registration \
 	 --mount type=volume,src=$(CONTAINER_NAME)-jobs,dst=/var/lib/bonito/jobs \
-     -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
-     $(IMAGE_NAME):latest
+	 -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
+	 $(IMAGE_NAME):latest
 	@echo 'URL: http://$(HOSTNAME):$(PORT)/'
 .PHONY: run
 
@@ -63,11 +63,11 @@ run-pre:
 # Stop running $(CONTAINER_NAME) container
 stop:
 	@if [ "$$(docker container ls -f name=$(CONTAINER_NAME) -q)" ] ; then \
-        docker container stop $(CONTAINER_NAME) ; \
-        docker container rm $(CONTAINER_NAME) ; \
-    else \
-        echo 'No running $(CONTAINER_NAME) container!' >&2 ; \
-    fi
+		docker container stop $(CONTAINER_NAME) ; \
+		docker container rm $(CONTAINER_NAME) ; \
+	else \
+		echo 'No running $(CONTAINER_NAME) container!' >&2 ; \
+	fi
 .PHONY: stop
 
 
@@ -85,8 +85,8 @@ execute:
 	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data \
 	 --mount type=bind,src=$(SECRETS_FILE),dst=/var/lib/bonito/htpasswd \
 	 -e FORCE_RECOMPILE="$(FORCE_RECOMPILE)" \
-     -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
-     $(IMAGE_NAME):latest "$(CMD)"
+	 -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
+	 $(IMAGE_NAME):latest "$(CMD)"
 .PHONY: execute
 
 execute-no-tty:
@@ -95,8 +95,8 @@ execute-no-tty:
 	 --mount type=bind,src=$(VERT_DIR),dst=/corpora/vert,readonly \
 	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data \
 	 -e FORCE_RECOMPILE="$(FORCE_RECOMPILE)" \
-     -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
-     $(IMAGE_NAME):latest "$(CMD)"
+	 -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
+	 $(IMAGE_NAME):latest "$(CMD)"
 .PHONY: execute-no-tty
 
 
