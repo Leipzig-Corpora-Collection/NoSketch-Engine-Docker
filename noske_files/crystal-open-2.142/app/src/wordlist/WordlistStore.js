@@ -255,6 +255,7 @@ class WordlistStoreClass extends FeatureStoreMixin {
         if(!this.data.histid){
             data = super.getRequestData()
             data.relfreq = 1
+            data.freqcls = 1
             data.reldocf = !this._isTextTypeAnalysis()
             data.wltype = "simple"
             if(this._isTextTypeAnalysis()){
@@ -347,6 +348,7 @@ class WordlistStoreClass extends FeatureStoreMixin {
         let request = super.getDownloadRequest(idx)
         let data = {
             relfreq: this.data.cols.includes("relfreq"),
+            freqcls: this.data.cols.includes("freqcls"),
             reldocf: this.data.cols.includes("reldocf"),
             wlmaxitems: this.data.wllimit || 10000000, // 0 means unlimited
             page: 1
@@ -362,6 +364,7 @@ class WordlistStoreClass extends FeatureStoreMixin {
     getRequestCols(){
         let cols = this.data.cols.map(c => {
             c = c.startsWith("rel") ? c.substr(3) : c
+            c = (c == "freqcls") ? "freq" : c
             return c == "freq" ? "frq" : c
         }).filter(c => c != this.data.wlsort)
         return [...new Set(cols)] //remove duplicates

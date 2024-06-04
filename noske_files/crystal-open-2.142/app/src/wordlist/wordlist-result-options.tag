@@ -74,6 +74,7 @@
             this.resultsFor =  this.store.getValueLabel(this.data.find, "find")
             this.totalitems = isNaN(this.data.totalitems) ? "" : window.Formatter.num(this.data.totalitems)
             this.store.request[0].relfreq = this.data.relfreq
+            this.store.request[0].freqcls = this.data.freqcls
             this.pulseId = null
             if((this.data.isEmpty || this.data.isEmptySearch) && !this.data.jobid){
                 this.pulseId = this.data.search_query === "" ? "settings" : "filter"

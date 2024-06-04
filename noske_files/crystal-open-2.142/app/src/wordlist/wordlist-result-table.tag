@@ -157,6 +157,7 @@
             this.data.cols.forEach(attr => {
                 let labelId = AppStore.getWlsortLabelId(attr)
                 let orderBy = attr.startsWith("rel") ? attr.substr(3) : attr
+                orderBy = (orderBy == "freqcls") ? "freq" : orderBy
                 if(orderBy == "freq"){
                     orderBy = "frq"
                 }

@@ -49,6 +49,10 @@ const Meta = {
         value: "frq",
         tooltip: "t_id:frequency"
     },{
+        labelId: "wl.freqcls",
+        value: "freqcls",
+        tooltip: "t_id:freqcls"
+    },{
         labelId: "relfreq",
         value: "relfreq",
         tooltip: "t_id:relfreq"

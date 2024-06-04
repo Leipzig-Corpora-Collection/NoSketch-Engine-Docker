@@ -477,7 +477,7 @@ window.attrFormatter = (attr, value) => {
         if (attr.endsWith('1') || attr.endsWith('2')){
             attr = attr.substring(0, attr.length - 1)
         }
-        if(['docf', 'freq', 'frq', 'norm:l', 'token:l'].includes(attr)){
+        if(['docf', 'freq', 'frq', 'freqcls', 'norm:l', 'token:l'].includes(attr)){
             return window.Formatter.num(value)
         } else if(['rnk:f', 'score'].includes(attr)){
             return window.valueFormatter(value, 1)

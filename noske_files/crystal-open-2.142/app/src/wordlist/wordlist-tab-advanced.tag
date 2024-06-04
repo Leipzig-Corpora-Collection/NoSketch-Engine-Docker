@@ -236,6 +236,7 @@
                 this.options.wlnums = ""
                 this.options.wlsort = "frq"
                 this.options.relfreq = 0
+                this.options.freqcls = 0
             }
             if(this.options.criteria.length && this.options.filter && this.options.keyword){
                 this.options.criteria.push({

@@ -1488,7 +1488,7 @@ class ConcCGI (UserCGI):
 
 
     def wordlist (self, wlpat='.*', wltype='simple', corpname='', usesubcorp='',
-                  ref_corpname='', ref_usesubcorp='', wlpage=1, relfreq=1, reldocf=1):
+                  ref_corpname='', ref_usesubcorp='', wlpage=1, relfreq=1, reldocf=1, freqcls=1):
         sc = self._corp()
         regex_inline_flags = ""
         if self.wlicase and not self.wlattr.endswith("_lc") and self.wlattr != "lc":
@@ -1637,6 +1637,29 @@ class ConcCGI (UserCGI):
             result_list = list(map(split_triples, result_list))
         else:
             result_list = list(map(split_wlist_item, result_list))
+
+        # compute frequency class
+        if freqcls \
+                and self.wlattr != "WSCOLLOC" and self.wlattr != "TERM" and not self.usengrams \
+                and result_list and "frq" in result_list[0]:
+            # find most frequent word
+            mfw_result_list, *_ = corplib.manatee.wordlist (wl, wlpat, addfreqs,
+                              sortfreq, self.wlwords, self.blacklist, self.wlminfreq,
+                              0, 1, nwre)
+            mwf_item = split_wlist_item(mfw_result_list[0])
+            # mwf_item = result_list[0]
+            # for item in result_list:
+            #     if item["frq"] > mwf_item["frq"]:
+            #         mwf_item = item
+            result["mfwItem"] = mwf_item
+
+            # compute FCL
+            from math import log2
+            mfwf = mwf_item["frq"]
+            def compute_and_add_fcl(item):
+                item["freqcls"] = round(log2(mfwf / max(1, item["frq"])))
+                return item
+            result_list = list(map(compute_and_add_fcl, result_list))
 
         if relfreq and (self.wlsort == 'frq' or 'frq' in self.wlnums):
             size = sc.search_size()

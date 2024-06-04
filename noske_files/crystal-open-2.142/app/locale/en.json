@@ -1004,6 +1004,8 @@
     "refCorpus": "Reference corpus",
     "reference": "reference",
     "relfreq": "Frequency per million",
+    "wl.freqcls": "Frequency class",
+    "freqcls": "FCL",
     "reload": "reload",
     "reorderGramrel": "Drag to move the column into a different position.",
     "requestFor": "Request for additional ",

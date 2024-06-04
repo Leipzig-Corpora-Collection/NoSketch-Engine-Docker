@@ -52,6 +52,16 @@ Overrides in `noske_files/crystal-open-2.142`:
 - disabled youtube integration (and tracking!)
   - `app/config.js`
   - `app/texts/`
+- add frequency class value to wordlist
+  - `app/src/misc/Misc.js` (column value formatting)
+  - `app/src/wordlist/wordlist-result-options-view.tag` (freqcls toggle dis/enable status)
+  - `app/src/wordlist/wordlist-result-options.tag` (user attributes updates)
+  - `app/src/wordlist/wordlist-result-table.tag` (sorting)
+  - `app/src/wordlist/wordlist-tab-advanced.tag` (? initial search options)
+  - `app/src/wordlist/Wordlist.meta.js` (freqcls (wlnums) column)
+  - `app/src/wordlist/WordlistStore.js` (freqcls in requests)
+  - `app/locale` (add freqcls labels)
+  - `app/texts/en/freqcls.html` (add freqcls description)
 
 ### bonito-open-5.63.9
 
@@ -71,6 +81,8 @@ Overrides in `noske_files/bonito-open-5.63.9`:
 - for [Wortschatz Leipzig]() added some more metadata (e.g., to compute frequency classes etc.)
   - `corplib.py`: `get_ws_info(corpus)` will extract `WSMFW` and `WSMFWF` settings aka _most frequent word_ and its frequency
   - `conccgi.py` --> `wsinfo: { mfw: str|null, mfwf: int|null }` will expose the _most frequent word_ information
+- add frequency class value to wordlist
+  - `conccgi.py` (freqcls computation in `wordlist` method)
 
 ### Basic Auth
 
