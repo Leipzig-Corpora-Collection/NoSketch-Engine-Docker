@@ -4,7 +4,7 @@ Fork of https://github.com/elte-dh/NoSketch-Engine-Docker with customizations fo
 
 This is a [dockerised](https://www.docker.com/) version of [NoSketch Engine](https://nlp.fi.muni.cz/trac/noske), the open source version of [Sketch Engine](https://www.sketchengine.eu/) corpus manager and text analysis software developed by [Lexical Computing Limited](https://www.lexicalcomputing.com/).
 
-This docker image is based on Debian 11 Bullseye and [the NoSketch Engine build and installation process](https://nlp.fi.muni.cz/trac/noske#Buildandinstallation) contains some additional hacks for convenient install and use.
+This docker image is based on Debian 12 Bookworm and [the NoSketch Engine build and installation process](https://nlp.fi.muni.cz/trac/noske#Buildandinstallation) contains some additional hacks for convenient install and use.
 See [Dockerfile](Dockerfile) for details.
 
 ## TL;DR
