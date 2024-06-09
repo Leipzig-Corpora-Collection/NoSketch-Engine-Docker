@@ -60,6 +60,11 @@ Overrides in `noske_files/bonito-open-5.63.9`:
 - fix corpus metadata in `/corpora` request (sizes as numbers)
   - `conccgi.py`
   - `corplib.py`
+- fix and cleanup imports
+  - `conccgi.py`
+  - `usercgi.py`
+- remove insecure `clear_cache` method (os access is mitigated with corpname validation but is not really used anyway)
+  - `conccgi.py`
 
 ### Basic Auth
 

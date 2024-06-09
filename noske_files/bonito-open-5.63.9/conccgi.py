@@ -5,6 +5,7 @@ from usercgi import UserCGI
 import corplib, conclib
 from corplib import corpconf_pairs
 import os
+import re
 import sys
 import gdex
 import manatee
@@ -13,7 +14,7 @@ from manatee import regexp_pattern
 import time
 import glob
 from collections import defaultdict
-from butils import *
+from butils import escape, escape_nonwild
 from annotlib import Annotation
 from conclib import strkwiclines
 
@@ -1375,13 +1376,6 @@ class ConcCGI (UserCGI):
                 'granularity': res
         }
 
-    def clear_cache (self, corpname=''):
-        if not corpname: corpname = self.corpname
-        if '..' in corpname or corpname.startswith('/'):
-            return {'error': 'This action is not allowed.'}
-        os.system ('rm -rf %s/%s' % (self._cache_dir, corpname))
-        return {'message': 'Cache cleared: %s' % corpname}
-
     wlminfreq = 5
     wlmaxfreq = 0
     wlmaxitems = 100
@@ -1429,23 +1423,19 @@ class ConcCGI (UserCGI):
     def check_wl_compatibility (self, wltype, ref_subcorp):
         if self.usengrams or ref_subcorp == '== the rest of the corpus ==':
             if wltype == 'multilevel':
-                raise ConcError('N-grams are not compatible with changing '
-                                  'output attribute(s)')
+                raise ConcError('N-grams are not compatible with changing output attribute(s)')
             if self.wlattr in ('WSCOLLOC', 'TERM') \
                      or '.' in self.wlattr:
-                raise ConcError('N-grams and "rest of corpus" can use only '
-                                  'positional attributes')
+                raise ConcError('N-grams and "rest of corpus" can use only positional attributes')
         if self.usengrams and ref_subcorp == '== the rest of the corpus ==':
-            raise ConcError(_('N-grams and "rest of corpus" cannot be used'
-                              'together'))
+            raise ConcError('N-grams and "rest of corpus" cannot be used together')
         if '.' in self.wlattr:
             if wltype != 'simple':
                 raise ConcError('Text types are limited to simple output')
             if self.wlnums == 'arf':
                 raise ConcError('ARF cannot be used with text types')
         if self.wlattr == 'WSCOLLOC' and self.wlsort != 'frq':
-            raise ConcError('Word sketch collocations are available '
-                            'with raw hit counts only')
+            raise ConcError('Word sketch collocations are available with raw hit counts only')
         if self.wlattr == 'TERM' and self.wlsort != 'frq':
             raise ConcError('Terms are available with raw hit counts only')
 
