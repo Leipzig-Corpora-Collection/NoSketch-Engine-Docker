@@ -1,4 +1,4 @@
-IMAGE_NAME?=lcc/nosketch-engine
+IMAGE_NAME?=lcc/nosketch-engine:latest
 CONTAINER_NAME?=noske
 
 CORPORA_DIR?=/disk/NoSketchEngine
@@ -33,7 +33,7 @@ build:
 
 
 # Run $(CONTAINER_NAME) container from $(IMAGE_NAME) image, mount $(CORPORA_DIR), use host port $(PORT)
-#  and set various environment variables
+#  and set various environment variables (Variables prefixed with $$ are shell variables to preserve newlines)
 run:
 	@make -s stop
 	@make -s run-pre
@@ -48,7 +48,7 @@ run:
 	 --mount type=volume,src=$(CONTAINER_NAME)-registration,dst=/var/lib/bonito/registration \
 	 --mount type=volume,src=$(CONTAINER_NAME)-jobs,dst=/var/lib/bonito/jobs \
 	 -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
-	 $(IMAGE_NAME):latest
+	 $(IMAGE_NAME)
 	@echo 'URL: http://$(HOSTNAME):$(PORT)/'
 .PHONY: run
 
@@ -78,6 +78,7 @@ connect:
 
 
 # Execute commmand in CMD variable and set various environment variables
+# (Variables prefixed with $$ are shell variables to preserve newlines)
 execute:
 	docker run --rm -it \
 	 --mount type=bind,src=$(REGISTRY_DIR),dst=/corpora/registry,readonly \
@@ -86,7 +87,7 @@ execute:
 	 --mount type=bind,src=$(SECRETS_FILE),dst=/var/lib/bonito/htpasswd \
 	 -e FORCE_RECOMPILE="$(FORCE_RECOMPILE)" \
 	 -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
-	 $(IMAGE_NAME):latest "$(CMD)"
+	 $(IMAGE_NAME) $(CMD)
 .PHONY: execute
 
 execute-no-tty:
@@ -96,7 +97,7 @@ execute-no-tty:
 	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data \
 	 -e FORCE_RECOMPILE="$(FORCE_RECOMPILE)" \
 	 -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
-	 $(IMAGE_NAME):latest "$(CMD)"
+	 $(IMAGE_NAME) $(CMD)
 .PHONY: execute-no-tty
 
 

@@ -37,6 +37,8 @@ WORKDIR /tmp/noske_files/
 
 ## Manatee
 ADD noske_files/manatee-open-${MANATEE_OPEN_VERSION}.tar.gz /tmp/noske_files/
+### HACKs + overrides (fixes)
+COPY noske_files/manatee-open-${MANATEE_OPEN_VERSION}/. /tmp/noske_files/manatee-open-${MANATEE_OPEN_VERSION}/
 RUN cd manatee* && \
     ./configure --with-pcre && \
     make && \

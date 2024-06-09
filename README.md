@@ -106,7 +106,7 @@ Overrides in `noske_files/bonito-open-5.63.9`:
 
 ### 1. Get the Docker image
 
-- Build your own image yourself (the process can take 5 minutes or so): `make build IMAGE_NAME=myimage`– be sure to name your image using the `IMAGE_NAME` parameter
+- Build your own image yourself (the process can take 5 minutes or so): `make build IMAGE_NAME=myimage:latest`– be sure to name your image using the `IMAGE_NAME` parameter
 
 ### 2. Compile your corpus
 
@@ -144,7 +144,7 @@ Overrides in `noske_files/bonito-open-5.63.9`:
 ## `make` parameters, multiple images and multiple containers
 
 By default,
-- the name of the docker image (`IMAGE_NAME`) is `lcc/nosketch-engine`,
+- the name of the docker image (`IMAGE_NAME`) is `lcc/nosketch-engine:latest`,
 - the name of the docker container (`CONTAINTER_NAME`) is `noske`,
 - the directory where the corpora metadata and raw input files (vertical) are stored (`CORPORA_DIR`) is `/disk/NoSketchEngine`,
   - the directory with the corpus metadata files (`REGISTRY_DIR`) is `$(CORPORA_DIR)/registry`,
@@ -162,9 +162,9 @@ By default,
 - the server alias (`SERVER_ALIAS`) is `cql.wortschatz-leipzig.de`,
 - the _htpasswd_ file is loaded from ([secrets/htpasswd](secrets) see [secrets/htpasswd.template](secrets) for example) or empty if these files do not exist.
 
-If there is a need to change these, set them as environment variables (e.g. `export IMAGE_NAME=myimage`) or supplement `make` commands with the appropriate values (e.g. `make run PORT=8080`).
+If there is a need to change these, set them as environment variables (e.g. `export IMAGE_NAME=myimage:latest`) or supplement `make` commands with the appropriate values (e.g. `make run PORT=8080`).
 
-E.g. `export IMAGE_NAME=myimage; make build` build an image called `myimage`; and `make run IMAGE_NAME=myimage CONTAINER_NAME=mycontainer PORT=12345` launches the image called `myimage` in a container called `mycontainer` which will use port `12345`.
+E.g. `export IMAGE_NAME=myimage:latest; make build` build an image called `myimage:latest`; and `make run IMAGE_NAME=myimage:latest CONTAINER_NAME=mycontainer PORT=12345` launches the image called `myimage:latest` in a container called `mycontainer` which will use port `12345`.
 In the latter case the system will be available at `http://SERVER_NAME:12345/`.
 
 See the table below on which `make` command accepts which parameter:
@@ -195,7 +195,7 @@ See the table below on which `make` command accepts which parameter:
 In the rare case of _multiple different docker images_, be sure to name them differently (by using `IMAGE_NAME`).\
 In the more common case of _multiple different docker containers_ running simultaneously, be sure to name them differently (by using `CONTAINER_NAME`) and also be sure to use different port for each of them (by using `PORT`). To handle multiple different sets of corpora be sure to set the directory containing the corpora (`CORPORA_DIR`) accordingly for each container.
 
-If you want to build your own docker image be sure to include the `IMAGE_NAME` parameter into the build command: `make build IMAGE_NAME=myimage` and also provide `IMAGE_NAME=myimage` for every `make` command which accepts this parameter.
+If you want to build your own docker image be sure to include the `IMAGE_NAME` parameter into the build command: `make build IMAGE_NAME=myimage:latest` and also provide `IMAGE_NAME=myimage:latest` for every `make` command which accepts this parameter.
 
 ## Authentication
 
