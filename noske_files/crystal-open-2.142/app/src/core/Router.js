@@ -71,6 +71,7 @@ class RouterClass{
 
     _checkAndSetPage(pageId, queryObj){
         let page = this._getPageToNaviagateTo(pageId, queryObj)
+        console.debug("_checkAndSetPage: page=<", page, "> (wanted <", pageId, "> with <", queryObj, ">)")
         let q = queryObj
         if(page != pageId){
             q = {}
@@ -109,9 +110,9 @@ class RouterClass{
             }
         }
         if(isAnonymous){
-            if(page == "corpus"){
-                page = "open"
-            }
+            // if(page == "corpus"){
+            //     page = "open"
+            // }
         }
         if(isDef(window.permissions[page]) && !window.permissions[page]){
             page = "not-allowed"
