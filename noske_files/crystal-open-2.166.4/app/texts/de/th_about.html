@@ -1,0 +1,55 @@
+<div class="aboutLeftCol">
+    <p>Thesaurus in Sketch Engine bezeichnet eine automatisch erstellte Liste von Synonymen oder von Wörtern, die zur selben Kategorie wie der Suchbegriff gehören (Wortfeld). Die Liste wird auf Basis des Kontexts erstellt, in dem der Suchbegriff im ausgewählten Korpus auftaucht. In den meisten Korpora werden nur Nomen, Adjektive, Verben und Adverbien unterstützt.</p>
+</div>
+<div class="aboutRightCol">
+    <iframe width="400" height="225" src="https://www.youtube.com/embed/kLsNUdTrTLk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<br>
+<ul class="clearfix collapsible">
+    <li>
+        <div class="collapsible-header">Was macht Thesaurus besonders?</div>
+        <div class="collapsible-body">
+            <div>Die Synonymliste wird automatisch generiert und kann so für jedes Wort einer Sprache erstellt werden, wenn es ausreichend oft im Korpus auftaucht. Deswegen lassen sich auch Synonymlisten für seltene Wörter generieren, die sonst nicht in einen traditionellen Thesaurus aufgenommen werden würden.</div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Wie werden Synonyme identifiziert?</div>
+        <div class="collapsible-body">
+            <div>Synonyme werden automatisch auf Basis des Kontexts identifiziert, in dem sie vorkommen. Diese Identifikation basiert auf der Theorie der distributionellen Semantik, die besagt, dass Wörter, die im selben Kontext vorkommen, eine ähnliche Bedeutung besitzen. Im Bezug auf Sketch Engine bedeutet das, dass Wörter mit ähnlichen <a href="https://www.sketchengine.eu/my_keywords/collocation/" target="_blank">Kollokationen</a> ähnliche Bedeutungen besitzen. Der Word Sketch ist dabei für die Bestimmung der Ähnlichkeit von zentraler Bedeutung. Um Synonyme für den Suchbegriff festzulegen, werden die Word Sketches aller Wörter derselben Wortart verglichen. Die Wörter, die die größte Schnittmenge an %[collocate|Kollokatoren]% besitzen, werden aufgelistet. Der Thesaurus-Wert jedes dieser Synonyme bezeichnet den Prozentsatz an übereinstimmenden Kollokatoren.
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Thesaurus-Qualität</div>
+        <div class="collapsible-body">
+            <div>Die Qualität des Thesaurus hängt stark davon, wieviele Kollokatoren ein Word Sketch enthält. Das wiederum hängt von der %[frequency|Häufigkeit]% des Suchbegriffs und der potentiellen Synonmye ab. Die Thesaurus-Erstellung benötigt also ein sehr großes Korpus. Zum Erhalt verwertbarer Ergebnisse für häufige vorkommende Wörter wird ein Korpus mit mindestens 100.000 Wörtern benötigt, für seltenere Wörter jedoch deutlich größere Korpora. Wir empfehlen ausdrücklich, eines unserer Korpora mit mehreren Milliarden Wörtern zu verwenden.</div>
+            <br>
+            <div>Es kann vorkommen, dass die Synonymliste Wörter enthält, die nicht in den Thesaurus aufgenommen werden sollten. Das hängt mit der automatischen Erstellung zusammen. Sketch Engine kann mögliche ähnliche Bedeutungen nicht direkt, sondern nur durch den Vergleich der Kollokatoren, erkennen. Sobald zwei Wörter die gleichen Kollokatoren besitzen, werden sie als Synonyme gelistet, auch wenn sie nicht unbedingt die gleiche Bedeutung besitzen. Die Nützlichkeit des Tools wird durch solche gelegentlich auftretenden Ungenauigkeiten jedoch nicht eingeschränkt. Um solche Ungenauigkeiten zu vermeiden, sollten Sie ein größeres Korpus verwenden. Die Thesaurus-Erstellung für extrem seltene Wörter (ein paar hundert Vorkommnisse oder weniger) wird unweigerlich schlechte oder überhaupt keine Ergebnisse hervorbringen.</div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Wie wird der Thesaurus-Wert ermittelt und interpretiert?</div>
+        <div class="collapsible-body">
+            <div>Der Thesaurus-Wert, der über die Anzeigeoptionen eingeblendet werden kann, ist einfach der Prozentsatz an übereinstimmenden Kollokatoren. Dabei wird der Word Sketch des Suchbegriffs mit dem Word Sketch aller anderen Wörter der gleichen Wortart im Korpus verglichen. Jede grammatische Beziehung wird unabhängig voneinander verglichen. Die Formeln und weitere Details finden Sie unter <a href="https://www.sketchengine.eu/documentation/statistics-used-in-sketch-engine" target="_blank">Statistiken in Sketch Engine</a>.
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Voraussetzungen für die optimale Anwendung</div>
+        <div class="collapsible-body">
+            <div>
+                <b>Word Sketch</b> <br> Die Thesaurus-Erstellung funktioniert nur, wenn das Korpus Word Sketches beinhaltet. Das Korpus muss in Sketch Engine getaggt worden sein oder das selbe Tagset benutzen. Wenn das Korpus mit einem anderen Tagset getaggt worden ist, wird eine benutzerdefinierte <a href="https://www.sketchengine.eu/my_keywords/word-sketch-grammar/" target="_blank">Word-Sketch-Grammatik</a> benötigt. <br> Die Thesaurus-Erstellung funktioniert mit bestimmten Einschränkungen auch mit allgemeinen Word-Sketch-Grammatiken. Mehr unter Word Sketch.
+            </div>
+            <br>
+            <div>
+                <b>Tags und Lemmata</b> <br>Für einen vollwertigen Thesaurus wird ein%[tag|getaggtes]% und %[lemma|lemmatisiertes]% Korpus benötigt. Thesauri, die mithilfe von nicht getaggten und nicht lemmatisierten Korpora erstellt werden, werden Qualitätsmängel aufweisen. Solche Thesauri können trotzdem sehr nützlich sein, vor allem bei der Arbeit mit Sprachen, für die wenige Daten vorhanden sind und für die deswegen das Taggen und Lemmatisieren nicht realistisch ist.
+            </div>
+            <br>
+            <div>
+                <b>Korpusgröße</b> <br>Die Qualität des Thesaurus hängt vor allem von umfangreichen Word Sketches ab. Ein Word Sketch ist dann umfangreich, wenn er eine große Menge an Kollokatoren in allen grammatischen Beziehungen enthält. Solche umfangreichen Word Sketches müssen sowohl für den Suchbegriff als auch für alle Wörter der gleichen Wortart existieren, damit diese miteinander verglichen werden können. Diese Vorraussetzung kann nur erfüllt werden, wenn das Wort eine hohe %[frequency|Häufigkeit]% im Korpus aufweist, idealerweise mehrere tausende Vorkommnisse oder mehr. Sehr große Korpora sind nötig, damit umfangreiche Word Sketches auch für weniger häufige Wörter produziert werden können. Wir empfehlen für jede fundierte Arbeit mit Thesaurus eines unserer Korpora mit mehreren Milliarden Wörtern.
+            </div>
+        </div>
+    </li>
+</ul>
+

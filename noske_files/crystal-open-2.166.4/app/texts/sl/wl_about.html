@@ -1,0 +1,63 @@
+<div class="row">
+   <div class="col m12 l7">
+       Orodje za izdelavo seznamov besed ustvarja različne vrste frekvenčnih seznamov:
+     <ul class="browser-default">
+<li>samostalniki, glagoli, pridevniki in druge besedne vrste</li>
+<li>besede, ki se začnejo na, končajo na ali vsebujejo določene znake</li>
+<li>%[wordForm|besedne oblike]%, %[tag|oznake]%, %[lemma|leme]% in drugi %[attribute|atributi]%</li>
+</ul>
+<div>ali kombinacija zgornjih treh možnosti.</div>
+<div>Na seznamu besed so lahko prikazane tri različne mere pogostosti: %[frequency|frekvenca]%, %[relfreq|frekvenca na milijon]% in <a href="https://www.sketchengine.eu/my_keywords/arf/" rel="noopener" target="_blank">ARF</a>.</div>
+   </div>
+   <div class="col m12 l5">
+       <iframe style="/* float: right; */" src="https://www.youtube.com/embed/nqpCIICCEdw" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe>
+   </div>
+</div>
+
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">Kako deluje seznam besed?</div>
+<div class="collapsible-body">
+<div>Seznam besed deluje na ravni %[token|pojavnice]%. Privzete nastavitve bodo ustvarile seznam besed, ker so <a href="https://www.sketchengine.eu/my_keywords/non-word/" rel="noopener" target="_blank">nebesede</a> samodejno izključene.</div>
+<br />
+<div>Seznam besed lahko omejite s frekvenco z nastavitvijo najmanjše in največje frekvence.</div>
+<br />
+<div>Frekvence lahko dobite za seznam konkretnih besed. Uporabite možnost <strong>s tega seznama:</strong> v zavihku za napredne in vnesite elemente, za katere je treba izračunati frekvence iz izbranega korpusa.</div>
+<br />
+<div>%[regex|Regularne izraze]% lahko uporabite za opredelitev kompleksnih meril za besede, ki naj bodo vključene v frekvenčni seznam.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Vključevanje več informacij v rezultat</div>
+<div class="collapsible-body">
+<div>Možnost <strong>Prikaži kot</strong> omogoča vključitev več atributov v rezultat. Tako je na primer mogoče ustvariti frekvenčni seznam besednih oblik, na katerem so poleg besednih oblik prikazane tudi leme. Dovoljeni so največ trije atributi.</div>
+<br />
+<div><strong>Omejitev</strong> <br>Ko uporabite možnost <strong>Prikaži kot</strong>, se najprej izdelajo <a href="https://www.sketchengine.eu/my_keywords/concordance/" rel="noopener" target="_blank">konkordance</a> vseh %[token|pojavnic]%, ki ustrezajo merilom, in iz teh konkordanc se izračunajo frekvence. Velikost te konkordance je tehnično omejena na 10 milijonov konkordančnih vrstic. Če je korpus zelo velik, se podatki o frekvencah ne morejo izračunati iz celotnega korpusa.</div>
+<br />
+<div>Te omejitve ni mogoče odpraviti. Če želite pridobiti frekvence iz celotnega korpusa, lahko Sketch Engine proti plačilu ustvari seznam. <a href="https://www.sketchengine.eu/contact-us/" rel="noopener" target="_blank">Kontaktirajte nas</a>.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Hitrost in velikost korpusa</div>
+<div class="collapsible-body">
+<div>Sketch Engine je posebej zasnovan za hitro obdelavo velikih korpusov. Vsako iskanje bo trajalo le nekaj sekund, če je velikost korpusa manjša od milijarde besed. Pri korpusih nad 1 milijardo besed lahko traja nekoliko dlje. Za kompleksna merila regularnih izrazov, ki se uporabljajo za velike korpuse, bo morda treba počakati več minut.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Zahteve za dobro delovanje seznama besed</div>
+<div class="collapsible-body">
+<div>Edina zahteva je %[token|tokeniziran]% korpus. Rezultati bodo bolj reprezentativni, če bodo ustvarjeni iz večjega korpusa. Vendar pa za delovanje seznama besed ni zahtevana najmanjša velikost korpusa.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Primeri rezultatov</div>
+<div class="collapsible-body">
+<div>Enostaven frekvenčni seznam samostalnikov.</div>
+<br />
+<div class="center"><img src="https://www.sketchengine.eu/wp-content/uploads/WL1.png" loading="lazy"> <br /><br /></div>
+<div>Frekvenčni seznam besednih oblik skupaj z lemami in oznakami.</div>
+<br />
+<div class="center"><img src="https://www.sketchengine.eu/wp-content/uploads/WL2.png" loading="lazy"></div>
+</div>
+</li>
+</ul>

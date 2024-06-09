@@ -1,0 +1,63 @@
+<div class="row">
+   <div class="col m12 l7">
+       La herramienta de listas de palabras genera listas de frecuencias de varios tipos:
+     <ul class="browser-default">
+<li>sustantivos, verbos, adjetivos y otras partes de la oración</li>
+<li>palabras que empiezan, terminan o contienen determinados caracteres</li>
+<li>%[wordForm|formas léxicas]%, %[tag|etiquetas]%, %[lemma|lemas]% y otros %[attribute|atributos]%</li>
+</ul>
+<div>o una combinación de las tres opciones anteriores.</div>
+<div>En la lista de palabras se pueden mostrar tres medidas de frecuencia diferentes: %[frequency|frecuencia]%, %[relfreq|frecuencia por millón]% y <a href="https://www.sketchengine.eu/my_keywords/arf/" target="_blank" rel="noopener">ARF</a>.</div>
+   </div>
+   <div class="col m12 l5">
+       <iframe style="/* float: right; */" src="https://www.youtube.com/embed/nqpCIICCEdw" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe>
+   </div>
+</div>
+
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">¿Cómo funciona la lista de palabras?</div>
+<div class="collapsible-body">
+<div>La lista de palabras funciona al nivel %[token]%. La configuración por defecto producirá una lista de palabras porque las <a href="https://www.sketchengine.eu/my_keywords/non-word/" target="_blank" rel="noopener">no-palabras</a> se excluyen automáticamente.</div>
+<br />
+<div>La lista de palabras puede limitarse por la frecuencia con el ajuste de frecuencia mínima y máxima.</div>
+<br />
+<div>Se pueden obtener frecuencias para una lista de palabras concretas. Utiliza la opción <strong>de esta lista:</strong> en la pestaña advanzada e introduce los elementos cuyas frecuencias deben calcularse a partir del corpus seleccionado.</div>
+<br />
+<div>Las %[regex|expresiones regulares]% pueden utilizarse para definir criterios complejos para las palabras que deberían ser incluidas en la lista de frecuencia.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Incluir más información en el resultado</div>
+<div class="collapsible-body">
+<div>La opción <strong>Mostrar como</strong> permite incluir más atributos en el resultado. Por ejemplo, se puede generar una lista de frecuencias de formas léxicas con lemas mostrados junto a las formas léxicas. Se permiten hasta 3 atributos.</div>
+<br />
+<div><strong>Limitación</strong> <br>Cuando se utiliza la opción <strong>Mostrar como</strong>, primero se genera una <a href="https://www.sketchengine.eu/my_keywords/concordance/" target="_blank" rel="noopener">concordancia</a> de todos los %[token|tokens]% que coinciden con los criterios y las frecuencias se calculan a partir de esta concordancia. El tamaño de esta concordancia tiene una limitación técnica de 10 millones de filas de concordancia. Por consiguiente, si el corpus es muy grande, es posible que los datos de frecuencia no se calculen a partir de todo el corpus.</div>
+<br />
+<div>Esta limitación no puede eliminarse. Para obtener frecuencias de todo el corpus, Sketch Engine puede generar la lista previo pago. <a href="https://www.sketchengine.eu/contact-us/" target="_blank" rel="noopener">Contacte con nosotros</a>.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Velocidad y tamaño del corpus</div>
+<div class="collapsible-body">
+<div>Sketch Engine está diseñado específicamente para manejar grandes corpus con rapidez. Cualquier búsqueda sólo tardará unos segundos en completarse si el tamaño del corpus es inferior a mil millones de palabras. Para corpus de más de mil millones de palabras, puede tardar un poco más. El uso de expresiones regulares complejas en corpus de gran tamaño puede requerir varios minutos de espera.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Requisitos para que la lista de palabras funcione bien</div>
+<div class="collapsible-body">
+<div>El único requisito es un corpus %[token|tokenizado]%. Los resultados serán más representativos si se generan a partir de un corpus grande. Sin embargo, no se requiere un corpus mínimo para que la lista de palabras funcione.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Ejemplos de resultado</div>
+<div class="collapsible-body">
+<div>Una simple lista de frecuencias de sustantivos.</div>
+<br />
+<div class="center"><img src="https://www.sketchengine.eu/wp-content/uploads/WL1.png" loading="lazy"> <br /><br /></div>
+<div>Lista de frecuencias de formas léxicas junto con lemas y etiquetas.</div>
+<br />
+<div class="center"><img src="https://www.sketchengine.eu/wp-content/uploads/WL2.png" loading="lazy"></div>
+</div>
+</li>
+</ul>

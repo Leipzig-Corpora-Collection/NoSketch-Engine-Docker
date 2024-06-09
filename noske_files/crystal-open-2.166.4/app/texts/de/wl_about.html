@@ -1,0 +1,63 @@
+<div class="row">
+   <div class="col m12 l7">
+       Mithilfe der Wortliste können Sie verschiedene Häufigkeitslisten erstellen:
+     <ul class="browser-default">
+<li>Nomen, Verben, Adjektive und andere Wortarten</li>
+<li>Wörter, die mit bestimmten Buchstaben beginnen, enden oder diese enthalten</li>
+<li>%[wordForm|Wortformen]%, %[tag|Tags]%, %[lemma|Lemmata]% und andere %[attribute|Attribute]%</li>
+</ul>
+<div>oder eine Kombination dieser drei Optionen.</div>
+<div>Die Häufigkeit kann in der Wortliste in drei verschiedenen Varianten angezeigt werden: %[frequency|Häufigkeit]%, %[relfreq|Häufigkeit pro Million]% und <a href="https://www.sketchengine.eu/my_keywords/arf/" target="_blank" rel="noopener">ARF</a>.</div>
+   </div>
+   <div class="col m12 l5">
+       <iframe style="/* float: right; */" src="https://www.youtube.com/embed/nqpCIICCEdw" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe>
+   </div>
+</div>
+
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">Wie funktioniert die Wortliste?</div>
+<div class="collapsible-body">
+<div>Die Wortliste arbeitet auf der Ebene von %[token|Token]%. Standardmäßig werden nur Wörter angezeigt, weil <a href="https://www.sketchengine.eu/my_keywords/non-word/" target="_blank" rel="noopener">Nichtwörter</a> automatisch aussortiert werden.</div>
+<br />
+<div>Die Wortliste kann in den Einstellungen nach minimaler und maximaler Häufigkeit eingegrenzt werden.</div>
+<br />
+<div>Häufigkeitslisten können für eine Auswahl konkreter Wörter erstellt werden. Wählen Sie die Option <strong>aus dieser Liste:</strong> in der erweiterten Suche und geben sie die Wörter ein, deren Häufigkeit im gewählten Korpus berechnet werden soll.</div>
+<br />
+<div>%[regex|Reguläre Ausdrücke (Regex)]% können genutzt werden, um komplexe Kriterien für die Wörter zu definieren, die in die Häufigkeitsliste aufgenommen werden sollen.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Mehr Informationen in den Ergebnissen anzeigen</div>
+<div class="collapsible-body">
+<div>Mit der Option <strong>Darstellen als</strong> können Sie dem Ergebnis mehr Attribute hinzufügen. Das kann beispielsweise eine Häufigkeitsliste von Wortformen sein, in der neben den Wortformen zusätzlich die Lemmata angezeigt werden. Sie können bis zu 3 Attribute auswählen.</div>
+<br />
+<div><strong>Einschränkungen</strong> <br>Wenn die Option <strong>Darstellen als</strong> ausgewählt ist, wird zunächst eine <a href="https://www.sketchengine.eu/my_keywords/concordance/" target="_blank" rel="noopener">Konkordanz</a> mit allen den Kriterien entsprechenden %[token|Token]% erzeugt. Die Häufigkeit wird dann aus dieser Konkordanz berechnet. Diese Konkordanz ist aus technischen Gründen auf eine Größe von 10 Millionen Konkordanzzeilen begrenzt. Das kann bei sehr großen Korpora dazu führen, dass die Häufigkeitsberechnung nicht auf dem gesamten Korpus basiert.</div>
+<br />
+<div>Diese Einschränkung kann nicht aufgehoben werden. Sketch Engine kann jedoch in solchen Fällen gegen eine Gebühr Häufigkeitslisten aus dem gesamten Korpus generieren. <a href="https://www.sketchengine.eu/contact-us/" target="_blank" rel="noopener">Kontaktieren Sie uns</a>.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Verarbeitungsgeschwindigkeit und Korpusgröße</div>
+<div class="collapsible-body">
+<div>Sketch Engine wurde speziell für die schnelle Verarbeitung sehr großer Korpora entwickelt. Deswegen dauern Suchanfragen in Korpora mit weniger als einer Milliarde Wörter in der Regel nur wenige Sekunden. Bei Korpora mit mehr als einer Milliarde Wörter kann es ein wenig länger dauern. Wenn komplexe reguläre Ausdrücke (Regex) auf sehr große Korpora angewandt werden, kann die Verarbeitung mehrere Minuten dauern.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Voraussetzungen für die optimale Anwendung</div>
+<div class="collapsible-body">
+<div>Ein %[token|tokenisiertes]% Korpus stellt die einzige Voraussetzung dar. Die Ergebnisse sind zwar repräsentativer, je größer das Korpus ist, es gibt jedoch keine erforderliche Mindestgröße für die Erstellung einer Wortliste.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Beispielergebnise</div>
+<div class="collapsible-body">
+<div>Eine einfache Häufigkeitsliste von Nomen.</div>
+<br />
+<div class="center"><img src="https://www.sketchengine.eu/wp-content/uploads/WL1.png" loading="lazy"> <br /><br /></div>
+<div>Häufigkeitsliste von Wortformen mit Lemmata und Tags.</div>
+<br />
+<div class="center"><img src="https://www.sketchengine.eu/wp-content/uploads/WL2.png" loading="lazy"></div>
+</div>
+</li>
+</ul>

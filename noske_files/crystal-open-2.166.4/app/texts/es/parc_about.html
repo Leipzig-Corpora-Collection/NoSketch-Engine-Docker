@@ -1,0 +1,66 @@
+<div class="row">
+<div class="col m12 l7">
+<div>La concordancia paralela sólo funciona con los <a href="https://www.sketchengine.eu/my_keywords/parallel-corpus/" target="_blank" rel="noopener">corpora paralelos</a> que estén <a href="https://www.sketchengine.eu/my_keywords/alignment/">alineados</a>. La concordancia paralela busca palabras, sintagmas, %[tag|tags]%, <a href="https://www.sketchengine.eu/my_keywords/document/" target="_blank" rel="noopener">documentos</a>, <a href="https://www.sketchengine.eu/my_keywords/text-type/" target="_blank" rel="noopener">text types</a> o <a href="https://www.sketchengine.eu/my_keywords/structure/" target="_blank" rel="noopener">estructuras</a> de corpus en un idioma y muestra los resultados junto con los <a href="https://www.sketchengine.eu/my_keywords/segment/" target="_blank" rel="noopener">segmentos</a>traducidos<a href="https://www.sketchengine.eu/my_keywords/alignment/">alineados</a> en el otro idioma. Los segmentos traducidos suelen contener las traducciones de la palabra o sintagma buscado pero la traducción puede no estar incluida si el traductor decidió utilizar una forma diferente de expresar la idea. La concordancia puede ordenarse, filtrarse, contarse y seguir procesándose para obtener el resultado deseado.</div>
+<br />
+<div>Las opciones de visualización permiten mostrar información adicional como lemas, etiquetas y otros %[atributo|atributos]%, tipos de texto (metadatos) o estructuras de corpus. Sketch Engine también intentará localizar la traducción y resaltarla.</div>
+<br />
+<div>La búsqueda CQL en la pestaña avanzada se utiliza para búsquedas complejas con criterios no específicos o criterios opcionales.</div>
+</div>
+<div class="col m12 l5"><iframe src="https://www.youtube.com/embed/vklUWMRV1ew" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe></div>
+</div>
+<p> </p>
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">Trabajar con las columnas (idiomas)</div>
+<div class="collapsible-body">
+<div>El número de idiomas (columnas) que se puede buscar simultáneamente sólo está limitado per el número de idiomas contenidos en el corpus. <br>Todas las herramientas están disponibles para el primer idioma. La distribución de frecuencia y la ordenación en lo(s) otro(s) idioma(s) sólo están disponibles si se utiliza una palabra de búsqueda también en ese idioma.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">¿Cómo funciona la concordancia?</div>
+<div class="collapsible-body">
+<div>La consulta de búsqueda debe definirse para el primer idioma, es opcional para el o los idiomas restantes. La búsqueda siempre empieza desde el inicio del corpus y las filas de concordancia se muestran en el orden en que se encuentran en el corpus. Utiliza los iconos de Barajar o Muestra aleatoria para cambiar este orden.</div>
+<br />
+<div>La visualización de %[lema|lemas]%, etiquetas y otros atributos puede establecerse en las opciones de visualización.</div>
+<br />
+<div>El icono a la izquierda de cada fila de concordancia lleva a los tipos de texto (metadatos) de la fila de concordancia. El usuario puede establecer cuales metadatos deben visualizarse permanentemente.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Resaltar la traducción</div>
+<div class="collapsible-body">
+<div>Después de que elr esultado esté visualizado, Sketch Engine intentará resaltar la palabra más probable que sea la traducción de la palabra o del sintagma buscado en el primer idioma. Puede que esto no siempre sea exacto o que no se resalte en absoluto. El proceso se indica con una notificación en la parte superior.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Cómo utilizar la concordancia</div>
+<div class="collapsible-body">
+<div><strong>Buscar</strong> <br>Pasa el ratón por encima de los distintos elementos del formulario de entrada para conocer las diferentes opciones de búsqueda.</div>
+<br />
+<div><strong>Trabajar con los resultados</strong> <br>Para aprender a filtrar, ordenar, contar, reorganizar o procesar los resultados, pasa el cursor por encima de un icono o del símbolo de interrogación (?) para que aparezca un tooltip que explique su función.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Velocidad y tamaño del corpus</div>
+<div class="collapsible-body">
+<div>Sketch Engine está diseñado específicamente para manejar grandes corpora con rapidez. Cualquier búsqueda sólo tardará unos segundos en completarse si el tamaño es inferior a mil millones de palabras. La búsqueda podría tardar más en caso del corpora con más de mil de milliones de palabras. Búsquedas CQL complejas que contienen expresiones regulares o cálculos de frecuencia en corpora grandes pueden tardar varios minutos en completarse.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Requisitos para que la concordancia funcione bien</div>
+<div class="collapsible-body">
+<div>La concordancia paralela funcionará bien aunque los idiomas en el corpus no estén anotados al mismo nivel. Por ejemplo, un idioma está etquetado y lematizado y el otro no. La funcionalidad para el idioma menos anotado se verá limitada en consecuencia.</div>
+<br />
+<div>La concordancia funcionará con cualquier corpus incluso el que no está <a href="https://www.sketchengine.eu/my_keywords/tokenization/" target="_blank" rel="noopener">tokenizado</a>, lematizado y etiquetado, pero si se le añaden estas tres características específicas aumentará su utilidad. La tokenización, la lematización y el tagging se realizan automáticamente al cargar los archivos en Sketch Engine, siempre que el idioma sea <a href="https://www.sketchengine.eu/user-guide/user-manual/corpora/by-language/" target="_blank" rel="noopener">admitido</a>.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Ejemplos de resultado</div>
+<div class="collapsible-body">
+<div>La concordancia de <em>easy</em> barajada aleatoriamente así que las frases de diferentes partes del corpus están en una sola pantalla. Las traducciones aparecen resaltadas.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance1.png" alt="" width="1151" height="720" loading="lazy"> <br /><br /></div>
+<div>La concordancia de arriba, pero sin los segmentos españoles en los que la palabra easy se traduce por fácil. Se utilizó un filtro que excluía los segmentos en español que contenían palabras que empezaban por fácil. No se han resaltado todas las traducciones.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance2.png" alt="" width="1151" height="720" loading="lazy"></div>
+</div>
+</li>
+</ul>

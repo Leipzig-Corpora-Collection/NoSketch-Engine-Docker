@@ -1,0 +1,66 @@
+<div class="row">
+<div class="col m12 l7">
+<div>Die Parallelkonkordanz funktioniert nur mit <a href="https://www.sketchengine.eu/my_keywords/parallel-corpus/" target="_blank" rel="noopener">Parallelkorpora</a>, die <a href="https://www.sketchengine.eu/my_keywords/alignment/">aligniert</a> sind. Sie sucht nach Wörtern, Phrasen, %[tag|Tags]%, <a href="https://www.sketchengine.eu/my_keywords/document/" target="_blank" rel="noopener">Dokumenten</a>, %[textType|Texttypen]% oder <a href="https://www.sketchengine.eu/my_keywords/structure/" target="_blank" rel="noopener">Korpusstrukturen</a> in einer Sprache und zeigt die Ergebnisse zusammen mit alignierten übersetzten <a href="https://www.sketchengine.eu/my_keywords/segment/">Segmenten</a> in der anderen Sprache an. Die übersetzten Segmente enthalten in der Regel die Übersetzungen des gesuchten Wortes oder der gesuchten Phrase, es kann jedoch vorkommen, dass die Übersetzung nicht enthalten ist, wenn der Übersetzer sich für eine andere Ausdrucksweise des Begriffs entschieden hat. Die Konkordanz kann sortiert, gefiltert, gezählt und weiterverarbeitet werden, um das gewünschte Ergebnis zu erhalten.</div>
+<br />
+<div>Die Anzeigeoptionen ermöglichen das Anzeigen von zusätzlichen Informationen wie Lemmata, Tags und anderen %[attribute|Attributen]%, Textypen (Metadaten) oder Korpusstrukturen. Sketch Engine versucht außerdem die Übersetzung zu finden und hervorzuheben.</div>
+<br />
+<div>Die CQL-Suche im Tab „Erweitert“ wird für komplexe Suchen mit unbestimmten oder optionalen Kriterien genutzt.</div>
+</div>
+<div class="col m12 l5"><iframe src="https://www.youtube.com/embed/vklUWMRV1ew" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe></div>
+</div>
+<p> </p>
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">Wie funktioniert das Arbeiten mit den Spalten (Sprachen)?</div>
+<div class="collapsible-body">
+<div>Die Anzahl der Sprachen (Spalten), die gleichzeitig durchsucht werden können, wird lediglich begrenzt durch die Anzahl an Sprachen, die das Korpus enthält. <br>Alle Tools sind für die erste Sprache verfügbar. Häufigkeitsverteilung und Sortieren in den anderen Sprachen ist nur möglich, wenn für die Suche auch ein Wort in der jeweiligen Sprache verwendet wird.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Wie funktioniert die Konkordanz?</div>
+<div class="collapsible-body">
+<div>Die Suchanfrage muss für die erste Sprache definiert werden, für die übrigen Sprachen ist sie optional. Die Suche beginnt immer am Anfang des Korpus und die Konkordanzzeilen werden in der Reihenfolge angezeigt, in der sie im Korpus gefunden werden. Klicken Sie auf das Symbol „Zeilen mischen“ oder „Zufällige Stichprobe“, um dies zu ändern.</div>
+<br />
+<div>Das Anzeigen von %[lemma|Lemmata]%, Tags und anderen Attributen kann in den Anzeigeoptionen eingestellt werden.</div>
+<br />
+<div>Das Symbol auf der linken Seite jeder Konkordanzzeile führt zu Texttypen (Metadaten) der Konkordanzzeile. Der Nutzer kann einstellen sich eines oder meherere davon dauerhaft anzeigen zu lassen. Der Nutzer kann festlegen, dass eine oder mehrere davon dauerhaft angezeigt werden sollen.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Hervorhebung von Übersetzungen</div>
+<div class="collapsible-body">
+<div>Nachdem das Ergebnis angezeigt wird, versucht Sketch Engine das Wort hervorzuheben, das am wahrscheinlichsten die Übersetzung des gesuchten Wortes oder der gesuchten Phrase in der ersten Sprache ist. Möglicherweise ist dies nicht immer korrekt oder es gibt keine Hervorhebung. Der Vorgang wird durch eine Benachrichtigung am oberen Bildschirmrand angezeigt.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Wie benutzt man die Konkordanz?</div>
+<div class="collapsible-body">
+<div><strong>Suchen</strong> <br>Bewegen Sie den Mauszeiger über die einzelnen Elemente der Suchmaske, um sich mit den verschiedenen Suchoptionen vertraut zu machen.</div>
+<br />
+<div><strong>Mit den Ergebnissen arbeiten</strong> <br>Um zu lernen, wie man die Ergebnisse filtert, sortiert, zählt, neu organisiert oder weiter verarbeitet, bewegen Sie den Mauszeiger über ein Symbol oder über das Fragezeichensymbol (?), um sich einen Tooltip anzeigen zu lassen, der die Funktion erklärt.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Verarbeitungsgeschwindigkeit und Korpusgröße</div>
+<div class="collapsible-body">
+<div>Sketch Engine wurde speziell für die schnelle Verarbeitung sehr großer Korpora entwickelt. Deswegen dauern Suchanfragen in Korpora mit weniger als einer Milliarde Wörter in der Regel nur wenige Sekunden. Bei Korpora mit mehr als einer Milliarde Wörter kann es ein wenig länger dauern. Komplexe CQL-Suchen mit regulären Ausdrücken oder Häufigkeitsberechnungen in großen Korpora können einige Minuten dauern.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Voraussetzungen für die optimale Anwendung</div>
+<div class="collapsible-body">
+<div>Die Parallelkonkordanz funktioniert auch dann, wenn die Sprachen im Korpus nicht auf demselben Niveau annotiert sind, beispielsweise dann, wenn eine Sprache getaggt und lemmatisiert ist und die andere Sprache nicht. Die Funktionalität für die weniger annotierte Sprache ist entsprechend eingeschränkt.</div>
+<br />
+<div>Die Konkordanz funktioniert mit jedem Korpus, auch wenn das Korpus nicht <a href="https://www.sketchengine.eu/my_keywords/tokenization/" target="_blank" rel="noopener">tokenisiert</a>, lemmatisiert oder getaggt ist. Ist dies jedoch der Fall, ist die Konkordanz um ein Vielfaches nützlicher. Tokenisierung, Lemmatisierung und Tagging werden automatisch beim Hochladen von Dateien auf Sketch Engine durchgeführt, sofern die Sprache <a href="https://www.sketchengine.eu/user-guide/user-manual/corpora/by-language/" target="_blank" rel="noopener">unterstützt</a> wird.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Beispielergebnisse</div>
+<div class="collapsible-body">
+<div>Die Konkordanz von <em>easy</em> zufällig sortiert, so dass Sätze aus verschiedenen Teilen des Korpus auf einem Bildschirm angezeigt werden. Übersetzungen sind hervorgehoben.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance1.png" alt="" width="1151" height="720" loading="lazy"> <br /><br /></div>
+<div>Die obige Konkordanz, jedoch ohne spanische Segmente, in denen das Wort easy mit fácil übersetzt wurde. Es wurde ein Filter verwendet, der spanische Segmente ausschließt, die mit fácil- beginnende Wörter enthalten. Nicht alle Übersetzungen sind hervorgehoben.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance2.png" alt="" width="1151" height="720" loading="lazy"></div>
+</div>
+</li>
+</ul>
