@@ -1,13 +1,17 @@
 IMAGE_NAME?=lcc/nosketch-engine
 CONTAINER_NAME?=noske
 
-# CORPORA_DIR?=$$(pwd)/corpora
 CORPORA_DIR?=/disk/NoSketchEngine
+FAST_CORPORA_DIR?=/ssd1/NoSketchEngine
+
 REGISTRY_DIR?=$(CORPORA_DIR)/registry
 VERT_DIR?=$(CORPORA_DIR)/vert
-COMPILED_DIR?=/ssd1/NoSketchEngine/data
-CACHE_DIR?=/ssd1/NoSketchEngine/cache
+COMPILED_DIR?=$(FAST_CORPORA_DIR)/data
+CACHE_DIR?=$(FAST_CORPORA_DIR)/cache
+SUBCORP_DIR?=$(FAST_CORPORA_DIR)/subcorp
+USERDATA_DIR?=$(FAST_CORPORA_DIR)/options
 SECRETS_FILE=$$(pwd)/secrets/htpasswd
+
 
 #HOSTNAME?=$(shell hostname -I | cut -f1 -d' ')
 HOSTNAME?=127.0.0.1
@@ -32,23 +36,31 @@ build:
 #  and set various environment variables
 run:
 	@make -s stop
-	@touch $(SECRETS_FILE)
+	@make -s run-pre
 	docker run -d --restart=unless-stopped --name $(CONTAINER_NAME) -p 127.0.0.1:$(PORT):80 \
 	 --mount type=bind,src=$(REGISTRY_DIR),dst=/corpora/registry,readonly \
 	 --mount type=bind,src=$(VERT_DIR),dst=/corpora/vert,readonly \
 	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data,readonly \
 	 --mount type=bind,src=$(CACHE_DIR),dst=/var/lib/bonito/cache \
+	 --mount type=bind,src=$(SUBCORP_DIR),dst=/var/lib/bonito/subcorp \
+	 --mount type=bind,src=$(USERDATA_DIR),dst=/var/lib/bonito/options \
 	 --mount type=bind,src=$(SECRETS_FILE),dst=/var/lib/bonito/htpasswd \
+	 --mount type=volume,src=$(CONTAINER_NAME)-registration,dst=/var/lib/bonito/registration \
+	 --mount type=volume,src=$(CONTAINER_NAME)-jobs,dst=/var/lib/bonito/jobs \
      -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
      $(IMAGE_NAME):latest
 	@echo 'URL: http://$(HOSTNAME):$(PORT)/'
 .PHONY: run
 
-#	 --mount type=bind,src=$$(pwd)/secrets/htaccess,dst=/var/www/.htaccess \
+run-pre:
+	[ -f "$(SECRETS_FILE)" ] || touch $(SECRETS_FILE)
+	mkdir -p $(USERDATA_DIR) $(SUBCORP_DIR) $(CACHE_DIR)
+	docker volume create $(CONTAINER_NAME)-registration
+	docker volume create $(CONTAINER_NAME)-jobs
+.PHONY: run-pre
 
 
 # Stop running $(CONTAINER_NAME) container
-# TODO: need to update the check and use `docker rm $(CONTAINER_NAME)`
 stop:
 	@if [ "$$(docker container ls -f name=$(CONTAINER_NAME) -q)" ] ; then \
         docker container stop $(CONTAINER_NAME) ; \
@@ -98,7 +110,7 @@ compile:
 .PHONY: compile
 
 
-# Create a strong password with htpasswd command inside the docker image
+# Create a strong password with htpasswd command inside the docker container
 htpasswd:
 	@make -s execute IMAGE_NAME=$(IMAGE_NAME) CMD="htpasswd -bB /var/lib/bonito/htpasswd \"$(USERNAME)\" \"$(PASSWORD)\""
 
@@ -106,6 +118,8 @@ htpasswd:
 # Stop container, remove image, remove compiled corpora
 clean:
 	@make -s stop CONTAINER_NAME=$(CONTAINER_NAME)
+	docker volume rm $(CONTAINER_NAME)-registration
+	docker volume rm $(CONTAINER_NAME)-jobs
 	docker image rm -f $(IMAGE_NAME)
 	sudo rm -vrf $(COMPILED_DIR)/*/
 .PHONY: clean

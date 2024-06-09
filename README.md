@@ -1,14 +1,10 @@
 # NoSketch Engine Docker
 
-Fork of https://github.com/elte-dh/NoSketch-Engine-Docker
+Fork of https://github.com/elte-dh/NoSketch-Engine-Docker with customizations for UI and Auth.
 
-This is a [dockerised](https://www.docker.com/) version of [NoSketch Engine](https://nlp.fi.muni.cz/trac/noske),
- the open source version of [Sketch Engine](https://www.sketchengine.eu/) corpus manager and text analysis software
- developed by [Lexical Computing Limited](https://www.lexicalcomputing.com/).
+This is a [dockerised](https://www.docker.com/) version of [NoSketch Engine](https://nlp.fi.muni.cz/trac/noske), the open source version of [Sketch Engine](https://www.sketchengine.eu/) corpus manager and text analysis software developed by [Lexical Computing Limited](https://www.lexicalcomputing.com/).
 
-This docker image is based on Debian 11 Bullseye and
- [the NoSketch Engine build and installation process](https://nlp.fi.muni.cz/trac/noske#Buildandinstallation) contains
- some additional hacks for convenient install and use.
+This docker image is based on Debian 11 Bullseye and [the NoSketch Engine build and installation process](https://nlp.fi.muni.cz/trac/noske#Buildandinstallation) contains some additional hacks for convenient install and use.
 See [Dockerfile](Dockerfile) for details.
 
 ## TL;DR
@@ -16,20 +12,17 @@ See [Dockerfile](Dockerfile) for details.
 1. `git clone https://git.saw-leipzig.de/wortschatz/nosketch-engine-docker.git`
 2. `make build` – to build the docker image
 3. `make compile` – to compile sample corpora
-4. `make execute` – to execute a Sketch Engine command (`compilecorp`, `corpquery`, etc.) in the docker container
-    (runs a test CLI query on `susanne` corpus by default)
+4. `make execute` – to execute a Sketch Engine command (`compilecorp`, `corpquery`, etc.) in the docker container (runs a test CLI query on `susanne` corpus by default)
 5. `make run` – to launch the docker container
 6. Navigate to `http://localhost:10070/` to try the WebUI
 
 ## Features
 
-- Easy to add corpora (just add vertical file and registry file to the appropriate location,
-   and compile the corpus with one command)
+- Easy to add corpora (just add vertical file and registry file to the appropriate location, and compile the corpus with one command)
 - CLI commands can be used directly (outside the docker image)
 - Works on any domain without changing configuration (without HTTPS and Shibboleth)
-- ~~(optional) Shibboleth SP (with eduid.hu)~~ (removed, see [origin](https://github.com/elte-dh/NoSketch-Engine-Docker))
-- (optional) basic auth (updateable easily)
-- ~~(optional) HTTPS with Let's Encrypt (automatic renewal with [traefik proxy](https://traefik.io/traefik/))~~ (removed)
+- basic auth (updateable easily)
+- removed _Shibboleth SP_ and _Let's Encrypt_, see [origin](https://github.com/elte-dh/NoSketch-Engine-Docker)
 
 Corpus configuration recipes to aid compilation of large corpora can be found [here](https://github.com/ELTE-DH/NoSketch-Engine-Docker/tree/main/examples).
 
@@ -37,25 +30,18 @@ Corpus configuration recipes to aid compilation of large corpora can be found [h
 
 ### 1. Get the Docker image
 
-- Build your own image yourself (the process can take 5 minutes or so): `make build IMAGE_NAME=myimage`– be sure
-   to name your image using the `IMAGE_NAME` parameter
+- Build your own image yourself (the process can take 5 minutes or so): `make build IMAGE_NAME=myimage`– be sure to name your image using the `IMAGE_NAME` parameter
 
 ### 2. Compile your corpus
 
-1. Put vert file(s) in: `corpora/vert/CORPUS_NAME` directory
-2. Put config in: `corpora/registry/CORPUS_NAME` file
-3. Compile all corpora listed in [`corpora/registry`](corpora/registry) directory using the docker image: `make compile`
-    - To compile _one_ corpus at a time (overwriting existing files), use the following command:
+1. Put vert file(s) in: `CORPORA_DIR/vert/CORPUS_NAME` directory (SSD)
+2. Put config in: `CORPORA_DIR/registry/CORPUS_NAME` file
+3. Compile all corpora listed in `CORPORA_DIR/registry` directory using the docker image: `make compile`
+    - To compile _one_ corpus at a time (overwriting existing files), use the following command:\
       `make execute CMD="compilecorp --no-ske --recompile-corpus CORPUS_REGISTRY_FILE"`
-    - If you want to overwrite all existing indices automatically when running `make compile` set any non-empty value
-       for `FORCE_RECOMPILE` env variable e.g. `make compile FORCE_RECOMPILE=y`
+    - If you want to overwrite all existing indices automatically when running `make compile` set any non-empty value for `FORCE_RECOMPILE` env variable e.g. `make compile FORCE_RECOMPILE=y`
 
 ### 3. Run
-
-(Optional, only recommended if variables are altered)
-
-Customise the environment variables in `secrets/env.sh` (see [`secrets/env.sh.template`](secrets/env.sh.template)
- for example) and _export_ them into the current shell with `source secrets/env.sh`
 
 #### 3a. Run the container
 
@@ -77,35 +63,24 @@ Customise the environment variables in `secrets/env.sh` (see [`secrets/env.sh.te
 
 - `make stop`: stops the container
 - `make clean`: stops the container, _removes indices for all corpora_ and deletes docker image – __use with caution!__
-- `make htpasswd`: generate strong password for htaccess authentication (must restart a container to apply; see details
-   in [Basic auth](#basic-auth) section)
+- `make htpasswd`: generate strong password for htaccess authentication, see details in [Basic auth](#basic-auth) section)
 
 ## `make` parameters, multiple images and multiple containers
 
 By default,
-- the name of the docker image (`IMAGE_NAME`) is `eltedh/nosketch-engine`,
+- the name of the docker image (`IMAGE_NAME`) is `lcc/nosketch-engine`,
 - the name of the docker container (`CONTAINTER_NAME`) is `noske`,
-- the directory where the corpora are stored (`CORPORA_DIR`) is `$(pwd)/corpora`,
+- the directory where the corpora are stored (`CORPORA_DIR`) is `/disk/NoSketchEngine`,
 - the port number which the docker container uses (`PORT`) is `10070`,
-- the variable to force recompiling already indexed corpora (`FORCE_RECOMPILE`) is not set
-   (_empty_ or _not set_ means _false_ any other non-zero length value means _true_),
-- the citation link (`CITATION_LINK`) is `https://github.com/elte-dh/NoSketch-Engine-Docker`,
-- the server name required for Let's Encrypt and/or Shibboleth (`SERVER_NAME`) is `https://sketchengine.company.com/`
-   (mandatory for [`docker-compose.yml`](docker-compose.yml)),
-- the server alias required for Let's Encrypt and/or Shibboleth (`SERVER_ALIAS`) is `sketchengine.company.com`
-   (mandatory for [`docker-compose.yml`](docker-compose.yml)),
-- the e-mail address required by Let's Encrypt (`LETS_ENCRYPT_EMAIL`) is not set (mandatory for Let's Encrypt and
-   [`docker-compose.yml`](docker-compose.yml)),
-- the _htaccess_ and _htpasswd_ files (`HTACCESS`, `HTPASSWD`) are loaded from ([secrets/{htaccess,htpasswd}](secrets)
-   see [secrets/{htaccess.template,htpasswd.template}](secrets) for example) or empty if these files do not exist
-   (mandatory for [`docker-compose.yml`](docker-compose.yml)).
+- the variable to force recompiling already indexed corpora (`FORCE_RECOMPILE`) is not set (_empty_ or _not set_ means _false_ any other non-zero length value means _true_),
+- the citation link (`CITATION_LINK`) is `https://wortschatz-leipzig.de/`,
+- the server name (`SERVER_NAME`) is `https://cql.wortschatz-leipzig.de/`,
+- the server alias (`SERVER_ALIAS`) is `cql.wortschatz-leipzig.de`,
+- the _htpasswd_ file (`HTPASSWD`) is loaded from ([secrets/htpasswd](secrets) see [secrets/htpasswd.template](secrets) for example) or empty if these files do not exist..
 
-If there is a need to change these, set them as environment variables (e.g. `export IMAGE_NAME=myimage`)
- or supplement `make` commands with the appropriate values (e.g. `make run PORT=8080`).
+If there is a need to change these, set them as environment variables (e.g. `export IMAGE_NAME=myimage`) or supplement `make` commands with the appropriate values (e.g. `make run PORT=8080`).
 
-E.g. `export IMAGE_NAME=myimage; make build` build an image called `myimage`; and
-`make run IMAGE_NAME=myimage CONTAINER_NAME=mycontainer PORT=12345` launches the image called `myimage` in a container
- called `mycontainer` which will use port `12345`.
+E.g. `export IMAGE_NAME=myimage; make build` build an image called `myimage`; and `make run IMAGE_NAME=myimage CONTAINER_NAME=mycontainer PORT=12345` launches the image called `myimage` in a container called `mycontainer` which will use port `12345`.
 In the latter case the system will be available at `http://SERVER_NAME:12345/`.
 
 See the table below on which `make` command accepts which parameter:
@@ -125,45 +100,27 @@ See the table below on which `make` command accepts which parameter:
 - The Other Variables are
     - `CITATION_LINK`
     - `SERVER_NAME` and `SERVER_ALIAS`
-    - `HTACCESS` and `HTPASSWD`
+    - `HTPASSWD`
 
 In the rare case of _multiple different docker images_, be sure to name them differently (by using `IMAGE_NAME`).\
-In the more common case of _multiple different docker containers_ running simultaneously,
-be sure to name them differently (by using `CONTAINER_NAME`) and also be sure to use different port for each of them
- (by using `PORT`). To handle multiple different sets of corpora be sure to set the directory containing the corpora
- (`CORPORA_DIR`) accordingly for each container.
+In the more common case of _multiple different docker containers_ running simultaneously, be sure to name them differently (by using `CONTAINER_NAME`) and also be sure to use different port for each of them (by using `PORT`). To handle multiple different sets of corpora be sure to set the directory containing the corpora (`CORPORA_DIR`) accordingly for each container.
 
-If you want to build your own docker image be sure to include the `IMAGE_NAME` parameter into the build command:
- `make build IMAGE_NAME=myimage` and also provide `IMAGE_NAME=myimage` for every `make` command
- which accepts this parameter.
-
-A convenient solution for managing many environment variables in an easy and reproducible way
- (e.g. for [`docker-compose.yml`](docker-compose.yml)) is to customise and source `secrets/env.sh` (based on
- [`secrets/env.sh.template`](`secrets/env.sh.template`)) before running the actual command:
- `source secrets/env.sh; docker-compose up -d` or `source secrets/env.sh; make run`.
- See [`secrets/env.sh.template`](secrets/env.sh.template) for example configuration.
+If you want to build your own docker image be sure to include the `IMAGE_NAME` parameter into the build command: `make build IMAGE_NAME=myimage` and also provide `IMAGE_NAME=myimage` for every `make` command which accepts this parameter.
 
 ## Authentication
 
-Two types of authentication is supported: _basic auth_ and _Shibboleth_
+Only _basic auth_ authentication is supported, and enabled by default. Configuration are set in [Apache configuration](conf/000-default.conf) and mapped in the [`Makefile`](Makefile).
 
 ### Basic auth
 
-1. Copy and uncomment relevant config lines from [`secrets/htaccess.template`](secrets/htaccess.template) into
-    `secrets/htaccess` and set username and password in `secrets/htpasswd`
-    (e.g. use `make htpasswd USERNAME="USERNAME" PASSWORD="PASSWD" >> secrets/htpasswd` shortcut
-    for running `htpasswd` from `apache2-utils` package inside docker)
-2. [Run or restart the container to apply](#3a-run-the-container) or
-    [(re)build your custom image](#1-get-the-docker-image)
+Enabled in [`conf/000-default.conf`](conf/000-default.conf) by default. Set username and password in `secrets/htpasswd` (e.g. use `make htpasswd USERNAME="USERNAME" PASSWORD="PASSWD"` shortcut for running `htpasswd` from `apache2-utils` package inside docker)
 
 ## Citation link
 
 You can set a link to your publications which you require users to cite.
-Set `CITATION_LINK` e.g. `export CITATION_LINK="https://LINK_GOES_HERE"` or in `secrets/env.sh`
- (see [`secrets/env.sh.template`](secrets/env.sh.template) for example).
+Set `CITATION_LINK` e.g. `export CITATION_LINK="https://LINK_GOES_HERE"` or in `secrets/env.sh` (see [`secrets/env.sh.template`](secrets/env.sh.template) for example).
 
-The link is displayed in the lower-right corner of the main dashboard if [any type of authentication](#authentication)
- is set.
+The link is displayed in the lower-right corner of the main dashboard if [any type of authentication](#authentication) is set.
 
 ## Similar projects
 

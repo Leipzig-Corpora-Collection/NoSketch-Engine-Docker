@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.4"
 
 services:
   sketch_engine:
@@ -9,21 +9,47 @@ services:
       SERVER_NAME: "${SERVER_NAME:-https://cql.wortschatz-leipzig.de/}"
       SERVER_ALIAS: "${SERVER_ALIAS:-cql.wortschatz-leipzig.de}"
       CITATION_LINK: "${CITATION_LINK:-https://wortschatz-leipzig.de/}"
-      HTACCESS: "${HTACCESS? Please use export HTACCESS=$(cat secrets/htaccess) or set it as empty!}"
-      HTPASSWD: "${HTPASSWD? Please use export HTPASSWD=$(cat secrets/htpasswd) or set it as empty!}"
+    ports:
+      - "127.0.0.1:${PORT:-10070}:80"
     volumes:
+      # corpus metadata
       - type: bind
         source: "${REGISTRY_DIR:-/disk/NoSketchEngine/registry}"
         target: /corpora/registry
         read_only: true
+      # raw data
       - type: bind
         source: "${VERT_DIR:-/disk/NoSketchEngine/vert}"
         target: /corpora/vert
         read_only: true
+      # compiled corpora
       - type: bind
         source: "${COMPILED_DIR:-/ssd1/NoSketchEngine/data}"
         target: /corpora/data
         read_only: true
+      # bonito folders (cache, userdata, subcorpora definitions)
       - type: bind
         source: "${CACHE_DIR:-/ssd1/NoSketchEngine/cache}"
         target: /var/lib/bonito/cache
+      - type: bind
+        source: "${SUBCORP_DIR:-/ssd1/NoSketchEngine/subcorp}"
+        target: /var/lib/bonito/subcorp
+      - type: bind
+        source: "${USERDATA_DIR:-/ssd1/NoSketchEngine/options}"
+        target: /var/lib/bonito/options
+      - type: bind
+        source: "${SECRETS_FILE:-./secrets/htpasswd}"
+        target: /var/lib/bonito/htpasswd
+      # do not really live forever
+      - type: volume
+        source: registration
+        target: /var/lib/bonito/registration
+      - type: volume
+        source: jobs
+        target: /var/lib/bonito/jobs
+
+volumes:
+  registration:
+    name: "${CONTAINER_NAME:-noske}-registration"
+  jobs:
+    name: "${CONTAINER_NAME:-noske}-jobs"

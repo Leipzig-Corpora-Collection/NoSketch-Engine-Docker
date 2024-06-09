@@ -69,21 +69,20 @@ RUN cd crystal-* && \
     make install VERSION=${CRYSTAL_OPEN_VERSION}
 
 
-# Remove unnecessary files and create symlink for utility command
+# Remove unnecessary files, create symlink for utility command, and create dummy auth (login) folder
 RUN rm -rf /var/www/bonito/.htaccess /tmp/noske_files/* && \
-    ln -sf /usr/bin/htpasswd /usr/local/bin/htpasswd
+    ln -sf /usr/bin/htpasswd /usr/local/bin/htpasswd && \
+    mkdir /var/www/auth
 
 
 # Copy config files (These files contain placeholders replaced in entrypoint.sh according to environment variables)
 COPY conf/*.sh /usr/local/bin/
 COPY conf/run.cgi /var/www/bonito/run.cgi
 COPY conf/000-default.conf /etc/apache2/sites-enabled/000-default.conf
-RUN mkdir /var/www/auth
 
 
-### These files should be updated through environment variables (HTACCESS,HTPASSWD,PUBLIC_KEY,PRIVATE_KEY)
-# but uncommenting the lines below enable creation of a custom image with secrets included
-# COPY secrets/htaccess /var/www/.htaccess
+### This file should be updated through docker volume mappings
+# but uncommenting the line below enable creation of a custom image with secrets included
 # COPY secrets/htpasswd /var/lib/bonito/htpasswd
 
 ### HACK4: Link site-packages to dist-packages to help Python find these packages
