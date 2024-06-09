@@ -73,6 +73,20 @@ class ConnectionClass{
             Dispatcher.trigger("LOADING_CHANGED", true, request.loadingId)
         }
 
+        if (request.data) {
+            let method = request.url.startsWith(window.config.URL_BONITO) ? request.url.slice(window.config.URL_BONITO.length) : null
+            let corpus = request.data.corpname
+            let query =
+                (method === "concordance") ? {query: request.data.concordance_query[0][request.data.concordance_query[0].queryselector.slice(0, -3)], data: request.data.concordance_query}
+                : (method === "wordlist") ? {attr: request.data.wlattr, query: request.data.wlpat}
+                : (method === "extract_keywords") ? {attr: request.data.attr, query: request.data.wlpat}
+                : null
+            console.debug("request: method=<", method, ">, corpus=<", corpus, ">, query=<", query, ">, data=", request.data)
+            if (query) {
+                _paq.push(['trackSiteSearch', query.query, `${corpus}:${method}`, false])
+            }
+        }
+
         let xhrParams = this._getXhrParams(request)
 
         let xhr = $.ajax(xhrParams)
