@@ -71,6 +71,7 @@ execute:
 	 --mount type=bind,src=$(REGISTRY_DIR),dst=/corpora/registry,readonly \
 	 --mount type=bind,src=$(VERT_DIR),dst=/corpora/vert,readonly \
 	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data \
+	 --mount type=bind,src=$(SECRETS_FILE),dst=/var/lib/bonito/htpasswd \
 	 -e FORCE_RECOMPILE="$(FORCE_RECOMPILE)" \
      -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
      $(IMAGE_NAME):latest "$(CMD)"

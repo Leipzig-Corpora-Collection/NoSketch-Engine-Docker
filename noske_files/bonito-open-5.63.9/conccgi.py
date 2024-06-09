@@ -358,6 +358,12 @@ class ConcCGI (UserCGI):
                     'aligned': mc.get_conf('ALIGNED').split(',') if mc.get_conf('ALIGNED') else [],
                     'docstructure': mc.get_conf('DOCSTRUCTURE')
                 })
+                if '/' in c:
+                    owner_name = c.split('/', 1)[0]
+                    o.update({
+                        'owner_id': owner_name,
+                        'owner_name': owner_name
+                    })
                 l.append(o)
             except corplib.manatee.CorpInfoNotFound as e:
                 pass

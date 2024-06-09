@@ -887,6 +887,7 @@
     "notEnoughSpace": "You do not have enough storage space for your corpora, delete some data or get more space.",
     "notFound": " Not found",
     "notLoggedIn": "Not logged in",
+    "loggedIn": "Logged in as",
     "nothingFound": "Nothing found",
     "nothingFoundDesc": "Please, try to change search criteria.",
     "nothingHere": "Nothing here…",

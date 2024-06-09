@@ -29,7 +29,7 @@ RUN apt-get update && \
 
 
 # Enable apache CGI and mod_rewrite
-RUN a2enmod cgi rewrite
+RUN a2enmod cgi rewrite headers
 
 
 # Install noske components

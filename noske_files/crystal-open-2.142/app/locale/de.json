@@ -607,6 +607,7 @@
     "noCorpus": "kein Korpus ausgewählt",
     "none": "kein",
     "notLoggedIn": "Nicht eingeloggt",
+    "loggedIn": "Eingeloggt als",
     "no": "nein",
     "noResultsFor": "Keine Ergebnisse für \"%{0}\" gefunden",
     "noResultsText": "Ihre Suchkriterien haben zu keinen Ergebnissen geführt. Probieren Sie andere Kriterien aus.",

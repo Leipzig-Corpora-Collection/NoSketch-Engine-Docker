@@ -26,6 +26,11 @@
                         <br>
                         <a href={window.config.URL_LOGIN} class="blue-text">{_("logIn")}</a>
                     </div>
+                    <div if={!isAnonymous} class="grey-text">
+                        {_("loggedIn")}
+                        <br>
+                        <span class="blue-text">{user.username}</span>
+                    </div>
                     <span class="siteLicence">
                         <div if={isSiteLicenceMember} class="licenceName grey-text">
                             {session.site_licence.name}

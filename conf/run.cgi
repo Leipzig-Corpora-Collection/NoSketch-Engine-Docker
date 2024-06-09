@@ -35,6 +35,8 @@ from usercgi import UserCGI
 class BonitoCGI (WSEval, UserCGI):
 
     _anonymous = True
+    _superusers = []
+
     _data_dir = '/var/lib/bonito'
 
     # UserCGI options
@@ -48,12 +50,26 @@ class BonitoCGI (WSEval, UserCGI):
     gdexpath = [] # [('confname', '/path/to/gdex.conf'), ...]
     user_gdex_path = "" # /path/to/%s/gdex/ %s to be replaced with username
 
-    # TODO: Read corpora list runtime from registry
+    # Read corpora list runtime from registry
     # set available corpora, e.g.: corplist = ['susanne', 'bnc', 'biwec']
     if 'MANATEE_REGISTRY' not in os.environ:
         # TODO: SET THIS APROPRIATELY!
         os.environ['MANATEE_REGISTRY'] = '/corpora/registry'
-    corplist = [corp_name for corp_name in os.listdir(os.environ['MANATEE_REGISTRY']) if not corp_name.endswith(".disabled")]
+    corplist = [
+        corp_name
+        for corp_name in os.listdir(os.environ['MANATEE_REGISTRY'])
+        if not corp_name.endswith(".disabled") and os.path.isfile(os.path.join(os.environ['MANATEE_REGISTRY'], corp_name))
+    ]
+    corplist_scoped = [
+        os.path.join(scope, corp_name)
+        for scope in os.listdir(os.environ['MANATEE_REGISTRY'])
+        if not scope.endswith(".disabled") and os.path.isdir(os.path.join(os.environ['MANATEE_REGISTRY'], scope))
+        for corp_name in os.listdir(os.path.join(os.environ['MANATEE_REGISTRY'], scope))
+        if os.path.isfile(os.path.join(os.environ['MANATEE_REGISTRY'], scope, corp_name))
+    ]
+    corplist += corplist_scoped
+    del corplist_scoped
+
     # set default corpus
     if len(corplist) > 0:
         corpname = corplist[0]
@@ -72,6 +88,29 @@ class BonitoCGI (WSEval, UserCGI):
             self.subcpath.append (self._data_dir + '/subcorp/%s' % user)
         self._conc_dir = self._data_dir + '/conc/%s' % user
         self._wseval_dir = self._data_dir + '/wseval/%s' % user
+
+    def _setup_user (self):
+        # update user infos
+        UserCGI._setup_user(self)
+        # filter corplist to only include corpora that user is allowed to see
+        self.corplist[:] = [
+            corp_name
+            for corp_name in self.corplist
+            # free, public corpora
+            if "/" not in corp_name
+            # being superuser
+            or self._superuser
+            # or only my corpora if not anonymous
+            or (not self._anonymous and corp_name.split('/', 1)[0] == self._user)
+        ]
+
+    # corpus access check
+    def parse_parameters (self, selectorname=None, environ=os.environ, post_fp=None):
+        named_args = super().parse_parameters(selectorname=selectorname, environ=environ, post_fp=post_fp)
+        corpname = named_args.get("corpname", None)
+        if corpname and corpname not in self.corplist:
+            raise ValueError("Corpus '%s' is not available to user!" % corpname)
+        return named_args
 
 
 if __name__ == '__main__':

@@ -13,12 +13,6 @@
                     suffix-icon={searchQuery !== "" ? "close" : "search"}
                     on-suffix-icon-click={onSuffixIconClick}>
             </ui-input>
-            <span class="spaceLimit">
-                {_("storageUsed", [window.Formatter.num(space.total / 1000000), space.percent])}
-                <i class="material-icons material-clickable tooltipped sizeTooltipIcon"
-                        data-tooltip="t_id:corp_sizes">help_outline</i>).
-                <a href="{window.config.URL_RASPI}#account/overview">{_("getMoreStorage", [Math.ceil((space.used - space.total) / 1000000)])}</a>
-            </span>
             <a href="#ca-create" if={window.permissions["ca-create"]}
                     class="btn btn-primary tooltipped btnNewCorpus"
                     data-tooltip={_("ca.newCorpusDesc")}>
@@ -80,7 +74,7 @@
                         <i class="material-icons shared tooltipped" data-tooltip={_("iShareCorpus")} if={corpus.is_shared}>group</i>
                         <span ref="{idx}_n">{corpus.name}</span>
                         <span class="badge new background-color-blue-100 hide-on-small-and-down"
-                            if={corpus.owner_id && corpus.owner_id != userid}
+                            if={corpus.owner_name && corpus.owner_name != username}
                             data-badge-caption="">
                             {corpus.owner_name}
                         </span>
@@ -123,7 +117,7 @@
 
         this.store = CorpusStore
         this.data = this.store.data
-        this.userid = Auth.getUserId()
+        this.username = Auth.getUsername()
         this.isFullAccount = Auth.isFullAccount()
         this.sort = {
             sort: UserDataStore.getOtherData("corpus_select_sort") || 'asc',
@@ -185,7 +179,7 @@
             this.corpusListLoaded = AppStore.data.corpusListLoaded
             this.allCorpora = AppStore.get('corpusList') || []
             this.allCorpora = this.allCorpora.filter(corpus => {
-                return corpus.owner_id == this.userid
+                return corpus.owner_name == this.username
             })
             this.visibleCorpora = this.allCorpora
             this.actCorp = AppStore.getActualCorpname()
