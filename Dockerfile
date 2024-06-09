@@ -1,6 +1,12 @@
 # From official Debian 11 Bullseye image pinned by its name bullseye-slim
 FROM debian:bullseye-slim
 
+# noske versions
+ARG MANATEE_OPEN_VERSION=2.223.6
+ARG BONITO_OPEN_VERSION=5.63.9
+ARG GDEX_VERSION=4.12
+ARG CRYSTAL_OPEN_VERSION=2.142
+
 
 # Install noske dependencies
 ## deb packages
@@ -27,16 +33,19 @@ RUN a2enmod cgi rewrite
 
 
 # Install noske components
-ADD noske_files/* /tmp/noske_files/
 WORKDIR /tmp/noske_files/
 
 ## Manatee
+ADD noske_files/manatee-open-${MANATEE_OPEN_VERSION}.tar.gz /tmp/noske_files/
 RUN cd manatee* && \
     ./configure --with-pcre && \
     make && \
     make install
 
 ## Bonito
+ADD noske_files/bonito-open-${BONITO_OPEN_VERSION}.tar.gz /tmp/noske_files/
+### HACKs + overrides for auth
+COPY noske_files/bonito-open-${BONITO_OPEN_VERSION}/. /tmp/noske_files/bonito-open-${BONITO_OPEN_VERSION}/
 RUN cd bonito* && \
     ./configure && \
     make && \
@@ -45,26 +54,19 @@ RUN cd bonito* && \
     chown -R www-data:www-data /var/lib/bonito
 
 ## GDEX
+ADD noske_files/gdex-${GDEX_VERSION}.tar.gz /tmp/noske_files/
 RUN cd gdex* && \
-    sed -i "s/<version>/4.12/g" setup.py && \
+    sed -i "s/<version>/${GDEX_VERSION}/g" setup.py && \
     ./setup.py build && \
     ./setup.py install
 
 ## Crystal
-### HACK1: Modify npm install command in Makefile to handle "permission denied"
-### HACK2: Copy modified page-dashboard.tag to be able to display custom citation message with URL
-### HACK3: modify URL_BONITO to be set dynamically to the request domain in every request
-COPY conf/page-dashboard.tag /tmp/noske_files/
-RUN sed  -i 's/npm install/npm install --unsafe-perm=true/' crystal*/Makefile && \
-    cp page-dashboard.tag crystal*/app/src/dashboard/page-dashboard.tag && \
-    cd crystal-* && \
+ADD noske_files/crystal-open-${CRYSTAL_OPEN_VERSION}.tar.gz /tmp/noske_files/
+### HACKs + overrides (auth, UI, ...)
+COPY noske_files/crystal-open-${CRYSTAL_OPEN_VERSION}/. /tmp/noske_files/crystal-open-${CRYSTAL_OPEN_VERSION}/
+RUN cd crystal-* && \
     make && \
-    make install VERSION=2.142 && \
-    sed -e 's|URL_BONITO: "http://.*|URL_BONITO: window.location.origin + "/bonito/run.cgi/",|' \
-        -e 's|HIDE_DASHBOARD_BANNER: true|HIDE_DASHBOARD_BANNER: false|' \
-        -e 's|DISABLE_EMBEDDED_YOUTUBE: false|DISABLE_EMBEDDED_YOUTUBE: true|' \
-        -i /var/www/crystal/config.js
-        # -e 's|NO_SKE: true|NO_SKE: false|' \
+    make install VERSION=${CRYSTAL_OPEN_VERSION}
 
 
 # Remove unnecessary files and create symlink for utility command

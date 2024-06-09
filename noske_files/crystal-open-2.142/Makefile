@@ -7,7 +7,7 @@ INSTALLDIR=/var/www/crystal
 bundle.js:
 	#wget https://nodejs.org/dist/v16.16.0/node-v16.16.0-linux-x64.tar.xz -O - | xz - -d| tar -x
 	tar xf node-v16.16.0-linux-x64.tar.xz
-	export PATH=$(PATH) && npm install
+	export PATH=$(PATH) && npm install --unsafe-perm=true
 	export PATH=$(PATH) && node ./node_modules/.bin/webpack --config webpack.prod.js --output-filename bundle.js --output-path .
 
 install: bundle.js

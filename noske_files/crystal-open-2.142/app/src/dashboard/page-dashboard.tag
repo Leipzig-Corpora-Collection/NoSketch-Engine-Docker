@@ -55,22 +55,6 @@
                             </a>
                         </div>
                     </div>
-                    <div if={inactiveItems.length}
-                            class="row inactiveFeaturesBar pt-8 dividerTop center-align">
-                        <span each={item in inactiveItems}
-                                class="mr-4">
-                            <i class="{item.iconClass || 'ske-icons'} {getFeatureIcon(item.id)} tooltipped"
-                                data-tooltip={getInactiveItemTooltip(item)}>
-                                {item.icon}
-                            </i>
-                        </span>
-                        <div class="grey-text pt-3">
-                            <raw-html if={config.NO_SKE}
-                                    content={_("NAInNoSkeP", ['<a target="_blank" href="https://sketchengine.eu">Sketch Engine</a>'])}></raw-html>
-                            <raw-html if={!config.NO_SKE}
-                                    content={_("availableAfterLogin")}></raw-html>
-                        </div>
-                    </div>
                 </div>
                 <div if={!corpus || !ready} class="card-content">
                     <div class="notReady">
@@ -134,52 +118,12 @@
 
             <div if={!hideBanner}
                     class="banner center-align">
-                <div if={bannerId == 1}>
-                    <div class="bannerContainer">
-                        <img src="images/elex-logo.png" loading="lazy">
-                        <div style="min-width: 250px; max-width: 400px;">
-                            <div class="bannerHeadline">
-                                Electronic Lexicography in the 21st Century <br>
-                            </div>
-                            <div class="bannerNote">
-                                Brno, Czech Republic, 27–29 June 2023
-                            </div>
-                            <a href="https://elex.link/elex2023/"
-                                    class="btn mt-4"
-                                    target="_blank">Registration</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div if={bannerId == 2}>
-                     <div class="bannerContainer">
-                        <img src="images/lexicom-logo.png" loading="lazy" width="240" height="64">
-                        <div style="min-width: 250px; max-width: 400px;">
-                            <div class="bannerHeadline">An intensive workshop in digital lexicography and lexical&nbsp;computing<br>
-                            </div>
-                            <div class="bannerNote">
-                                Cambridge, UK, 11–15 September 2023
-                            </div>
-                            <a href="https://lexicom.courses/lexicom-2023-cambridge-uk-lexicography-workshop/"
-                                    class="btn mt-4"
-                                    target="_blank">Registration</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div if={bannerId == 3}>
-                     <div class="bannerContainer">
-                        <img src="images/boot_camp.png" width="262" height="69" loading="lazy">
-                        <div style="min-width: 250px; max-width: 400px;">
-                            <div class="bannerHeadline">A <b class="red-text">face-to-face</b> course in using Sketch Engine.<br>
-                                Brno, CZ, 26–27 April 2023 <br>
-                            </div>
-                            <a href="https://www.sketchengine.eu/bootcamp/boot-camp-brno/"
-                                    class="btn mt-4"
-                                    target="_blank">Registration</a>
-                        </div>
-                    </div>
-                </div>
+                <h5>If you use the corpora for your work, please cite the corresponding publication.</h5>
+                <br>
+                <a href="CITATION_LINK_PLACEHOLDER"
+                        class="btn"
+                        target="_blank">The list of publications recommended to cite</a>
+                <br>
             </div>
             <!--div class="banner bigBanner center-align">
                 <a class="btn btn-floating btn-flat right" onClick={onBannerToggleClick}>

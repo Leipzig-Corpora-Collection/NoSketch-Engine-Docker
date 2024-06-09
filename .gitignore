@@ -1,26 +1,4 @@
-# Private coropra
-corpora/*
-!corpora/susanne/
-!corpora/emagyardemo/
-!corpora/registry/susanne
-!corpora/registry/emagyardemo
-
-# Compiled corpora
-corpora/**/indexed/*
-
 # Secrets specific to deployment (e.g. the private key should not be published)
-secrets/sp.for.eduid.service.hu-cert.crt
-secrets/sp.for.eduid.service.hu-key.crt
 secrets/htaccess
 secrets/htpasswd
 secrets/env.sh
-
-# Let's encrypt's certificate cache
-letsencrypt/
-
-# Large temp files in examples
-examples/webcorpus_orig
-examples/webcorpus_ske
-
-# PyCharm
-.idea/

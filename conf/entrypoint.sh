@@ -4,9 +4,9 @@
 # else run the specified command from /usr/local/bin
 if [ $# -eq 1 ]; then
     # Shibboleth requires these to be set properly!
-    SERVER_NAME=${SERVER_NAME:="https://sketchengine.company.com/"}
-    SERVER_ALIAS=${SERVER_ALIAS:="sketchengine.company.com"}
-    CITATION_LINK=${CITATION_LINK:="https://github.com/elte-dh/NoSketch-Engine-Docker"}
+    SERVER_NAME=${SERVER_NAME:="https://cql.wortschatz-leipzig.de/"}
+    SERVER_ALIAS=${SERVER_ALIAS:="cql.wortschatz-leipzig.de"}
+    CITATION_LINK=${CITATION_LINK:="https://wortschatz-leipzig.de/"}
     HTACCESS?=${HTACCESS:=""}
     HTPASSWD?=${HTPASSWD:=""}
     echo "Starting server with name (${SERVER_NAME}) and alias (${SERVER_ALIAS})."
@@ -21,6 +21,9 @@ if [ $# -eq 1 ]; then
     if [[ -n "${HTPASSWD}" ]] || [[ ! -s "/var/lib/bonito/htpasswd" ]]; then
         echo "${HTPASSWD}" > /var/lib/bonito/htpasswd
     fi
+    #
+    chown -R www-data:www-data /var/lib/bonito/cache
+    # run apache
     /usr/sbin/apache2ctl -D FOREGROUND
 else
     shift
