@@ -46,6 +46,7 @@ Overrides in `noske_files/crystal-open-2.142`:
   - `app/src/corpus/` (remove 'basic' and 'shared' corpus tabs, not used)
   - `app/src/dialogs/` (disable any Ske feedback dialogs, remove user Lexonomy settings, fix manage-corpus redirect)
   - `app/src/core/side-nav/side-nav.tag` (remove word sketches, can't provide those anyway)
+  - `app/src/concordance/concordance-line-detail-dialog.tag` (`.Refs` access, api: `"error": "AttrNotFound (doc)"`)
 - some UI additions
   - `app/src/corpus/` (add sentence count to corpora list)
 - disabled youtube integration (and tracking!)

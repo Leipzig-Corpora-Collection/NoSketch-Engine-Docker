@@ -98,7 +98,7 @@
         this.tooltipClass = ".ldtt"
         this.isLoading = true
         this.list = [];
-        this.showAll = false
+        this.showAll = true // show all by default
         this.toknum = this.opts.toknum
 
         this.references = this.data.refs ? this.data.refs.split(",").map(r => {
@@ -262,9 +262,11 @@
         onDataLoaded(payload){
             this.isLoading = false
             this.dataObj = {}
-            payload.Refs.forEach(d => {
-                this.dataObj[d.id] = d.val
-            })
+            if (payload.Refs) {
+                payload.Refs.forEach(d => {
+                    this.dataObj[d.id] = d.val
+                })
+            }
             this.refreshList()
             this.update()
         }
