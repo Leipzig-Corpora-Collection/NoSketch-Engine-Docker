@@ -55,22 +55,6 @@
                             </a>
                         </div>
                     </div>
-                    <div if={inactiveItems.length}
-                            class="row inactiveFeaturesBar pt-8 dividerTop center-align">
-                        <span each={item in inactiveItems}
-                                class="mr-4">
-                            <i class="{item.iconClass || 'ske-icons'} {getFeatureIcon(item.id)} tooltipped"
-                                data-tooltip={getInactiveItemTooltip(item)}>
-                                {item.icon}
-                            </i>
-                        </span>
-                        <div class="grey-text pt-3">
-                            <raw-html if={config.NO_SKE}
-                                    content={_("NAInNoSkeP", ['<a target="_blank" href="https://sketchengine.eu">Sketch Engine</a>'])}></raw-html>
-                            <raw-html if={!config.NO_SKE}
-                                    content={_("availableAfterLogin")}></raw-html>
-                        </div>
-                    </div>
                 </div>
                 <div if={!corpus || !ready} class="card-content">
                     <div class="notReady">
@@ -134,56 +118,13 @@
 
             <div if={!hideBanner}
                     class="banner center-align">
-                <div if={bannerId == 1}>
-                     <div class="bannerContainer">
-                        <img src="images/lexicom-logo.png" loading="lazy" width="240" height="64">
-                        <div style="min-width: 250px; max-width: 400px;">
-                            <div class="bannerHeadline">An intensive workshop in digital lexicography and lexical&nbsp;computing<br>
-                            </div>
-                            <div class="bannerNote">
-                                Málaga, Spain, 16–20 September 2024
-                            </div>
-                            <a href="https://lexicom.courses/lexicom-2024-malaga-spain-lexicography-workshop/"
-                                    class="btn mt-4"
-                                    target="_blank">Registration</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div if={bannerId == 2}>
-                     <div class="bannerContainer">
-                        <img src="images/boot_camp.png" width="262" height="69" loading="lazy">
-                        <div style="min-width: 250px; max-width: 400px;">
-                            <div class="bannerHeadline">A <b class="red-text">face-to-face</b> course in using Sketch Engine.<br>
-                                Brno, CZ, 25–26 October 2023<br>
-                            </div>
-                            <a href="https://www.sketchengine.eu/bootcamp/boot-camp-brno/"
-                                    class="btn mt-4"
-                                    target="_blank">Registration</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--div class="banner bigBanner center-align">
-                <a class="btn btn-floating btn-flat right" onClick={onBannerToggleClick}>
-                    <i class="material-icons bigBanner">keyboard_arrow_up</i>
-                </a>
-                <img src="images/boot_camp.png" loading="lazy">
-                <h5>2 days of corpus searching &amp; corpus building</h5>
-                <div>Learn to work with Sketch Engine like a pro!</div>
+                <h5>If you use the corpora for your work, please cite the corresponding publication.</h5>
                 <br>
-                <a href={externalLink("bootCamp")}
+                <a href="CITATION_LINK_PLACEHOLDER"
                         class="btn"
-                        target="_blank">{_("detailsAndReg")}</a>
+                        target="_blank">The list of publications recommended to cite</a>
                 <br>
             </div>
-            <div class="banner smallBanner center-align" onClick={onBannerToggleClick}>
-                <a class="btn btn-floating btn-flat right">
-                    <i class="material-icons smallBanner">keyboard_arrow_down</i>
-                </a>
-                <h5>Master the interface in 2 days!</h5>
-                <div>March & April 2020</div>
-            </div-->
         </div>
         <div class="col s12" if={isFullAccount}>
             <div class="card dashboardCard history">
@@ -206,7 +147,7 @@
         this.isFullAccount = Auth.isFullAccount()
         this.bannerExpanded = true
         this.hideBanner = window.config.HIDE_DASHBOARD_BANNER
-        this.bannerId = 1//Math.ceil(Math.random() * 2)
+        this.bannerId = 1 // Math.ceil(Math.random() * 2)
 
         _isBitermsActive(){
             if(!this.corpus

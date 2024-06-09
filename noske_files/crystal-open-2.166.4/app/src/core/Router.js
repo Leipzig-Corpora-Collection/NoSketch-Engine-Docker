@@ -71,6 +71,7 @@ class RouterClass{
 
     _checkAndSetPage(pageId, queryObj){
         let page = this._getPageToNaviagateTo(pageId, queryObj)
+        // console.debug("_checkAndSetPage: page=<", page, "> (wanted <", pageId, "> with <", queryObj, ">)")
         let q = queryObj
         if(page != pageId){
             q = {}
@@ -81,6 +82,11 @@ class RouterClass{
         route.base()
         this._actualPage = page
         this._setDocumentTitle()
+        // Matomo/Piwik
+        _paq.push(['setCustomUrl', '/' + (document.location || window.location).hash.substring(1)])
+        _paq.push(['setDocumentTitle', document.title])
+        _paq.push(['setCustomVariable', 1, 'Corpus', queryObj.corpname, 'page'])
+        _paq.push(['trackPageView'])
         Dispatcher.trigger("ROUTER_CHANGE", this._actualPage, q)
     }
 
@@ -109,9 +115,9 @@ class RouterClass{
             }
         }
         if(isAnonymous){
-            if(page == "corpus"){
-                page = "open"
-            }
+            // if(page == "corpus"){
+            //     page = "open"
+            // }
         }
         if(isDef(window.permissions[page]) && !window.permissions[page]){
             page = "not-allowed"
@@ -162,7 +168,7 @@ class RouterClass{
 
     _initPage(){
         let corpus = AppStore.getActualCorpus()
-        let page = Url.getPage() || (corpus ? "dashboard" : "corpus")
+        let page = Url.getPage() || (corpus ? "dashboard" : "open")
         this._checkAndSetPage(page, Url.getQuery())
     }
 

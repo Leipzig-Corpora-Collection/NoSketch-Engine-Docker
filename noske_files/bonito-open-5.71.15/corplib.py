@@ -417,6 +417,19 @@ def run_bgjob (user, corp, cmd, desc, url):
                 "notifyme": job[0].get("notifyme", False),
                 "esttime": job[0]["esttime"], "desc": unquote_plus(desc)}
 
+def get_ws_info(corp):
+    info = {
+        'mfw': corp.get_conf('WSMFW') or None,
+        'mfwf': corp.get_conf('WSMFWF') or None,
+    }
+    try:
+        info['mfwf'] = int(info['mfwf'])
+    except:
+        pass
+    if info['mfw'] is None or info['mfwf'] is None:
+        info['mfw'] = info['mfwf'] = None
+    return info
+
 def parse_sizes(sizes_string):
     sizes = {}
     alsizes = []
@@ -439,6 +452,7 @@ def get_corp_info(corp, registry=0, gramrels=0, corpcheck=0, struct_attr_stats=0
             'lang': corp.get_conf('LANGUAGE'),
             'infohref': corp.get_conf('INFOHREF'),
             'info': corp.get_conf('INFO'),
+            'handle': corp.get_conf('HANDLE') or None,
             'encoding': corp.get_conf('ENCODING'),
             'tagsetdoc': corp.get_conf('TAGSETDOC'),
             'defaultattr': corp.get_conf('DEFAULTATTR'),
@@ -455,6 +469,7 @@ def get_corp_info(corp, registry=0, gramrels=0, corpcheck=0, struct_attr_stats=0
             'freqttattrs': list(filter(bool, corp.get_conf('FREQTTATTRS').replace('|', ',').replace('*', '').split(','))),
             'subcorpattrs': list(filter(bool, corp.get_conf('SUBCORPATTRS').replace('|', ',').replace('*', '').split(','))),
             'shortref': corp.get_conf('SHORTREF'),
+            'fcsrefs': corp.get_conf('FCSREFS') or None,
             'docstructure': corp.get_conf('DOCSTRUCTURE'),
             'newversion': corp.get_conf('NEWVERSION'),
             'structures': [],
@@ -463,7 +478,8 @@ def get_corp_info(corp, registry=0, gramrels=0, corpcheck=0, struct_attr_stats=0
             'deffilterlink': True if corp.get_conf('DEFFILTERLINK') == '1' else False,
             'defaultstructs': list(filter(bool, corp.get_conf('DEFAULTSTRUCTS').split(','))) or [],
             'wsttattrs': corp.get_conf('WSTTATTRS'),
-            'maxcontext': corp.get_conf('MAXCONTEXT')
+            'maxcontext': corp.get_conf('MAXCONTEXT'),
+            'wsinfo': get_ws_info(corp)
     }
     terms_file = corp.get_conf('TERMBASE') + '.fsa'
     result['terms_compiled'] = os.path.exists(terms_file)

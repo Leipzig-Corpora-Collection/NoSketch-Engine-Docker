@@ -3,6 +3,8 @@
 
 import CGIPublisher
 import os, json
+import re
+from butils import open_exclusive_file_with_wait
 from jobrunner import JobClient
 
 def load_opt_file (options, filepath, option_list=[], selector=''):
@@ -183,8 +185,6 @@ class UserCGI (CGIPublisher.CGIPublisher):
         return {'default': defaults, 'user': user_opts}
 
     def set_user_options(self, options={}, corpus=''):
-        import re
-        from butils import open_exclusive_file_with_wait
         def natural_key(x):
             return [ int(s) if s.isdigit() else s
                      for s in re.split(r'(\d+)', x[0]) ]
@@ -249,7 +249,7 @@ class UserCGI (CGIPublisher.CGIPublisher):
             if attachment[0]:
                 part = MIMEBase('application', "octet-stream")
                 part.set_payload(attachment[1].read())
-                Encoders.encode_base64(part)
+                encoders.encode_base64(part)
                 part.add_header('Content-Disposition', 'attachment; filename="%s"'%\
                         attachment[0])
                 m.attach(part)

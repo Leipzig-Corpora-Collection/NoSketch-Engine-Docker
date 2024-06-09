@@ -38,7 +38,8 @@
                     onclick={closeDialog}>
                 {_("manageCorpus")}
             </a>
-            <a href="#ca-subcorpora"
+            <a if={window.permissions["ca-subcorpora"]}
+                    href="#ca-subcorpora?corpname={corpus.corpname}"
                     class="btn">
                 {_("ca.subcorporaDesc")}
             </a>
@@ -74,12 +75,6 @@
                             </div>
                             <div if={corpus.errsetdoc}>
                                 <a href={corpus.errsetdoc} class="btn" target="_blank">{_("listCodes")}</a>
-                            </div>
-                            <div>
-                                <button class="btn t_showSketchGrammar {disabled: !corpus.wsdef}" onclick={showGrammarDialog.bind(this, false)}>{_(corpus.wsdef ? "ci.wordSketchGrammar" : "noWsdef")}</button>
-                            </div>
-                            <div>
-                                <button class="btn t_showTermGrammar {disabled: !corpus.termdef}" onclick={showGrammarDialog.bind(this, true)}>{_(corpus.termdef ? "termGrammar" : "noTermGrammar")}</button>
                             </div>
                         </div>
                     </div>

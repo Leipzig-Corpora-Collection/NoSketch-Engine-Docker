@@ -5,6 +5,7 @@ from usercgi import UserCGI
 import corplib, conclib
 from corplib import corpconf_pairs
 import os
+import re
 import sys
 import gdex
 import manatee
@@ -13,7 +14,7 @@ from manatee import regexp_pattern
 import time
 import glob
 from collections import defaultdict
-from butils import *
+from butils import escape, escape_nonwild
 from annotlib import Annotation
 from conclib import strkwiclines
 
@@ -357,12 +358,20 @@ class ConcCGI (UserCGI):
                     'new_version': mc.get_conf('NEWVERSION'),
                     'name': mc.get_conf('NAME'),
                     'info': mc.get_conf('INFO'),
+                    'handle': mc.get_conf('HANDLE') or None,
                     'wsdef': mc.get_conf('WSDEF'),
                     'termdef': mc.get_conf('TERMDEF'),
                     'diachronic': bool(mc.get_conf('DIACHRONIC')),
                     'aligned': mc.get_conf('ALIGNED').split(',') if mc.get_conf('ALIGNED') else [],
                     'docstructure': mc.get_conf('DOCSTRUCTURE')
                 })
+                o.update({'wsinfo': corplib.get_ws_info(mc)})
+                if '/' in c:
+                    owner_name = c.split('/', 1)[0]
+                    o.update({
+                        'owner_id': owner_name,
+                        'owner_name': owner_name
+                    })
                 l.append(o)
             except corplib.manatee.CorpInfoNotFound as e:
                 pass
@@ -1451,18 +1460,6 @@ class ConcCGI (UserCGI):
                 'granularity': res
         }
 
-    def clear_cache (self, corpname=''):
-        import shutil, urllib
-        if not corpname: corpname = self.corpname
-        cache_path = '%s/%s' % (self._cache_dir, corpname)
-        if '..' in corpname or len(cache_path.strip('/')) == 0:
-            return {'error': 'This action is not allowed.'}
-        shutil.rmtree(cache_path, ignore_errors=True)
-        if self.wssensesurl:
-            r = urllib.request.Request(self.wssensesurl + '/cmaps/', method='DELETE')
-            urllib.request.urlopen(r)
-        return {'message': 'Cache cleared: %s' % corpname}
-
     wlminfreq = 5
     wlmaxfreq = 0
     wlmaxitems = 100
@@ -1575,7 +1572,7 @@ class ConcCGI (UserCGI):
 
     def wordlist (self, wlpat='.*', wltype='simple', corpname='', usesubcorp='',
                   ref_corpname='', ref_usesubcorp='', wlpage=1, relfreq=1,
-                  hierarchical_top_only=0, reldocf=1):
+                  hierarchical_top_only=0, reldocf=1, freqcls=1):
         sc = self._corp()
         regex_inline_flags = ""
         if self.wlicase and not self.wlattr.endswith("_lc") and self.wlattr != "lc":
@@ -1710,6 +1707,7 @@ class ConcCGI (UserCGI):
         result_list, cnt, f = corplib.manatee.wordlist (wl, wlpat, addfreqs,
                               sortfreq, self.wlwords, self.blacklist, self.wlminfreq,
                               self.wlmaxfreq, self.wlmaxitems, nwre)
+
         def split_wlist_item (i):
             vals = i.split("\v")
             ret = {'str': vals[0]}
@@ -1731,6 +1729,29 @@ class ConcCGI (UserCGI):
             result_list = list(map(split_triples, result_list))
         else:
             result_list = list(map(split_wlist_item, result_list))
+
+        # compute frequency class
+        if freqcls \
+                and self.wlattr != "WSCOLLOC" and self.wlattr != "TERM" and not self.usengrams \
+                and result_list and "frq" in result_list[0]:
+            # find most frequent word
+            mfw_result_list, *_ = corplib.manatee.wordlist (wl, wlpat, addfreqs,
+                              sortfreq, self.wlwords, self.blacklist, self.wlminfreq,
+                              0, 1, nwre)
+            mwf_item = split_wlist_item(mfw_result_list[0])
+            # mwf_item = result_list[0]
+            # for item in result_list:
+            #     if item["frq"] > mwf_item["frq"]:
+            #         mwf_item = item
+            result["mfwItem"] = mwf_item
+
+            # compute FCL
+            from math import log2
+            mfwf = mwf_item["frq"]
+            def compute_and_add_fcl(item):
+                item["freqcls"] = round(log2(mfwf / max(1, item["frq"])))
+                return item
+            result_list = list(map(compute_and_add_fcl, result_list))
 
         if relfreq and (self.wlsort == 'frq' or 'frq' in self.wlnums):
             size = sc.search_size()

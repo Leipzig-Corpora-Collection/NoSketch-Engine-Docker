@@ -40,7 +40,6 @@
         require('dialogs/profile-dialog/profile-dialog.tag')
         require('dialogs/help-dialog/help-dialog.tag')
         require('dialogs/settings-dialog/settings-dialog.tag')
-        require('dialogs/feedback-dialog/feedback-dialog.tag')
         require('dialogs/login-as-dialog/login-as-dialog.tag')
         require('dialogs/ske-li-dialog/ske-li-dialog.tag')
 
@@ -61,21 +60,8 @@
         }
 
         onLogoutClick(){
-            Auth.logout()
-        }
-
-        onFeedbackClick(){
-            Dispatcher.trigger('openDialog', {
-                tag: 'feedback-dialog',
-                title: _('fb.feedback'),
-                buttons: [{
-                    label: _("send"),
-                    class: "sendFeedbackBtn btn-primary",
-                    onClick: (dialog) => {
-                        dialog.contentTag.refs.feedback.send()
-                    }
-                }]
-            })
+            let loc = (document.location || window.location)
+            loc.href = loc.protocol + "//" + "logout:nopassword@" + loc.host
         }
 
         onHelpClick(){
@@ -161,22 +147,16 @@
                 inMenu: true,
                 onClick: this.onHelpClick,
             }, {
-                id: "feedback",
-                labelId: "fb.feedback",
-                icon: "feedback",
-                inMenu: true,
-                onClick: this.onFeedbackClick,
-            }, {
                 id: "settings",
                 labelId: "settings",
                 icon: "settings",
                 onClick: this.onSettingsClick
             }, {
-                hide: isFullAccount || window.config.NO_CA,
+                hide: isFullAccount,
                 id: "login",
                 labelId: "logIn",
                 icon: "group",
-                href: window.config.URL_RASPI
+                href: window.config.URL_LOGIN
             }, {
                 hide: !Auth.isSiteLicenceAdmin(),
                 id: "localAdmin",
@@ -202,7 +182,7 @@
                 icon: "group",
                 onClick: this.onLoginAsClick
             }, {
-                hide: !isFullAccount || window.config.NO_CA,
+                hide: !isFullAccount,
                 id: "logout",
                 labelId: "logout",
                 icon: "exit_to_app",

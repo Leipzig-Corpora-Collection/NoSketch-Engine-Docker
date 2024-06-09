@@ -36,7 +36,7 @@ class PermissionsClass{
             'octerms':               hasSkE,
             'ocd':                   !isA && !RO && hasSkE,
 
-            'ca':                    !RO && !isA,
+            'ca':                    !RO && !isA && hasCA,
             'ca-create':             isFA && !RO && hasCA,
             'ca-create-content':     isFA && !RO && hasCA && canM,
             'ca-create-compile':     isFA && !RO && hasCA && canM,

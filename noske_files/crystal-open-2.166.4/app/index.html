@@ -14,7 +14,7 @@
         <link rel="apple-touch-icon-precomposed" href="images/favicon-152.png">
         <meta name="msapplication-TileColor" content="#000000">
         <meta name="msapplication-TileImage" content="images/favicon-144.png">
-        <link rel="icon" href="images/favicon-32.png" sizes="32x32">
+        <link rel="icon" href="favicon.ico" sizes="32x32">
         <link rel="shortcut icon" sizes="196x196" href="images/favicon-196.png">
 
         <style type="riot"></style>
@@ -101,5 +101,23 @@
         <script src="bundle.js?v=@VERSION@" charset="utf-8"></script>
         <script src="vendors-main.js?ver=@VERSION@" charset="utf-8"></script>
         <script defer src="libs/sortable/sortable.min.js"></script>
+
+        <!-- Matomo -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['setCustomUrl', '/' + (document.location || window.location).hash.substring(1)]);
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+              var u="https://analytics.wortschatz-leipzig.de/";
+              _paq.push(['setTrackerUrl', u+'piwik.php']);
+              _paq.push(['setSiteId', '10']);
+              _paq.push(['setDomains', '*.wortschatz-leipzig.de']);
+              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+              g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="https://analytics.wortschatz-leipzig.de/piwik.php?idsite=10&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+        <!-- End Matomo Code -->  
     </body>
 </html>

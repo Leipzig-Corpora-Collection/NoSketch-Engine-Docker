@@ -746,6 +746,7 @@
     "endingWith": "endet mit",
     "wl.excludeWords": "Diese Wörter ausschließen:",
     "wl.first10M": "erste 10 Mio.",
+    "wl.freqcls": "Häufigkeitsklasse",
     "fromList": "aus dieser Liste:",
     "includeNonwords": "Nicht-Wörter berücksichtigen",
     "wl.items": "Wortanzahl",

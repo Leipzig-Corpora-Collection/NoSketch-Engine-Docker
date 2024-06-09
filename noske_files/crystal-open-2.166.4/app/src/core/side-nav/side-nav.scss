@@ -6,7 +6,7 @@ side-nav{
     }
 
     #navMain {
-        height: 105px;
+        height: 140px;
         a {
             height: 100%;
             padding-top: 10px;
@@ -25,28 +25,9 @@ side-nav{
                 .logo{
                     width: 45px;
                     height: 45px;
-                    background-image: url("images/logo_noske_uk.png");
-                }
-            }
-        }
-    }
-    .academicUseOnly{
-        height: 2em;
-        div{
-            text-align: center;
-            background-color: #26a69a;
-            line-height: 2em;
-            font-weight: bold;
-            color: #fff;
-            opacity: 0;
-            transition: opacity 0.2s linear;
-            a {
-                background-color: none!important;
-                padding-left: 0;
-                vertical-align: middle;
-                line-height: 1em;
-                i{
-                    font-size: 16px
+                    background-image: url("images/Logo_LCC_NSE.png");
+                    background-size: contain;
+                    background-position: center;
                 }
             }
         }
@@ -56,12 +37,6 @@ side-nav{
             width: 200px;
             height: 100%;
             transition-delay: 1100ms;
-        }
-        .academicUseOnly{
-            div{
-                transition-delay: 1000ms;
-                opacity: 1;
-            }
         }
     }
 

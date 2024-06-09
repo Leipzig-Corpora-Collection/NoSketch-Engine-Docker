@@ -114,7 +114,7 @@
             let isStruct = this.store.isStructuredWordlist()
             return !this.store.hasBeenLoaded
                     || this.data.isLoading
-                    || (isStruct && !["frq", "relfreq"].includes(attr.value))
+                    || (isStruct && !["frq", "freqcls", "relfreq"].includes(attr.value))
                     || (isStruct && attr == "relfreq" && this.data.raw.concsize == this.data.raw.fullsize)
         }
     </script>

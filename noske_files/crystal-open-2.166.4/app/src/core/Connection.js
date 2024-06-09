@@ -73,6 +73,23 @@ class ConnectionClass{
             Dispatcher.trigger("LOADING_CHANGED", true, request.loadingId)
         }
 
+        if (request.data) {
+            let method = request.url.startsWith(window.config.URL_BONITO) ? request.url.slice(window.config.URL_BONITO.length) : null
+            let corpus = request.data.corpname
+            let query =
+                (method === "concordance") ? {query: request.data.concordance_query[0][request.data.concordance_query[0].queryselector.slice(0, -3)], extra: `:ps=${request.data.pagesize}`, data: request.data.concordance_query}
+                : (method === "wordlist") ? {attr: request.data.wlattr, query: request.data.wlpat, extra: ''}
+                : (method === "extract_keywords") ? {attr: request.data.attr, query: request.data.wlpat, extra: ''}
+                : null
+            // filter pagesize 1000 / 1 for concordance (preload/final stats)
+            let skip = (method === "concordance" && (request.data.pagesize === 1 || request.data.pagesize === 1000))
+            console.debug("request: method=<", method, ">, corpus=<", corpus, ">, query=<", query, ">, data=", request.data)
+            if (query && !skip) {
+                _paq.push(['setCustomVariable', 1, 'Corpus', corpus, 'page'])
+                _paq.push(['trackSiteSearch', query.query, `${corpus}:${method}${query.extra}`, false])
+            }
+        }
+
         let xhrParams = this._getXhrParams(request)
 
         let xhr = $.ajax(xhrParams)

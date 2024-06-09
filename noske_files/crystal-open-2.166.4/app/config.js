@@ -1,11 +1,13 @@
 window.config = {
-    URL_BONITO: "http://localhost/bonito/run.cgi/",
+    URL_BONITO: window.location.origin + "/bonito/run.cgi/",
+    // Basic Auth login page
+    URL_LOGIN: window.location.protocol + "//" + window.location.host + "/auth",
     // URL of endpoint for registering new users (e.g bonito/registration.cgi). Leave empty to disable registration.
     URL_REGISTER_NEW_USER: "",
     // Default language of the interface.
     DEFAULT_LOCALE: "en",
     // If true, plain image is rendered instead of YouTube iframe.
-    DISABLE_EMBEDDED_YOUTUBE: false,
+    DISABLE_EMBEDDED_YOUTUBE: true,
     // If true, Word Sketch, Word Sketch Difference, Thesaurus, Terms and Ngrams are not available.
     NO_SKE: true,
     // Set to true, if Corpus architect is not available. Some request will be send to Bonito instead of CA.
@@ -22,9 +24,10 @@ window.config = {
     // One URL per language is allowed, e.g.: CUSTOM_LOCALE_EN, CUSTOM_LOCALE_DE, CUSTOM_LOCALE_IT,...
     CUSTOM_LOCALE_EN: "",
     // Remove SkE advertisement banner from dashboard.
-    HIDE_DASHBOARD_BANNER: true,
+    HIDE_DASHBOARD_BANNER: false,
 
     links: {
+        "bibliographyOfSke": "https://www.sketchengine.eu/bibliography-of-sketch-engine/",
         "wl_download_limits": "https://www.sketchengine.eu/guide/access-to-unlimited-wordlists/",
         "priceList": "https://www.sketchengine.eu/price-list/",
         "quickStartGuide": "https://www.sketchengine.eu/quick-start-guide/",

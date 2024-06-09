@@ -151,6 +151,18 @@
                                     on-sort={onSort}>
                                 </table-label>
                             </th>
+                            <th>
+                                <table-label
+                                    align-right=1
+                                    label={_("sentences")}
+                                    desc-allowed={true}
+                                    asc-allowed={true}
+                                    order-by="sizeS"
+                                    actual-sort={sort.sort}
+                                    actual-order-by={sort.orderBy}
+                                    on-sort={onSort}>
+                                </table-label>
+                            </th>
                             <th style="width: 1px;"></th>
                         </tr>
                     </thead>
@@ -171,9 +183,9 @@
                                 <i class="material-icons shared tooltipped" data-tooltip={_("iShareCorpus")} if={corpus.is_shared}>group</i>
                                 <span ref="a_{idx}_n">{corpus.name}</span>
                                 <span class="badge new background-color-blue-100 hide-on-small-and-down"
-                                    if={corpus.owner_id}
+                                    if={corpus.owner_name}
                                     data-badge-caption="">
-                                    {corpus.owner_id == userid ? _("cp.myCorpus") : corpus.owner_name}
+                                    {corpus.owner_name == username ? _("cp.myCorpus") : corpus.owner_name}
                                 </span>
                                 <i class="material-icons" style="vertical-align: bottom;"
                                         if={!corpus.user_can_read}>
@@ -182,6 +194,9 @@
                             </td>
                             <td onclick={onSelectCorpus} class="right-align">
                                 {corpus.sizes ? window.Formatter.num(corpus.sizes.wordcount) : (corpus.size && window.Formatter.num(corpus.size) || '')}
+                            </td>
+                            <td onclick={onSelectCorpus} class="right-align">
+                                {corpus.sizes && window.Formatter.num(corpus.sizes.sentcount) || ''}
                             </td>
                             <td class="menuCell" if={!config.READ_ONLY}>
                                 <a href="javascript:void(0);"
@@ -220,8 +235,8 @@
                             <td onclick={onSelectCorpus}>
                                 <span ref="{o_idx}_n">{corpus.name}</span>
                                 <span class="badge new background-color-blue-100 hide-on-small-and-down"
-                                    if={corpus.owner_id}>
-                                    {corpus.owner_id == userid ? _("cp.myCorpus") : corpus.owner_name}
+                                    if={corpus.owner_name}>
+                                    {corpus.owner_name == username ? _("cp.myCorpus") : corpus.owner_name}
                                 </span>
                                 <i class="material-icons" style="vertical-align: bottom;"
                                         if={!corpus.user_can_read}>
@@ -287,7 +302,7 @@
 
         this.store = CorpusStore
         this.isFullAccount = Auth.isFullAccount()
-        this.userid = Auth.getUserId()
+        this.username = Auth.getUsername()
         this.actCorp = AppStore.getActualCorpname()
         this.data = this.store.data
 
@@ -583,10 +598,10 @@
                 case "parallel":
                     return corp.aligned.length > 0
                 case "my":
-                    return corp.owner_id && corp.owner_id == this.userid
+                    return corp.owner_name && corp.owner_name == this.username
                 case "shared":
-                    return corp.user_can_read && corp.owner_id
-                            && corp.owner_id != this.userid
+                    return corp.user_can_read && corp.owner_name
+                            && corp.owner_name != this.username
                 case "featured":
                     return corp.is_featured
                 case "general":

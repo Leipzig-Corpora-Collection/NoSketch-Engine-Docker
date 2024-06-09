@@ -2,13 +2,13 @@
     <introduction if={!skipWizard && isFullAccount && !noSkeNoCa}></introduction>
     <div class="pt2">
         <div class="form card mt-0">
-            <ui-tabs if={!noSkeNoCa}
+            <ui-tabs if={isFullAccount}
                     name="corpus-tabs"
                     tabs={tabs}
                     active={tab}
                     on-tab-change={onTabChange}>
             </ui-tabs>
-            <corpus-tab-advanced if={noSkeNoCa}></corpus-tab-advanced>
+            <corpus-tab-advanced if={!isFullAccount}></corpus-tab-advanced>
         </div>
     </div>
 
@@ -29,29 +29,14 @@
         this.isFullAccount = Auth.isFullAccount()
         this.languageCount = AppStore.get("languageList").length
         this.tabs = [{
-            tabId: "basic",
-            labelId: "basic",
-            tag: "corpus-tab-basic"
-        }, {
             tabId: "advanced",
             labelId: "advanced",
             tag: "corpus-tab-advanced"
         }, {
-            tabId: "shared",
-            labelId: "cp.shared",
-            tag: "corpus-tab-shared"
+            tabId: "my",
+            labelId: "cp.my",
+            tag: "corpus-tab-my"
         }]
-        if(!Auth.isSiteLicenceMember()){
-            this.tabs.splice(2, 0, {
-                tabId: "my",
-                labelId: "cp.my",
-                tag: "corpus-tab-my"
-            })
-        } else {
-            if(this.tab == "my"){
-                this.tab = "basic"
-            }
-        }
         this.tab = CorpusStore.get("tab")
         if(this.tabs.findIndex(t => t.tabId == this.tab) == -1){
             this.tab = this.tabs[0].tabId

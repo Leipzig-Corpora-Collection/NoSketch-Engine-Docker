@@ -59,24 +59,6 @@
                     class: "material-icons"
                 },
                 {
-                    page: "wordsketch",
-                    label: "Word Sketch",
-                    class: "ske-icons skeico_word_sketch",
-                    disabled: !this.features.wordsketch
-                },
-                {
-                    page: "sketchdiff",
-                    labelId: "sketchdiff",
-                    class: "ske-icons skeico_word_sketch_difference",
-                    disabled: !this.features.sketchdiff
-                },
-                {
-                    page: "thesaurus",
-                    labelId: "thesaurus",
-                    class: "ske-icons skeico_thesaurus",
-                    disabled: !this.features.thesaurus
-                },
-                {
                     page: "concordance",
                     labelId: "concordance",
                     class: "ske-icons skeico_concordance",
@@ -94,12 +76,6 @@
                     labelId: "wordlist",
                     class: "ske-icons skeico_word_list",
                     disabled: !this.features.wordlist
-                },
-                {
-                    page: "ngrams",
-                    labelId: "ngrams",
-                    class: "ske-icons skeico_n_grams",
-                    disabled: !this.features.ngrams
                 },
                 {
                     page: "keywords",
