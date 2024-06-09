@@ -85,7 +85,7 @@ class RouterClass{
         // Matomo/Piwik
         _paq.push(['setCustomUrl', '/' + (document.location || window.location).hash.substring(1)])
         _paq.push(['setDocumentTitle', document.title])
-        _paq.push(['setCustomVariable', 1, 'Corpus', Url.getQuery().corpname, 'page'])
+        _paq.push(['setCustomVariable', 1, 'Corpus', queryObj.corpname, 'page'])
         _paq.push(['trackPageView'])
         Dispatcher.trigger("ROUTER_CHANGE", this._actualPage, q)
     }
@@ -168,7 +168,7 @@ class RouterClass{
 
     _initPage(){
         let corpus = AppStore.getActualCorpus()
-        let page = Url.getPage() || (corpus ? "dashboard" : "corpus")
+        let page = Url.getPage() || (corpus ? "dashboard" : "open")
         this._checkAndSetPage(page, Url.getQuery())
     }
 

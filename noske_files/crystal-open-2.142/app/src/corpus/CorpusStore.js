@@ -8,7 +8,7 @@ class CorpusStoreClass extends StoreMixin {
     constructor(){
         super()
         this.data = {
-            tab: UserDataStore.getOtherData("pageCorpusTab") || "basic",
+            tab: UserDataStore.getOtherData("pageCorpusTab") || "advanced",
             cat: "all",
             sketches: "0",
             lang: "",
