@@ -453,6 +453,7 @@ def get_corp_info(corp, registry=0, gramrels=0, corpcheck=0, struct_attr_stats=0
             'infohref': corp.get_conf('INFOHREF'),
             'info': corp.get_conf('INFO'),
             'handle': corp.get_conf('HANDLE') or None,
+            'institution': corp.get_conf('INSTITUTION') or None,
             'encoding': corp.get_conf('ENCODING'),
             'tagsetdoc': corp.get_conf('TAGSETDOC'),
             'defaultattr': corp.get_conf('DEFAULTATTR'),
