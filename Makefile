@@ -7,6 +7,7 @@ REGISTRY_DIR?=$(CORPORA_DIR)/registry
 VERT_DIR?=$(CORPORA_DIR)/vert
 COMPILED_DIR?=/ssd1/NoSketchEngine/data
 CACHE_DIR?=/ssd1/NoSketchEngine/cache
+SECRETS_FILE=$$(pwd)/secrets/htpasswd
 
 #HOSTNAME?=$(shell hostname -I | cut -f1 -d' ')
 HOSTNAME?=127.0.0.1
@@ -31,16 +32,19 @@ build:
 #  and set various environment variables
 run:
 	@make -s stop
+	@touch $(SECRETS_FILE)
 	docker run -d --restart=unless-stopped --name $(CONTAINER_NAME) -p 127.0.0.1:$(PORT):80 \
 	 --mount type=bind,src=$(REGISTRY_DIR),dst=/corpora/registry,readonly \
 	 --mount type=bind,src=$(VERT_DIR),dst=/corpora/vert,readonly \
 	 --mount type=bind,src=$(COMPILED_DIR),dst=/corpora/data,readonly \
 	 --mount type=bind,src=$(CACHE_DIR),dst=/var/lib/bonito/cache \
-	 --mount type=bind,src=$$(pwd)/secrets/htpasswd,dst=/var/lib/bonito/htpasswd \
+	 --mount type=bind,src=$(SECRETS_FILE),dst=/var/lib/bonito/htpasswd \
      -e SERVER_NAME="$(SERVER_NAME)" -e SERVER_ALIAS="$(SERVER_ALIAS)" -e CITATION_LINK="$(CITATION_LINK)" \
      $(IMAGE_NAME):latest
 	@echo 'URL: http://$(HOSTNAME):$(PORT)/'
 .PHONY: run
+
+#	 --mount type=bind,src=$$(pwd)/secrets/htaccess,dst=/var/www/.htaccess \
 
 
 # Stop running $(CONTAINER_NAME) container
@@ -95,7 +99,7 @@ compile:
 
 # Create a strong password with htpasswd command inside the docker image
 htpasswd:
-	@make -s execute IMAGE_NAME=$(IMAGE_NAME) CMD="htpasswd -nbB \"$(USERNAME)\" \"$(PASSWORD)\""
+	@make -s execute IMAGE_NAME=$(IMAGE_NAME) CMD="htpasswd -bB /var/lib/bonito/htpasswd \"$(USERNAME)\" \"$(PASSWORD)\""
 
 
 # Stop container, remove image, remove compiled corpora

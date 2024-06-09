@@ -60,7 +60,8 @@
         }
 
         onLogoutClick(){
-            Auth.logout()
+            let loc = (document.location || window.location)
+            loc.href = loc.protocol + "//" + "logout:nopassword@" + loc.host
         }
 
         onHelpClick(){
@@ -151,11 +152,11 @@
                 icon: "settings",
                 onClick: this.onSettingsClick
             }, {
-                hide: isFullAccount || window.config.NO_CA,
+                hide: isFullAccount,
                 id: "login",
                 labelId: "logIn",
                 icon: "group",
-                href: window.config.URL_RASPI
+                href: window.config.URL_LOGIN
             }, {
                 hide: !Auth.isSiteLicenceAdmin(),
                 id: "localAdmin",
@@ -181,7 +182,7 @@
                 icon: "group",
                 onClick: this.onLoginAsClick
             }, {
-                hide: !isFullAccount || window.config.NO_CA,
+                hide: !isFullAccount,
                 id: "logout",
                 labelId: "logout",
                 icon: "exit_to_app",

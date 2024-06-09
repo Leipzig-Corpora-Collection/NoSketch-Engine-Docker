@@ -1,5 +1,7 @@
 window.config = {
     URL_BONITO: window.location.origin + "/bonito/run.cgi/",
+    // Basic Auth login page
+    URL_LOGIN: window.location.protocol + "//" + window.location.host + "/auth",
     // URL of endpoint for registering new users (e.g bonito/registration.cgi). Leave empty to disable registration.
     URL_REGISTER_NEW_USER: "",
     // Default language of the interface.

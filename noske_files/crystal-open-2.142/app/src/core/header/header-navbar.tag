@@ -21,10 +21,10 @@
                     <span if={showSubscribe && daysLeft !== null} class="daysLeft">
                         {_("daysLeft", [daysLeft])}
                     </span>
-                    <div if={isAnonymous && !window.config.NO_CA} class="anonymousUser grey-text">
+                    <div if={isAnonymous} class="anonymousUser grey-text">
                         {_("notLoggedIn")}
                         <br>
-                        <a href={window.config.URL_RASPI} class="blue-text">{_("logIn")}</a>
+                        <a href={window.config.URL_LOGIN} class="blue-text">{_("logIn")}</a>
                     </div>
                     <span class="siteLicence">
                         <div if={isSiteLicenceMember} class="licenceName grey-text">

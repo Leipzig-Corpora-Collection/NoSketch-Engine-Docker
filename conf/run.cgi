@@ -88,30 +88,21 @@ if __name__ == '__main__':
     else:
         username = None
 
+        # process optional Authorization header
         if os.environ.get("HTTP_AUTHORIZATION", "").lower().startswith("basic "):
-            import base64
-            import subprocess
+            import base64, subprocess
 
-            digest = os.environ["HTTP_AUTHORIZATION"].split(" ", 1)[-1]
+            digest = os.environ.pop("HTTP_AUTHORIZATION").split(" ", 1)[-1]
             _username, _password = base64.b64decode(digest).decode("utf-8").split(":", 1)
             proc = subprocess.run(["htpasswd", "-vb", "/var/lib/bonito/htpasswd", _username, _password], stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
             if proc.returncode == 0:
                 os.environ["REMOTE_USER"] = _username
+            del _username, _password, digest, proc
 
     if 'MANATEE_REGISTRY' not in os.environ:
         # TODO: SET THIS APROPRIATELY!
         os.environ['MANATEE_REGISTRY'] = '/corpora/registry'
-    # if ";prof=" in os.environ['QUERY_STRING'] or "&prof=" in os.environ['QUERY_STRING']:
-    #     import cProfile, pstats, tempfile
-    #     proffile = tempfile.NamedTemporaryFile()
-    #     cProfile.run('''BonitoCGI().run_unprotected (selectorname="corpname",
-    #                     outf=open(os.devnull, "w"))''', proffile.name)
-    #     profstats = pstats.Stats(proffile.name)
-    #     print("<pre>")
-    #     profstats.sort_stats('time','calls').print_stats(50)
-    #     profstats.sort_stats('cumulative').print_stats(50)
-    #     print("</pre>")
-    # else:
+
     BonitoCGI(user=username).run_unprotected (selectorname='corpname')
 
 # vim: ts=4 sw=4 sta et sts=4 si tw=80:
