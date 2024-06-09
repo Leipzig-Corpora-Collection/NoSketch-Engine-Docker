@@ -1,0 +1,181 @@
+@import 'app/styles/constants';
+
+side-nav{
+    .linkText {
+        white-space: nowrap;
+    }
+
+    #navMain {
+        height: 105px;
+        a {
+            height: 100%;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            .logo {
+                background-image: url("images/logo_white_300_uk.png");
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                transition: all 0.3s linear;
+            }
+            &.noSkeLogo{
+                padding-left: 3px;
+                .logo{
+                    width: 45px;
+                    height: 45px;
+                    background-image: url("images/logo_noske_uk.png");
+                }
+            }
+        }
+    }
+    .academicUseOnly{
+        height: 2em;
+        div{
+            text-align: center;
+            background-color: #26a69a;
+            line-height: 2em;
+            font-weight: bold;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.2s linear;
+            a {
+                background-color: none!important;
+                padding-left: 0;
+                vertical-align: middle;
+                line-height: 1em;
+                i{
+                    font-size: 16px
+                }
+            }
+        }
+    }
+    &.show{
+        ul#side-nav #navMain span{
+            width: 200px;
+            height: 100%;
+            transition-delay: 1100ms;
+        }
+        .academicUseOnly{
+            div{
+                transition-delay: 1000ms;
+                opacity: 1;
+            }
+        }
+    }
+
+    #side-nav.open #navMain {
+        a{
+            padding: 10px 32px 20px;
+        }
+        span{
+            width: 200px;
+            height: 100%;
+        }
+    }
+
+    ul#side-nav{
+        box-shadow: none;
+        background-color: $blue-800;
+        transition: 0.3s cubic-bezier(0.800, 0.000, 0.200, 1.000);
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        li{
+            a{
+                white-space: nowrap;
+                font-weight: bold;
+                transition: padding 0.3s cubic-bezier(0.800, 0.000, 0.200, 1.000);
+                .linkText{
+                    transition: opacity 0.3s;
+                    font-size: large;
+                }
+                i, span {
+                    color: white;
+                }
+            }
+            &.disabled{
+                opacity: 0.3;
+                a{
+                    background-color: initial!important;
+                    cursor: default!important;
+                }
+            }
+            &.active{
+                a{
+                    cursor: default;
+                }
+                background-color: $blue-600;
+                i,
+                span{
+                    color: $white;
+                }
+            }
+            &.feature a:hover {
+                background-color: rgba(0,0,0,0.3)
+            }
+        }
+        .skeLogo{
+            position: relative;
+            padding: 20px 20px 0 32px;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+    }
+    &.show ul#side-nav,
+    &.show ul#side-nav li a{
+        transition-delay: 1000ms;
+    }
+    #side-nav{
+        overflow: hidden;
+    }
+
+    #side-nav.open,
+    &.show #side-nav{
+        overflow: auto;
+    }
+    &:not(.show){
+        ul{
+            width: 52px!important;
+            li{
+                a{
+                    padding: 0 9px;
+                    .linkText{
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+    }
+    &.show{
+        ul{
+            li.feature{
+                a{
+                    padding: 0 0 0 32px;
+                }
+            }
+        }
+        #navMain a.noSkeLogo{
+            padding-left: 32px;
+        }
+    }
+    #side-nav{
+        @media only screen and (min-width: 993px){
+            /* on large screen is menu always visible, override hide after menu item click */
+            transform: translateX(0)!important;
+        }
+        @media only screen and (max-width: 992px){
+            width: 330px!important;
+            li.feature{
+                a{
+                    padding: 0 32px;
+                    .linkText{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}

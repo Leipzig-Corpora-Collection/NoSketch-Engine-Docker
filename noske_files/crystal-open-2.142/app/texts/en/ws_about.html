@@ -1,0 +1,113 @@
+<div class="aboutLeftCol">
+<p>A word sketch processes the word’s %[collocate|collocates]% and other words in its surroundings. It can be used as a one-page summary of the word’s grammatical and <a href="https://www.sketchengine.eu/my_keywords/collocation/" target="_blank" rel="noopener">collocational</a> behaviour. The results are organized into categories, called <a href="https://www.sketchengine.eu/my_keywords/grammatical-relation/" target="_blank" rel="noopener">grammatical relations</a>, such as words that serve as an object of the verb, words that serve as a subject of the verb, words that modify the word etc. Some grammatical relations may display usage statistics instead of collocates. Only nouns, adjectives, verbs and adverbs are supported in most corpora. The collocations which will be included in the analysis are defined by rules specified in the <a href="https://www.sketchengine.eu/my_keywords/word-sketch-grammar/" target="_blank" rel="noopener">sketch grammar</a>.</p>
+</div>
+<div class="aboutRightCol"><iframe src="https://www.youtube.com/embed/tKdEa1E-p2Y" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe></div>
+<div><a href="https://www.sketchengine.eu/wp-content/uploads/2019-04-29_15-22-11.png" target="_blank" rel="noopener"> <img src="https://www.sketchengine.eu/wp-content/uploads/2019-04-29_15-22-11.png" alt="Word Sketch" width="1346" height="604" /> </a></div>
+<div><br />Display <a href="https://ske.li/f08" target="_blank" rel="noopener">this word sketch in Sketch Engine</a> (login required) <br />Display a <a href="https://app.sketchengine.eu/#wordsketch?corpname=preloaded%2Faclarc_2&tab=basic&lemma=team&showresults=1" target="_blank" rel="noopener">similar word sketch</a> in an open corpus (login not required)</div>
+<p> </p>
+<div><b>Multiword Sketch</b> — collocations with phrases
+</div>
+<div>The multiword sketch is an extension of the word sketch. It processes the left and right context of a phrase and identifies the collocates of each word in the phrase. The collocations are only extracted from sentences which contain the collocation (phrase) in question. In other words, the collocates only come from contexts where the collocation (phrase) is used. Contexts where the members of the phrase are used on their own are excluded. This makes it possible to only display collocates related to a particular word sense or subject.</div>
+<div>The multiword sketch can be accessed in two ways:</div>
+<div><b>From the context menu</b></div>
+<div>Locate the collocate you are interested in, click multiword sketch in the context menu.</div>
+<div><a href="https://www.sketchengine.eu/wp-content/uploads/multiword-sketch-IFmenu.gif" target="_blank" rel="noopener"> <img src="https://www.sketchengine.eu/wp-content/uploads/multiword-sketch-IFmenu.gif" alt="MultiWord Sketch" width="500" height="340" /> </a></div>
+<div><b>By typing the collocation in the input form</b></div>
+<div>Type the node and the collocate(s) directly in the input form. Their order is not important. Do not type words which are not a node or collocate(s), i.e. only words which would appear in the grammatical relations in the word sketch.</div>
+<div><a href="https://www.sketchengine.eu/wp-content/uploads/2019-10-09_13-35-31.png" target="_blank" rel="noopener"> <img src="https://www.sketchengine.eu/wp-content/uploads/2019-10-09_13-35-31.png" alt="MultiWord Sketch" width="435" height="243" /> </a></div>
+<table style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td style="width: 50%;"><b>to get collocations for</b></td>
+<td style="width: 50%;"><b>type</b></td>
+</tr>
+<tr>
+<td style="width: 50%;">sweetened drinks</td>
+<td style="width: 50%;">sweeten drink</td>
+</tr>
+<tr>
+<td style="width: 50%;">grab a drink</td>
+<td style="width: 50%;">grab drink</td>
+</tr>
+</tbody>
+</table>
+<div><i>Multiword sketch of sugary drink</i></div>
+<div><a href="https://www.sketchengine.eu/wp-content/uploads/2019-10-09_13-40-56.png" target="_blank" rel="noopener"> <img src="https://www.sketchengine.eu/wp-content/uploads/2019-10-09_13-40-56.png" alt="MultiWord Sketch" width="694" height="401" loading="lazy"> </a></div>
+
+
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">What makes the word sketches unique?</div>
+<div class="collapsible-body">
+<div>Large modern corpora can contain billions of words with thousands of instances of each word. This makes it unrealistic to look at each concordance line. The word sketch solves this problem. Words surrounding the search word are processed by the word Sketch Engine and displayed in a compact, easy to understand format and organized from the most <a href="https://www.sketchengine.eu/most-frequent-or-most-typical-collocations/" target="_blank" rel="noopener">typical</a> to the least typical collocations. The above word sketch was generated from over 9 million instances of the word <em>team</em>. It shows the search word, its frequency, its collocates sorted into grammatical relations, the frequency of each collocate, typicality score, the most frequent representation of each collocation and a local menu with links to other tools.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Working with the columns</div>
+<div class="collapsible-body">
+<div>Use the icons in the header of each column to reorder, close and display the columns again. Use the icons next to each collocate or in the header of the column to display the collocates in context as a concordance. To focus on only one column, use the icon which will hide all the remaining columns with one click. Hover the mouse over the icons to display tooltips which explain their functions.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Sorted by the score (typicality)</div>
+<div class="collapsible-body">
+<div>By default, the word sketch is sorted with the most typical collocations at the top. This is the preferred option for most uses. The reason is that what is frequent is usually not interesting or useful, but typical is. The <a href="https://www.sketchengine.eu/my_keywords/logdice/" target="_blank" rel="noopener">logDice</a> score is used for determining how typical (strong) the collocation is.</div>
+<div>A high score means that the %[collocate]% is often found together with the <a href="https://www.sketchengine.eu/my_keywords/node/" target="_blank" rel="noopener">node</a> and at the same time there are not very many other nodes that the collocate combines with or it does not combine with them too frequently. The bond between the node and the collocate is very strong ⇢ strong collocation.</div>
+<div>A low score means that the collocate likes to combine with very many other words. The bond between the node and the collocate is weak ⇢ weak collocation.</div>
+<div>It is not possible to set a universal threshold between weak and strong collocations because each word behaves differently. The main purpose of the score is to sort the collocates by their typicality or strength, not to decide whether a collocation is weak or strong.</div>
+<div>The view options allow sorting by frequency if needed.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">How is the score computed</div>
+<div class="collapsible-body">
+<div>Please refer to <a href="https://www.sketchengine.co.uk/statistics-used-in-sketch-engine/" target="_blank" rel="noopener">this paper</a> for the formula and details.</div>
+<div>Here is a simplified but sufficiently informative explanation. Referring to the screenshot above, to determine the strength of the collocation <em>management team</em> compared to other collocations of <em>team</em>, all nouns modified by management are found first. The sketch grammar for English determines which nouns surrounding <em>management</em> should be regarded as the modified nouns.</div>
+<div>Then, each time <em>management</em> modifying <em>team</em> is found, <em>management</em> gets a plus point. Each time <em>management</em> is found modifying another noun, <em>management</em> is given a minus point. The logDice score is calculated to indicate whether there were many plus points or many minus points.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Interpreting the score</div>
+<div class="collapsible-body">
+<div>A very high score of the collocate means that there is little competition from other collocates. The node does not often combine with other collocates. In other words, the competitors are not frequent for either of these reasons or their combination:</div>
+<ul class="browser-default">
+<li>The number of different competing collocates is very small.</li>
+<li>The number of different competing collocates may be high but the frequency of each of them is low so the total stays low.</li>
+</ul>
+<div>A very low score means that there is extreme competition from other collocates for either of these reasons or their combination:</div>
+<ul class="browser-default">
+<li>The number of different competing collocates is very high.</li>
+<li>The number of different competing collocates may be small but the frequency of each of them is extremely high which produces lots of competition for the collocate in question.</li>
+</ul>
+<div>As a result, it is quite common that the most common and frequent words (new, go, be, small, very) hardly ever receive high scores as collocates because they are so universal that they combine with many other words. Exceptions can exist if the collocation is so extremely frequent and that it beats all its competitors.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Sketch grammar</div>
+<div class="collapsible-body">
+<div>The sketch grammar is a set of rules written in <a href="https://www.sketchengine.eu/my_keywords/cql/" target="_blank" rel="noopener">CQL</a> which make use of POS tags and regular expressions to define which tokens should be included in each <a href="https://www.sketchengine.eu/my_keywords/grammatical-relation/" target="_blank" rel="noopener">grammatical relation</a>. For example, a subject may be defined as <em>a noun before verb</em> but the actual rule is much more complex defining more specific requirements for both the noun and verb, their relative position and compulsory and optional words between them. It will also contain conditions to clean content captured accidentally by the preceding rules.</div>
+<div>The word sketch does not use any parsing information and a parsed corpus is not needed. However, sketch grammars using parsed corpora can be developed.</div>
+<div>Instead of using the sketch grammars developed by Sketch Engine, users can develop their own and apply them to their own corpora. <br />Requirements for word sketch to work well</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">POS Tags and lemmas</div>
+<div class="collapsible-body">
+<div>The word sketch works with a %[tag|POS-tagged]% and %[lemma|lemmatized]% corpus. A parsed corpus is not needed. Universal word sketches are available for corpora without tagging and/or lemmatization, see below.</div>
+<div>The corpus has to be tagged in Sketch Engine or with the same tagset as the one used by Sketch Engine so that the tags are the same as the ones used in the word sketch grammar. A custom word sketch grammar has to be developed if the corpus is tagged with a different tagset.</div>
+<div>A word sketch can also be generated from a non-lemmatized corpus in which case each word form will be treated independently. Thus, using English as an example, a different word sketch would be produced for <em>goes</em> and a different one for <em>went</em>. Such word sketches exist only for languages where lemmatization is not supported by Sketch Engine.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">The effect of the corpus size</div>
+<div class="collapsible-body">
+<div>The corpus size itself does not affect the quality of the result, what matters is the absolute frequency of the word for which the word sketch should be generated. At least a few dozen occurrences are required. However, a minimum of a few hundred occurrences is required for a usable word sketch. To obtain a rich word sketch with lots of collocates, a few thousand occurrences are needed at least. The quality improves with each order of magnitude. (A 10-million-word corpus is gives much worse results than a 100-million-word one. A 1-billion-word corpus gives worse results than a 10-billion-word one.)</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Universal sketch grammar</div>
+<div class="collapsible-body">
+<div>A so-called universal sketch grammar is used for corpora in languages where tagging and/or lemmatization is not available. The grammatical relations will be simplified to something like <em>noun to the right</em>, <em>noun to the left</em>, <em>verb to the right</em>, <em>verb to the left</em>, or if %[tag|POS-tags]% are unavailable <em>word to the right</em>, <em>word to the left</em>. Although simplistic, they are a great help when working with large corpora and high-frequency words because data from thousands of occurrences can be reviewed quickly and easily.</div>
+</div>
+</li>
+</ul>

@@ -1,0 +1,66 @@
+<div class="row">
+<div class="col m12 l7">
+<div>The parallel concordance only works with <a href="https://www.sketchengine.eu/my_keywords/parallel-corpus/" target="_blank" rel="noopener">parallel corpora</a> which are <a href="https://www.sketchengine.eu/my_keywords/alignment/">aligned</a>. The parallel concordance searches for words, phrases, %[tag|tags]%, <a href="https://www.sketchengine.eu/my_keywords/document/" target="_blank" rel="noopener">documents</a>, <a href="https://www.sketchengine.eu/my_keywords/text-type/" target="_blank" rel="noopener">text types</a> or corpus <a href="https://www.sketchengine.eu/my_keywords/structure/" target="_blank" rel="noopener">structures</a> in one language and displays the results together with the&nbsp;<a href="https://www.sketchengine.eu/my_keywords/alignment/" target="_blank" rel="noopener">aligned </a>translated <a href="https://www.sketchengine.eu/my_keywords/segment/">segments</a> in the other language. The translated segments usually contain the translations of the search word or phrase but the translation may not be included if the translator decided to use a different way of expressing the idea. The concordance can be sorted, filtered, counted and processed further to obtain the desired result.</div>
+<br />
+<div>The view options allow displaying additional information such as lemmas, tags and other <a href="https://www.sketchengine.eu/my_keywords/positional-attribute/" target="_blank" rel="noopener">attributes</a>, text types (metadata) or corpus structures. Sketch Engine will also try to locate the translation and highlight it.</div>
+<br />
+<div>The CQL search on the advanced tab is used for complex searches with unspecific criteria or optional criteria.</div>
+</div>
+<div class="col m12 l5"><iframe src="https://www.youtube.com/embed/vklUWMRV1ew" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe></div>
+</div>
+<p>&nbsp;</p>
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">Working with the columns (languages)</div>
+<div class="collapsible-body">
+<div>The number of languages (columns) to search simultaneously is only limited by the number of languages the corpus contains. <br />All tools are available for the first language. Frequency distribution and sorting in the other language(s) is only available if a search word is used in that language too.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">How does the concordance work?</div>
+<div class="collapsible-body">
+<div>The search query must be defined for the first language, it is optional for the remaining language(s). The search always starts from the beginning of the corpus and the concordance lines are displayed in the order in which they are found in the corpus. Use the Shuffle or Random sample icons to change this.</div>
+<br />
+<div>The display of %[lemma|lemmas]%, tags and other attributes can be set in view options.</div>
+<br />
+<div>The icon to the left of each concordance line leads to text types (metadata) of the concordance line. The user can set one or more of them to stay displayed permanently.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Translation highlighting</div>
+<div class="collapsible-body">
+<div>After the result is displayed, Sketch Engine will try to highlight the most probable word that is the translation of the search word or phrase in the first language. This may not always be accurate or may not be highlighted at all. The process is indicated with a notification at the top.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">How to use the concordance</div>
+<div class="collapsible-body">
+<div><strong>Searching</strong> <br />Hover the mouse over the different elements of the input form to learn about the different search options.</div>
+<br />
+<div><strong>Working with the results</strong> <br />To learn to filter, sort, count, reorganize or process the results, hover the mouse over an icon or the question mark symbol (?) to display a tooltip which explains its function.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Speed and corpus size</div>
+<div class="collapsible-body">
+<div>Sketch Engine is specifically designed to handle large corpora with speed. Any search will only take a few seconds two to complete if the corpus size is under a billion words. It might take a bit of extra time for corpora over 1 billion words. Complex CQL searches containing regular expressions or frequency calculations on large corpora can take several minutes to complete.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Requirements for the concordance to work well</div>
+<div class="collapsible-body">
+<div>Parallel concordance will work even if the languages in the corpus are not annotated to the same level. For example, one language is tagged and lemmatized and the other is not. Functionality for the less annotated language will be limited accordingly.</div>
+<br />
+<div>The concordance will work with any corpus even one which is not <a href="https://www.sketchengine.eu/my_keywords/tokenization/" target="_blank" rel="noopener">tokenized</a>, lemmatized and tagged, however, adding these three features increases the usefulness immensely. Tokenization, lemmatization and tagging are carried out automatically upon uploading files to Sketch Engine provided the language is supported.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Result examples</div>
+<div class="collapsible-body">
+<div>The concordance of <em>easy</em> shuffled randomly so that sentences from different parts of the corpus are on one screen. Translations are highlighted.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance1.png" alt="" width="1151" height="720" loading="lazy"> <br /><br /></div>
+<div>The above concordance but without Spanish segments where the word easy is translated by f&aacute;cil. A filter excluding Spanish segments containing words starting f&aacute;cil- was used. Not all translations are highlighted.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance2.png" alt="" width="1151" height="720" loading="lazy"></div>
+</div>
+</li>
+</ul>

@@ -1,0 +1,66 @@
+<div class="row">
+<div class="col m12 l7">
+<div>Vzporedne konkordance delujejo samo z <a href="https://www.sketchengine.eu/my_keywords/parallel-corpus/" rel="noopener" target="_blank">vzporednimi korpusi</a>, ki so <a href="https://www.sketchengine.eu/my_keywords/alignment/">poravnani</a>. Vzporedne konkordance poiščejo besede, izraze, %[tag|oznake]%, <a href="https://www.sketchengine.eu/my_keywords/document/" rel="noopener" target="_blank">dokumente</a>, %[textType|vrste besedil]% ali korpusne <a href="https://www.sketchengine.eu/my_keywords/structure/" rel="noopener" target="_blank">strukture</a> v enem jeziku in prikažejo rezultate skupaj s poravnanimi prevedenimi <a href="https://www.sketchengine.eu/my_keywords/segment/">segmenti</a> v drugem jeziku. Prevedeni segmenti običajno vsebujejo prevode iskane besede ali besedne zveze, vendar prevod morda ni vključen, če se je prevajalec odločil za drugačen način izražanja ideje. Konkordance lahko razvrstite, filtrirate, preštejete in nadalje obdelujete, da dobite želeni rezultat.</div>
+<br />
+<div>Možnosti prikaza omogočajo prikaz dodatnih informacij, kot so leme, oznake in drugi %[attribute|atributi]%, vrste besedil (metapodatki) ali korpusne strukture. Sketch Engine bo poskusil poiskati prevod in ga označiti.</div>
+<br />
+<div>Iskanje CQL v zavihku za napredne se uporablja za zapletena iskanja z nedoločenimi merili ali poljubnimi merili.</div>
+</div>
+<div class="col m12 l5"><iframe src="https://www.youtube.com/embed/vklUWMRV1ew" width="400" height="225" frameborder="0" allowfullscreen="allowfullscreen" loading="lazy"></iframe></div>
+</div>
+<p> </p>
+<ul class="collapsible">
+<li>
+<div class="collapsible-header">Delo s stolpci (jeziki)</div>
+<div class="collapsible-body">
+<div>Število jezikov (stolpcev) za hkratno iskanje je omejeno le s številom jezikov, ki jih vsebuje korpus. <br>Vsa orodja so na voljo za prvi jezik. Porazdelitev pogostosti in razvrščanje v drugih jezikih je na voljo le, če je iskalna beseda uporabljena tudi v tem jeziku.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Kako delujejo konkordance?</div>
+<div class="collapsible-body">
+<div>Iskalno poizvedbo je treba opredeliti za prvi jezik, za preostale jezike ni obvezna. Iskanje se vedno začne na začetku korpusa, konkordančne vrstice pa se prikažejo v vrstnem redu, v katerem so v korpusu. To lahko spremenite z ikonama Premešaj ali Naključni vzorec.</div>
+<br />
+<div>Prikaz %[lemma|leme]%, oznak in drugih atributov lahko nastavite v možnostih pogleda.</div>
+<br />
+<div>Ikona na levi strani vsake konkordančne vrstice vodi do vrst besedil (metapodatkov) konkordančne vrstice. Uporabnik lahko eno ali več od njih nastavi tako, da ostanejo stalno prikazane.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Poudarjanje prevodov</div>
+<div class="collapsible-body">
+<div>Ko se prikaže rezultat, Sketch Engine poskuša poudariti najverjetnejšo besedo, ki je prevod iskane besede ali besedne zveze v prvem jeziku. To morda ne bo vedno natančno ali pa sploh ne bo poudarjeno. Postopek je označen z obvestilom na vrhu.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Kako uporabljati konkordance</div>
+<div class="collapsible-body">
+<div><strong>Iskanje</strong> <br>Z miško se pomaknite nad različne elemente vnosnega obrazca in se seznanite z različnimi možnostmi iskanja.</div>
+<br />
+<div><strong>Delo z rezultati</strong> <br>Če se želite naučiti filtrirati, razvrščati, šteti, reorganizirati ali obdelati rezultate, z miško kliknite na ikono ali simbol vprašaja (?), da se prikaže namig z razlago njegove funkcije.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Hitrost in velikost korpusa</div>
+<div class="collapsible-body">
+<div>Sketch Engine je posebej zasnovan za hitro obdelavo velikih korpusov. Vsako iskanje bo trajalo le nekaj sekund, če je velikost korpusa manjša od milijarde besed. Pri korpusih nad 1 milijardo besed lahko traja nekoliko dlje. Kompleksna iskanja v jeziku CQL, ki vsebujejo regularne izraze ali izračune pogostosti v velikih korpusih, lahko trajajo več minut.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Zahteve za dobro delovanje konkordanc</div>
+<div class="collapsible-body">
+<div>Vzporedne konkordance bodo delovale tudi, če jeziki v korpusu niso označeni na isti ravni. Na primer, en jezik je označen in lematiziran, drugi pa ne. Funkcionalnost manj označenega jezika bo ustrezno omejena.</div>
+<br />
+<div>Konkordance bodo delovale s katerimkoli korpusom, tudi če korpus ni <a href="https://www.sketchengine.eu/my_keywords/tokenization/" rel="noopener" target="_blank">tokeniziran</a>, lematiziran in označen, vendar dodajanje teh treh funkcij zelo poveča uporabnost. Tokenizacija, lematizacija in označevanje se izvedejo samodejno ob nalaganju datotek v Sketch Engine, če je jezik <a href="https://www.sketchengine.eu/user-guide/user-manual/corpora/by-language/" rel="noopener" target="_blank">podprt</a>.</div>
+</div>
+</li>
+<li>
+<div class="collapsible-header">Primeri rezultatov</div>
+<div class="collapsible-body">
+<div>Konkordance za <em>easy</em>, naključno premešane, tako da so stavki iz različnih delov korpusa na enem zaslonu. Prevodi so poudarjeni.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance1.png" alt="" width="1151" height="720" loading="lazy"> <br /><br /></div>
+<div>Zgornje konkordance, vendar brez španskih segmentov, kjer je beseda easy prevedena s fácil. Uporabljen je bil filter, ki izključuje španske segmente, ki vsebujejo besede z začetkom fácil-. Vsi prevodi niso poudarjeni.</div>
+<div class="center"><br /> <img src="https://www.sketchengine.eu/wp-content/uploads/parallel-concordance2.png" alt="" width="1151" height="720" loading="lazy"></div>
+</div>
+</li>
+</ul>
