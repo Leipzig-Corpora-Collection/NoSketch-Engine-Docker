@@ -5,6 +5,7 @@ from usercgi import UserCGI
 import corplib, conclib
 from corplib import corpconf_pairs
 import os
+import re
 import sys
 import gdex
 import manatee
@@ -13,7 +14,7 @@ from manatee import regexp_pattern
 import time
 import glob
 from collections import defaultdict
-from butils import *
+from butils import escape, escape_nonwild
 from annotlib import Annotation
 from conclib import strkwiclines
 
@@ -348,8 +349,11 @@ class ConcCGI (UserCGI):
                     'corpname': c,
                     'language_id': mc.get_conf('LANGUAGE'),
                     'language_name': mc.get_conf('LANGUAGE'),
-                    'sizes': dict([x.split() for x in mc.get_sizes().split('\n')\
-                            if len(x.split()) == 2]),
+                    'sizes': dict([
+                        map(lambda f, d: f(d), [str, int], x.split())
+                        for x in mc.get_sizes().split('\n')
+                        if len(x.split()) == 2
+                    ]),
                     'compilation_status': mc.get_sizes() and 'COMPILED' or 'READY',
                     'new_version': mc.get_conf('NEWVERSION'),
                     'name': mc.get_conf('NAME'),
@@ -360,6 +364,12 @@ class ConcCGI (UserCGI):
                     'aligned': mc.get_conf('ALIGNED').split(',') if mc.get_conf('ALIGNED') else [],
                     'docstructure': mc.get_conf('DOCSTRUCTURE')
                 })
+                if '/' in c:
+                    owner_name = c.split('/', 1)[0]
+                    o.update({
+                        'owner_id': owner_name,
+                        'owner_name': owner_name
+                    })
                 l.append(o)
             except corplib.manatee.CorpInfoNotFound as e:
                 pass
@@ -1369,15 +1379,6 @@ class ConcCGI (UserCGI):
                 'granularity': res
         }
 
-    def clear_cache (self, corpname=''):
-        import shutil
-        if not corpname: corpname = self.corpname
-        cache_path = '%s/%s' % (self._cache_dir, corpname)
-        if '..' in corpname or len(cache_path.strip('/')) == 0:
-            return {'error': 'This action is not allowed.'}
-        shutil.rmtree(cache_path, ignore_errors=True)
-        return {'message': 'Cache cleared: %s' % corpname}
-
     wlminfreq = 5
     wlmaxfreq = 0
     wlmaxitems = 100
@@ -1425,23 +1426,19 @@ class ConcCGI (UserCGI):
     def check_wl_compatibility (self, wltype, ref_subcorp):
         if self.usengrams or ref_subcorp == '== the rest of the corpus ==':
             if wltype == 'multilevel':
-                raise ConcError('N-grams are not compatible with changing '
-                                  'output attribute(s)')
+                raise ConcError('N-grams are not compatible with changing output attribute(s)')
             if self.wlattr in ('WSCOLLOC', 'TERM') \
                      or '.' in self.wlattr:
-                raise ConcError('N-grams and "rest of corpus" can use only '
-                                  'positional attributes')
+                raise ConcError('N-grams and "rest of corpus" can use only positional attributes')
         if self.usengrams and ref_subcorp == '== the rest of the corpus ==':
-            raise ConcError(_('N-grams and "rest of corpus" cannot be used'
-                              'together'))
+            raise ConcError('N-grams and "rest of corpus" cannot be used together')
         if '.' in self.wlattr:
             if wltype != 'simple':
                 raise ConcError('Text types are limited to simple output')
             if self.wlnums == 'arf':
                 raise ConcError('ARF cannot be used with text types')
         if self.wlattr == 'WSCOLLOC' and self.wlsort != 'frq':
-            raise ConcError('Word sketch collocations are available '
-                            'with raw hit counts only')
+            raise ConcError('Word sketch collocations are available with raw hit counts only')
         if self.wlattr == 'TERM' and self.wlsort != 'frq':
             raise ConcError('Terms are available with raw hit counts only')
 
