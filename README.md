@@ -44,11 +44,19 @@ Overrides in `noske_files/crystal-open-2.142`:
   - `app/src/core/permissions.js` (fix permissions)
   - `app/config.js` (add missing links)
   - `app/src/corpus/` (remove 'basic' and 'shared' corpus tabs, not used)
-  - `app/src/dialogs/` (disable any Ske feedback dialogs)
+  - `app/src/dialogs/` (disable any Ske feedback dialogs, remove user Lexonomy settings, fix manage-corpus redirect)
   - `app/src/core/side-nav/side-nav.tag` (remove word sketches, can't provide those anyway)
 - disabled youtube integration (and tracking!)
   - `app/config.js`
   - `app/texts/`
+
+### bonito-open-5.63.9
+
+Overrides in `noske_files/bonito-open-5.63.9`:
+
+- fix corpus metadata in `/corpora` request (sizes as numbers)
+  - `conccgi.py`
+  - `corplib.py`
 
 ### Basic Auth
 
@@ -58,6 +66,11 @@ Overrides in `noske_files/crystal-open-2.142`:
 - `noske_files/crystal-open-2.142/app/locale/`
 - `noske_files/crystal-open-2.142/app/src/core/header`
 - `noske_files/crystal-open-2.142/app/src/corpus/` (using `username` instead of `userid`)
+
+## Known Issues
+
+- basic auth re-login:\
+  Logging in with valid credentials, then logging out and finally trying to login again silently fails due to browser credentials caching. Users then need use the browsers' devtools with cache-clearing active in the network tab to be able to login. No good solution for now.
 
 ## Usage
 

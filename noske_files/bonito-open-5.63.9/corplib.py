@@ -538,7 +538,7 @@ def get_corp_info(corp, registry=0, gramrels=0, corpcheck=0, struct_attr_stats=0
     for sizesline in corp.get_sizes().split('\n'):
         sls = sizesline.split(' ')
         if len(sls) == 2:
-            sizes[sls[0].strip()] = sls[1].strip()
+            sizes[sls[0].strip()] = int(sls[1].strip())
         if len(sls) == 4:
             alsizes.append((sls[2], sls[1], sls[3]))
     result.update({

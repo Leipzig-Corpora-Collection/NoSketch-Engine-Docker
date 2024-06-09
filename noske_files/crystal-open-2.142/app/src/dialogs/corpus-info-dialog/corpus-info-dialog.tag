@@ -39,7 +39,7 @@
                 {_("manageCorpus")}
             </a>
             <a if={window.permissions["ca-subcorpora"]}
-                    href="#ca-subcorpora"
+                    href="#ca-subcorpora?corpname={corpus.corpname}"
                     class="btn">
                 {_("ca.subcorporaDesc")}
             </a>

@@ -41,34 +41,6 @@
     <virtual if={isFullAccount}>
         <div class="row">
             <div class="col m5 s12 input-label">
-                {_("opts.lexEmail")}
-            </div>
-            <div class="col m7 s12">
-                <ui-input
-                    riot-value={settings.lexonomyEmail}
-                    name="lexonomyEmail"
-                    placeholder="@"
-                    on-change={parent.onOptionChange}>
-                </ui-input>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col m5 s12 input-label">
-                {_("opts.lexKey")}
-            </div>
-            <div class="col m7 s12">
-                <ui-input
-                    riot-value={settings.lexonomyApiKey}
-                    name="lexonomyApiKey"
-                    on-change={parent.onOptionChange}>
-                </ui-input>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col m5 s12 input-label">
                 {_("opts.cookies")}
             </div>
             <div class="col m7 s12 input-label">
