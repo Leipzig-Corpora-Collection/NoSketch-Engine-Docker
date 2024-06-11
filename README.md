@@ -28,9 +28,17 @@ Corpus configuration recipes to aid compilation of large corpora can be found [h
 
 ## Changes
 
-### crystal-open-2.142
+A few overrides to the source files for the `bonito-open` API and `crystal-open` UI were added to [`noske_files/`](noske_files/) in directories matching the source archives. When building the packages, first the source archives will be extracted and then the override files on top.
 
-Overrides in `noske_files/crystal-open-2.142`:
+For changes, please take a look at the git history, e.g. `git log --stat --oneline --decorate --graph --all --name-status`.
+Commits with message _Add base files before changes_ (or _(base files)_) will only add the unchanged source files from the source archives as diff base and in separate new commits our own changes and updates. This allows to look at modifications against the base sources a little bit easier.
+Updates of NoSketchEngine sources will also be split into two commits, the first being all the original source files from the new version as diff base, and the second commit that removes all the old version and with our changes applied to the new source files.
+
+See helper scripts [`noske_files/noske-diff.sh`](noske_files/noske-diff.sh) for seeing changes to our override files and [`noske_files/rebase-originals.sh`](noske_files/rebase-originals.sh) for how commits can be split for better diffs.
+
+### crystal-open-2.142 .. crystal-open-2.166.4
+
+Overrides in `noske_files/crystal-open-2.166.4`:
 
 - added Matomo/Piwik monitoring by hooking into the UI routing lib
   - `app/index.html`
@@ -63,9 +71,9 @@ Overrides in `noske_files/crystal-open-2.142`:
   - `app/locale` (add freqcls labels)
   - `app/texts/en/freqcls.html` (add freqcls description)
 
-### bonito-open-5.63.9
+### bonito-open-5.63.9 .. bonito-open-5.71.15
 
-Overrides in `noske_files/bonito-open-5.63.9`:
+Overrides in `noske_files/bonito-open-5.71.15`:
 
 - fix corpus metadata in `/corpora` request (sizes as numbers)
   - `conccgi.py`
@@ -83,6 +91,13 @@ Overrides in `noske_files/bonito-open-5.63.9`:
   - `conccgi.py` --> `wsinfo: { mfw: str|null, mfwf: int|null }` will expose the _most frequent word_ information
 - add frequency class value to wordlist
   - `conccgi.py` (freqcls computation in `wordlist` method)
+
+### manatee-open-2.225.8
+
+Overrides in `noske_files/manatee-open-2.225.8`:
+
+- added missing header file for docker build (`debuild`)
+  - `hat-trie/test/str_map.h` (by [ELTE-DH/NoSketch-Engine-Docker](https://github.com/ELTE-DH/NoSketch-Engine-Docker/commit/8186407ab3d3ac39bed59f1bbfb5b7f2db78e5b6#diff-507ccde5eb32a558a2ea7bc57c5ebe5b8d128b9ec28faf2799234ffe5305ed85))
 
 ### Basic Auth
 
