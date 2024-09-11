@@ -180,7 +180,13 @@ def kwiclines (conc, fromline, toline, leftctx='40#', rightctx='40#',
                 continue
             link_tmpl = conc.corp().get_conf(reflinks[i] + '.URLTEMPLATE')
             mtype = conc.corp().get_conf(reflinks[i] + '.MEDIATYPE')
-            links.append({'url': link_tmpl % ref, 'mediatype': mtype})
+            info = conc.corp().get_conf(reflinks[i] + '.INFO')
+            struct_attr = reflinks[i]
+            links.append({'url': link_tmpl % ref,
+                          'mediatype': mtype,
+                          'struct_attr': struct_attr,
+                          'info': info or None
+                          })
         lines.append ({'toknum': kl.get_pos(),
                        'hitlen': kl.get_kwiclen(),
                        'Refs': reflist[:refslen],
