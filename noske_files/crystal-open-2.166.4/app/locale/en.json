@@ -706,6 +706,7 @@
     "icase": "Ignore case",
     "ignoreCase": "A = a",
     "includeNonwords": "Include nonwords",
+    "info": "Info",
     "insert": "Insert",
     "invalidEmail": "invalid email",
     "invalidLinknNme": "use only letters, numbers or '_', 8 characters at least",

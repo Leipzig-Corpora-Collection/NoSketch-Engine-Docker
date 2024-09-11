@@ -572,7 +572,10 @@
         getIconTooltip(line){
             let source = line.mediatype || "unknown"
             let fileName = line.url.substring(line.url.lastIndexOf('/') + 1).split("?")[0]
-            return _("clickToOpen" + capitalize(source)) + "<br><br><small style=\"white-space: nowrap\">" + fileName + "</small>"
+            let structureAttributeSource = line.struct_attr
+            return _("clickToOpen" + capitalize(source))
+                    + "<br><br><small style=\"white-space: nowrap\">" + fileName + "</small>"
+                    + "<br><small style=\"white-space: nowrap\">" + structureAttributeSource + "</small>"
         }
 
         this.on('updated', () => {

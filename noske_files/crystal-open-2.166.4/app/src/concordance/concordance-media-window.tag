@@ -16,7 +16,13 @@
                 <img if={link.mediatype == "image"} ref="image" src="{link.url}" loading="lazy">
             </div>
             <div class="fileInfo dividerTop grey-text">
-                {_("file")}: {fileName}
+                <span if={link.info}>
+                    {_("info")}: {link.info}
+                </span>
+                <br if={link.info}>
+                <span>
+                    {_("file")}: {fileName}
+                </span>
                 <br>
                 <span>
                     URL: {link.url}
@@ -24,6 +30,8 @@
                 <a href={link.url} class="btn btn-floating btn-flat btn-small" target="_blank">
                     <i class="material-icons">open_in_new</i>
                 </a>
+                <br>
+                {_("tr.structattr")}: {link.struct_attr}
             </div>
         </div>
     </div>
