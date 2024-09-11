@@ -1515,8 +1515,8 @@ class ConcCGI (UserCGI):
                 raise ConcError('N-grams and "rest of corpus" can use only '
                                   'positional attributes')
         if self.usengrams and ref_subcorp == '== the rest of the corpus ==':
-            raise ConcError(_('N-grams and "rest of corpus" cannot be used'
-                              'together'))
+            raise ConcError('N-grams and "rest of corpus" cannot be used '
+                              'together')
         if '.' in self.wlattr:
             if wltype != 'simple':
                 raise ConcError('Text types are limited to simple output')

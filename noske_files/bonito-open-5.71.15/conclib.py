@@ -523,7 +523,7 @@ def get_detail_context (corp, pos, hitlen=1,
             seg['color'] = c[4:]
             seg['class'] = seg['class'].replace(c, '').strip()
         elif '#' in seg['class']:
-            c = [x for x in segment['class'].split() if x.startswith('#')][0]
+            c = [x for x in seg['class'].split() if x.startswith('#')][0]
             seg['color'] = c
             seg['class'] = seg['class'].replace(c, '').strip()
     for seg in region_kwic:
