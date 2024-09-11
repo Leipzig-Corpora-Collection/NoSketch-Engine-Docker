@@ -45,6 +45,11 @@
                 object-fit: contain;
             }
         }
+        &:not(:has(> :first-child > audio, > :first-child > video, > :first-child > img)) > .dividerTop {
+            margin-top: unset;
+            padding-top: unset;
+            border-top: unset;
+        }
     }
     .fileInfo{
         font-size: 13px;
