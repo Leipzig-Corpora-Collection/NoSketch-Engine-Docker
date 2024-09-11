@@ -68,8 +68,13 @@ Overrides in `noske_files/crystal-open-2.166.4`:
   - `app/src/wordlist/wordlist-tab-advanced.tag` (? initial search options)
   - `app/src/wordlist/Wordlist.meta.js` (freqcls (wlnums) column)
   - `app/src/wordlist/WordlistStore.js` (freqcls in requests)
-  - `app/locale` (add freqcls labels)
+  - `app/locale` (add "freqcls" labels)
   - `app/texts/en/freqcls.html` (add freqcls description)
+- show (new) `struct_attr` and `info` metadata for condordance `Lines[].Links[]`
+  - `app/src/concordance/concordance-media-window.scss` (remove divider and spacing if not media on top)
+  - `app/src/concordance/concordance-media-window.tag` (show `info` and `struct_attr` metadata)
+  - `app/src/concordance/concordance-result.tag` (show `struct_attr` in tooltip)
+  - `app/locale` (add "info" labels)
 
 ### bonito-open-5.63.9 .. bonito-open-5.71.15
 
@@ -91,6 +96,8 @@ Overrides in `noske_files/bonito-open-5.71.15`:
   - `conccgi.py` --> `wsinfo: { mfw: str|null, mfwf: int|null }` will expose the _most frequent word_ information
 - add frequency class value to wordlist
   - `conccgi.py` (freqcls computation in `wordlist` method)
+- add `struct_attr` and `info` metadata to condordance `Lines[].Links[]`
+  - `conclib.py` (`kwiclines` method)
 
 ### manatee-open-2.225.8
 
