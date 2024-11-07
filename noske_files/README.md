@@ -16,3 +16,14 @@ mv crystal-open-2.142-temp crystal-open-2.142
 
 # TODO: copy from original and modify
 ```
+
+---
+
+To update on source archive:
+
+1. download updated source archive
+2. run `noske-diff.sh`
+3. apply changes
+  1. for each file: `patch -p1 < .compare/<archive>-diff/<path-to-patch>.patch`, if sources folder has not been renamed, select the filename of the original (old) version
+  2. on error, do manual inspection; to be sure, copy new original source file over our overlay file and then inspect changes (to our intended changes)
+4. update versions

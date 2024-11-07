@@ -1,0 +1,63 @@
+<div class="aboutLeftCol">
+    <p>Sketch Engine 中的同义词库是自动生成的同义词或属于同一类别（语义方面）的单词列表。该列表是根据单词在选定语料库中出现的上下文生成的。大多数语料库仅支持名词、形容词、动词和副词。</p>
+</div>
+<div class="aboutRightCol">
+    <a
+    href="https://www.youtube.com/embed/kLsNUdTrTLk"
+    target="_blank"
+    class="youtubePlaceholder"
+    style="width:400px;height:225px;">
+    <img src="images/youtube-placeholder.jpg"
+       loading="lazy"
+       alt="Thesaurus - synonyms and similar words identified automatically">
+    </a>
+</div>
+
+<br>
+<ul class="clearfix collapsible">
+    <li>
+        <div class="collapsible-header">同义词库有什么特殊之处？</div>
+        <div class="collapsible-body">
+            <div>由于并非人工操作，只要在语料库中找到足够的出现词频，就可以为该语言中的任何单词生成同义词列表。这就是为什么即使是传统同义词库中不包括的生僻词，也能生成同义词列表的原因。</div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">同义词是通过什么来职别的？</div>
+        <div class="collapsible-body">
+            <div>同义词是根据它们出现的上下文自动识别的。简而言之，根据分布式语义理论，出现在相同上下文中的单词具有相似的含义。在 Sketch Engine 中，这意味着具有相似<a href="https://www.sketchengine.eu/my_keywords/collocation/" target="_blank">搭配词</a>的单词在含义上是相似的。词汇素描在确定这方面的相似性起着关键的作用。为了确定搜索词的同义词，所有具有相同词性的单词的词汇素描都会进行比较，并列出那些共享最多%[collocate|搭配词]%的单词。每个同义词的分数代表共享搭配词的百分比。
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">同义词库质量</div>
+        <div class="collapsible-body">
+            <div>同义词库的质量，有很大程度依赖于，包含大量搭配词的丰富词汇素描，而这又取决于搜索词的高%[frequency|词频]%以及潜在同义词的高词频。这意味着，需要一个非常大的语料库。大约 100,000 词的规模是为高频词生成一些可用结果的最低要求。然而，对于生僻词来说，需要一个更大的语料库才能确保足够的频率。因此，我们强烈推荐使用十亿词以上的语料库。</div>
+            <br>
+            <div>同义词列表中可能包含不应包含的单词，这是自动处理的结果。Sketch Engine 无法直接判断词义相似性，只能比较搭配词。如果两个单词共享相同的搭配词，它们将被列为同义词，即使它们的含义不太相似。这类偶尔出现的误差并不会降低工具的实用性。为了避免这种情况，建议使用更大的语料库。对于极少见的单词（频率只有几百次或更少的），同义词库的结果可能不理想，或者可能根本无法生成同义词库。</div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">这个分数是如何计算和解读的？</div>
+        <div class="collapsible-body">
+            <div>通过查看选项显示的分数，实际上是共享搭配词的百分比。为达到此目标，搜索词的词汇素描会与语料库中，所有具有相同词性单词的词汇素描进行比较。每个语法关系都会单独进行比较。有关公式和详细信息，请参阅<a href="https://www.sketchengine.eu/statistics-used-in-sketch-engine" target="_blank">Sketch Engine 中的统计信息</a>。
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">发挥同义词库功能的必要条件</div>
+        <div class="collapsible-body">
+            <div>
+                <b>词汇素描</b> <br>同义词库只能在语料库中存在词汇素描的情况下使用。语料库必须在 Sketch Engine 中进行标注，或使用相同的标注集。如果语料库使用不同的标注集，则必须使用自定义的<a href="https://www.sketchengine.eu/my_keywords/word-sketch-grammar/" target="_blank">词汇素描语法</a>。<br>即使使用通用素描语法，同义词库也能使用，但会有相关的限制。参见词汇素描。
+            </div>
+            <br>
+            <div>
+                <b>标注和词目</b> <br>要生成一个完善的同义词库，需要一个%[tag|标注]%和%[lemma|词形还原]%的语料库。在未标注和未词形还原的语料库中，使用通用词汇素描生成的同义词库，质量就会有所下降。然而，结果仍然值得使用，尤其是在标注和词形还原无法使用的低资源语言中。
+            </div>
+            <br>
+            <div>
+                <b>语料库大小</b> <br>同义词库的质量完全取决于充沛的词汇素描。充沛的词汇素描是由大量的语法关系的搭配词定义的。充沛的词汇素描除了必须存在于搜索词中以外，还必须存在于具有相同词性的所有其他单词中，以便进行比较。只有当单词在语料库中具有较高的%[frequency|词频]%，理想情况下出现数千次或更多时，才能满足此要求。因此，需要一个非常大的语料库，来让低频单词生成丰富的词汇素描。对于任何较需要较严谨的同义词库结果，建议使用我们的十亿词以上的语料库。
+            </div>
+        </div>
+    </li>
+</ul>
+

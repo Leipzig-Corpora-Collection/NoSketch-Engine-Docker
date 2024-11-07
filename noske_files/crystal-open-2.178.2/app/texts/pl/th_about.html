@@ -1,0 +1,63 @@
+<div class="aboutLeftCol">
+    <p>Tezaurus w Sketch Engine to automatycznie generowana lista synonimów lub słów należących do tej samej kategorii (pola semantycznego). Lista jest tworzona na podstawie kontekstu, w jakim słowa pojawiają się w wybranym korpusie. W większości korpusów obsługiwane są tylko rzeczowniki, przymiotniki, czasowniki i przysłówki.</p>
+</div>
+<div class="aboutRightCol">
+    <a
+    href="https://www.youtube.com/embed/kLsNUdTrTLk"
+    target="_blank"
+    class="youtubePlaceholder"
+    style="width:400px;height:225px;">
+    <img src="images/youtube-placeholder.jpg"
+       loading="lazy"
+       alt="Thesaurus - synonyms and similar words identified automatically">
+    </a>
+</div>
+
+<br>
+<ul class="clearfix collapsible">
+    <li>
+        <div class="collapsible-header">Co sprawia, że tezaurus jest wyjątkowy?</div>
+        <div class="collapsible-body">
+            <div>Ponieważ jego użycie nie wymaga ręcznej pracy, listy synonimów można wygenerować dla dowolnego słowa w języku – pod warunkiem, że w korpusie znajduje się wystarczająca liczba wystąpień. Dlatego też listy synonimów mogą być generowane nawet dla rzadkich słów, które nie zostałyby uwzględnione w tradycyjnych tezaurusach.</div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Jak identyfikowane są synonimy?</div>
+        <div class="collapsible-body">
+            <div>Synonimy są identyfikowane automatycznie na podstawie kontekstu, w którym występują. Opiera się to na teorii semantyki dystrybucyjnej, która w skrócie mówi, że słowa pojawiające się w tym samym kontekście są podobne znaczeniowo. W Sketch Engine oznacza to, że słowa, które mają podobne <a href="https://www.sketchengine.eu/my_keywords/collocation/" target="_blank">kolokacje</a>, są podobne znaczeniowo. Szkic słowa jest kluczowy w określaniu podobieństwa. Aby ustalić synonimy wyszukiwanego słowa, porównywane są szkice wszystkich słów o tej samej części mowy, a te, które dzielą największą proporcję %[collocate]%s, są wymieniane. Wynik podany dla każdego synonimu wskazuje procent wspólnych kolokacji.
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Jakość tezaurusa</div>
+        <div class="collapsible-body">
+            <div>Jakość tezaurusa jest uzależniona od wordsketchów zawierających wiele kolokacji – na co z kolei wpływają wysoka %[częstość]% wyszukiwanego słowa, jak również wysoka %[częstość]% potencjalnych synonimów. Oznacza to, że potrzebny jest tu bardzo duży korpus. Rozmiar około 100 000 słów to minimum potrzebne do uzyskania wyników dla słów o wysokiej częstości. Dla rzadkich słów potrzebny jest znacznie większy korpus, aby możliwe było uzyskanie wystarczającej częstości. Zalecane jest korzystanie z naszych korpusów zawierających miliardy słów.</div>
+            <br>
+            <div>Lista synonimów może zawierać słowa, które nie powinny być uwzględnione. Jest to wynik automatycznego przetwarzania. Sketch Engine nie może bezpośrednio określić podobieństwa znaczenia; może jedynie porównać %[kolokaty]%. Jeśli dwa słowa mają te same %[kolokaty]%, zostaną wymienione jako synonimy, nawet jeśli ich znaczenie nie jest podobne. Takie sporadyczne nieścisłości nie zmniejszają użyteczności narzędzia. Aby tego uniknąć, użyj większego korpusu. Tezaurus dla wyjątkowo rzadkich słów (częstość zaledwie kilkuset wystąpień lub mniej) poskutkuje słabymi wynikami lub może w ogóle nie wygenerować tezaurusa.</div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Jak obliczany jest i interpretowany wynik?</div>
+        <div class="collapsible-body">
+            <div>Wynik, który można wyświetlić za pomocą opcji widoku, to procent wspólnych kolokatów. Aby go uzyskać, wordsketch wyszukiwanego wyrazu jest porównywany z wordsketchami wszystkich innych wyrazów w korpusie o tej samej części mowy. Każda relacja gramatyczna jest porównywana osobno. Aby uzyskać wzór i szczegóły, można zapoznać się z <a href="https://www.sketchengine.eu/statistics-used-in-sketch-engine" target="_blank">widokiem Statystyk w SketchEngine</a>.
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Wymagania dotyczące prawidłowego działania tezaurusa</div>
+        <div class="collapsible-body">
+            <div>
+                <b>Word sketch</b> <br>Tezaurus może działać tylko wtedy, gdy w korpusie istnieją word sketche. Korpus musi być otagowany w Sketch Engine lub używać tego samego zestawu tagów. Jeśli korpus jest otagowany innym zestawem tagów, należy użyć własnej <a href="https://www.sketchengine.eu/my_keywords/word-sketch-grammar/" target="_blank">gramatyki word sketch</a>. <br>Tezaurus będzie działać nawet z uniwersalnymi gramatykami word sketch, wraz ze wszystkimi związanymi ograniczeniami. Zobacz word sketch.
+            </div>
+            <br>
+            <div>
+                <b>Tagi i lemmy</b> <br> Do pełnoprawnego tezaurusa wymagany jest korpus %[tag|otagowany]% i %[lemma|zlematyzowany]%. Tezaurusy wygenerowane z nieotagowanych i niezlematyzowanych korpusów z uniwersalnymi gramatykami word sketch będą miały niższą jakość. <br>Tezaurus będzie działał nawet z uniwersalnymi gramatykami word sketch, z wszystkimi związanymi ograniczeniami. Zobacz word sketch.
+            </div>
+            <br>
+            <div>
+                <b>Rozmiar korpusu</b> <br> Jakość tezaurusa jest całkowicie zależna od treściwych word sketchów. Treściwy word sketch jest definiowany przez dużą liczbę kolokacji we wszystkich relacjach gramatycznych. Treściwy word sketch musi istnieć dla wyszukiwanego słowa, ale także dla wszystkich innych słów o tej samej części mowy, aby można je było porównać. Ten wymóg można spełnić tylko wtedy, gdy słowo ma wysoką %[frekwencję]% w korpusie, najlepiej tysiące wystąpień lub więcej. W związku z tym potrzebny jest bardzo duży korpus, aby nawet mniej częste słowa mogły wygenerować treściwe word sketche. Zaleca się użycie naszych korpusów liczących wiele miliardów słów do wszelkich poważnych prac nad tezaurusem.
+            </div>
+        </div>
+    </li>
+</ul>
+
