@@ -19,6 +19,9 @@ from annotlib import Annotation
 from conclib import strkwiclines
 
 
+USER_SCOPED_CORPORA_SEP = "----"
+
+
 def onelevelcrit (prefix, attr, ctx, pos, fcode, icase, bward='', empty=''):
     fromcode = {'lc': '<0', 'rc': '>0', 'kl': '<0', 'kr': '>0'}
     if type(icase) == type(True):
@@ -367,8 +370,8 @@ class ConcCGI (UserCGI):
                     'docstructure': mc.get_conf('DOCSTRUCTURE')
                 })
                 o.update({'wsinfo': corplib.get_ws_info(mc)})
-                if '/' in c:
-                    owner_name = c.split('/', 1)[0]
+                if USER_SCOPED_CORPORA_SEP in c:
+                    owner_name = c.split(USER_SCOPED_CORPORA_SEP, 1)[0]
                     o.update({
                         'owner_id': owner_name,
                         'owner_name': owner_name

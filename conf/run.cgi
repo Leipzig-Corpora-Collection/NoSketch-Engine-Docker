@@ -21,6 +21,8 @@ except:
     class WSEval(ConcCGI):
         pass
 
+from conccgi import USER_SCOPED_CORPORA_SEP
+
 # Following might be needed for CORS compliance if XHR requests are coming from a different domain
 # You may also set it in the webserver configuration instead, see the .htaccess file in
 # Bonito distribution tarball for an Apache-based example
@@ -98,11 +100,11 @@ class BonitoCGI (WSEval, UserCGI):
             corp_name
             for corp_name in self.corplist
             # free, public corpora
-            if "/" not in corp_name
+            if USER_SCOPED_CORPORA_SEP not in corp_name
             # being superuser
             or self._superuser
             # or only my corpora if not anonymous
-            or (not self._anonymous and corp_name.split('/', 1)[0] == self._user)
+            or (not self._anonymous and corp_name.split(USER_SCOPED_CORPORA_SEP, 1)[0] == self._user)
         ]
 
     # corpus access check
