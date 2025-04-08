@@ -68,9 +68,12 @@
                                 </b>
                             </div>
                             <div>
-                                <a href={corpus.infohref} class="btn" target="_blank">{_("corpusDescAndBibliography")}</a>
+                                <a href={corpus.infohref} class="btn" target="_blank">{_("corpusDesc")}</a>
                             </div>
                             <div>
+                                <a href={corpus.citehref} class="btn" target="_blank">{_("corpusBibliography")}</a>
+                            </div>
+                            <div if={corpus.tagsetdoc}>
                                 <a href={corpus.tagsetdoc} class="btn {disabled: !corpus.tagsetdoc}" target="_blank">{_(corpus.tagsetdoc ? "tagset" : "noTagset")}</a>
                             </div>
                             <div if={corpus.errsetdoc}>
@@ -320,6 +323,12 @@
 
         onCorpusLoaded(corpus){
             this.corpus = corpus
+
+            // if unset, fall back to global value (placeholder)
+            if (!this.corpus.citehref) {
+                this.corpus.citehref = "CITATION_LINK_PLACEHOLDER"
+            }
+
             this.update()
         }
 

@@ -452,6 +452,7 @@ def get_corp_info(corp, registry=0, gramrels=0, corpcheck=0, struct_attr_stats=0
             'lang': corp.get_conf('LANGUAGE'),
             'infohref': corp.get_conf('INFOHREF'),
             'info': corp.get_conf('INFO'),
+            'citehref': corp.get_conf('CITEHREF') or None,
             'handle': corp.get_conf('HANDLE') or None,
             'institution': corp.get_conf('INSTITUTION') or None,
             'encoding': corp.get_conf('ENCODING'),

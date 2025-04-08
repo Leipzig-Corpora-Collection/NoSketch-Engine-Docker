@@ -1764,6 +1764,8 @@
     "nonAlignedDocsDesc": "Parallel corpus from texts which are not aligned but are translations of each other. Sketch Engine will align them automatically.",
     "cancelSharing": "Cancel sharing",
     "corpusDescAndBibliography": "corpus description & bibliography",
+    "corpusDesc": "corpus description",
+    "corpusBibliography": "bibliography & citation",
     "noTagset": "not tagged for parts of speech",
     "noTermGrammar": "corpus without terms",
     "noWsdef": "corpus without Word Sketches",

@@ -1511,6 +1511,8 @@
     "alignedDocs": "Alignierte Dokumente",
     "cancelSharing": "Teilen beenden",
     "corpusDescAndBibliography": "Korpusbeschreibung & Bibliografie",
+    "corpusDesc": "Korpusbeschreibung",
+    "corpusBibliography": "Bibliografie & Zitationshinweise",
     "noTagset": "nicht für Wortarten getaggt",
     "noTermGrammar": "Korpus ohne Begriffe",
     "noWsdef": "Korpus ohne Word Sketches",

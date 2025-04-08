@@ -24,7 +24,7 @@ window.config = {
     // One URL per language is allowed, e.g.: CUSTOM_LOCALE_EN, CUSTOM_LOCALE_DE, CUSTOM_LOCALE_IT,...
     CUSTOM_LOCALE_EN: "",
     // Remove SkE advertisement banner from dashboard.
-    HIDE_DASHBOARD_BANNER: false,
+    HIDE_DASHBOARD_BANNER: true,
 
     links: {
         "bibliographyOfSke": "https://www.sketchengine.eu/bibliography-of-sketch-engine/",

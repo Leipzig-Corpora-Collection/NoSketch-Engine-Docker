@@ -75,6 +75,11 @@ Overrides in `noske_files/crystal-open-2.166.4`:
   - `app/src/concordance/concordance-media-window.tag` (show `info` and `struct_attr` metadata)
   - `app/src/concordance/concordance-result.tag` (show `struct_attr` in tooltip)
   - `app/locale` (add "info" labels)
+- add `citehref` for bibliography/citation
+  - `app/src/dashboard/page-dashboard.scss` (update "noBanner" height)
+  - `app/src/dialogs/corpus-info-dialog/corpus-info-dialog.tag` (split corpus info & bibliography button, use `citehref`/`CITATION_LINK`)
+  - `app/locale` (add "corpusDesc" and "corpusBibliography" labels)
+  - `app/config.js` (enable `HIDE_DASHBOARD_BANNER`)
 
 ### bonito-open-5.63.9 .. bonito-open-5.71.15
 
@@ -98,6 +103,8 @@ Overrides in `noske_files/bonito-open-5.71.15`:
   - `conccgi.py` (freqcls computation in `wordlist` method)
 - add `struct_attr` and `info` metadata to condordance `Lines[].Links[]`
   - `conclib.py` (`kwiclines` method)
+- add `citehref` for bibliography/citation
+  - `corplib.py` (`get_corp_info` method; use `CITEHREF` corpus configuration)
 
 ### manatee-open-2.225.8
 
