@@ -1,0 +1,152 @@
+@import 'app/styles/constants';
+$small: 58px;
+
+.page-dashboard{
+    margin: 0 -0.75rem;
+    .isAnonymous.row{
+        max-width: 1000px;
+        >.col{
+            width: 100%;
+        }
+    }
+    .card{
+        &.dashboardCard{
+            background-color: $blue-100;
+            .card.inactive {
+                color: $blue-800;
+            }
+            input, input::placeholder {
+                color: $blue-800;
+                border-bottom-color: $blue-800;
+            }
+            .card{
+                .card-content{
+                    padding: 5px 0;
+                }
+            }
+            .notReady{
+                text-align: center;
+                padding: 50px;
+                i{
+                    font-size: 3em;
+                    display:block;
+                }
+                i, h4{
+                    opacity: .4;
+                }
+                .note{
+                    opacity: .5;
+                }
+            }
+        }
+        .card-content .card-title{
+            font-size: 1.2em;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: $blue-800;
+        }
+        &.corpusCard{
+            .card-content .card-title {
+                margin-bottom: 0;
+            }
+            min-height: 500px;
+            .active{
+                color: $gray-800;
+                cursor: pointer;
+            }
+            .inactive{
+                /* cursor: not-allowed; */
+                box-shadow: none;
+                background-color: inherit;
+            }
+            .small{
+                height: $small;
+            }
+            .featureName{
+                font-size: 1.3em;
+                line-height: 1.3em;
+                font-weight: 500;
+            }
+            .featureDesc{
+                font-size: 0.8em;
+                opacity: 0.84;
+                line-height: 1;
+            }
+            .card{
+                i{
+                    margin: 0 0.25em;
+                    font-size: 2.25em;
+                    line-height: $small;
+                }
+            }
+            .inactiveFeaturesBar{
+                i {
+                    font-size: 2.2em;
+                    color: $blue-800;;
+                }
+            }
+        }
+        &.recentCorpora {
+            height: 380px;
+            .card-content {
+                height: 100%;
+                display: flex;
+                flex-flow: column;
+                .corpus-history{
+                    overflow: auto;
+                    flex: 1 1 auto;
+                }
+            }
+        }
+    }
+    .banner{
+        padding: 15px;
+        background-color: whitesmoke;
+        overflow: auto;
+        img{
+            max-width: 100%;
+        }
+        h5{
+            text-transform: initial;
+        }
+        .bannerContainer{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 10px;
+        }
+        .bannerHeadline{
+            font-size: 19px;
+        }
+        .bannerNote{
+            opacity: 0.8;
+            font-size: 16px;
+        }
+    }
+    .smallBanner{
+        cursor: pointer;
+    }
+
+    &.bannerExpanded{
+        .card.recentCorpora{
+            height: 250px;
+        }
+        .smallBanner{
+            display: none;
+        }
+    }
+    &.noBanner .card.recentCorpora{
+        height: 547px;
+    }
+    &:not(.bannerExpanded) .bigBanner{
+        display: none;
+    }
+    .history i {
+      color: $blue-800;
+    }
+}
+.langSelect{
+    width: auto !important;
+    display: inline-block !important;
+}
