@@ -16,9 +16,9 @@ SECRETS_FILE=$$(pwd)/secrets/htpasswd
 #HOSTNAME?=$(shell hostname -I | cut -f1 -d' ')
 HOSTNAME?=127.0.0.1
 PORT?=10070
-SERVER_NAME?=https://cql.wortschatz-leipzig.de/
-SERVER_ALIAS?=cql.wortschatz-leipzig.de
-CITATION_LINK?=https://wortschatz-leipzig.de/
+SERVER_NAME?=https://text.wortschatz-leipzig.de/
+SERVER_ALIAS?=text.wortschatz-leipzig.de
+CITATION_LINK?=https://wortschatz-leipzig.de/en/documentation/publications
 CMD?=corpquery susanne "[word=\"Mardi\"][word=\"Gras\"]"
 
 
