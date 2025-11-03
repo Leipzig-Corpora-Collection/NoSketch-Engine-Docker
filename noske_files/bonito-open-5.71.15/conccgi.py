@@ -362,7 +362,7 @@ class ConcCGI (UserCGI):
                     'name': mc.get_conf('NAME'),
                     'info': mc.get_conf('INFO'),
                     'handle': mc.get_conf('HANDLE') or None,
-                    'institution': mc.get_conf('INSTITUTION') or None,
+                    'fcsinfos': mc.get_conf('FCSINFOS') or None,
                     'wsdef': mc.get_conf('WSDEF'),
                     'termdef': mc.get_conf('TERMDEF'),
                     'diachronic': bool(mc.get_conf('DIACHRONIC')),

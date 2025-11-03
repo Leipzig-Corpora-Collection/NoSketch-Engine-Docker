@@ -94,7 +94,7 @@ Overrides in `noske_files/bonito-open-5.71.15`:
 - remove insecure `clear_cache` method (os access is mitigated with corpname validation but is not really used anyway)
   - `conccgi.py`
 - added [FCS](https://git.saw-leipzig.de/text-plus/FCS/fcs-nosketchengine-endpoint) related attributes to API
-  - `conccgi.py` (for `/corp_info`: `handle` PID (from `HANDLE`), `fcsrefs` for backlinks (from `FCSREFS`), 'institution' name (from `INSTITUTION`))
+  - `conccgi.py` (for `/corp_info`: `handle` PID (from `HANDLE`), `fcsrefs` for backlinks (from `FCSREFS`), 'fcsinfos' for fcs resource metadata (from `FCSINFOS`))
   - `corplib.py` (for `/corpora`: `handle` PID, `institution` name)
 - for [Wortschatz Leipzig](https://wortschatz-leipzig.de) added some more metadata (e.g., to compute frequency classes etc.)
   - `corplib.py`: `get_ws_info(corpus)` will extract `WSMFW` and `WSMFWF` settings aka _most frequent word_ and its frequency
